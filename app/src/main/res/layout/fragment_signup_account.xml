@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".signup_fragments.SignupAccpuntFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="@dimen/marginTertiary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+        android:focusable="true">
+        <requestFocus/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginVertical="@dimen/marginTertiary">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:padding="@dimen/marginTertiary">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/account"
+                    android:textSize="@dimen/textH4"
+                    android:textStyle="bold"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/username_input"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginSecondary"
+                    android:textColorHint="@android:color/tertiary_text_light"
+                    app:boxCornerRadiusBottomEnd="@dimen/radiusTertiary"
+                    app:boxCornerRadiusBottomStart="@dimen/radiusTertiary"
+                    app:boxCornerRadiusTopEnd="@dimen/radiusTertiary"
+                    app:boxCornerRadiusTopStart="@dimen/radiusTertiary"
+                    app:boxStrokeColor="@color/primary"
+                    app:boxStrokeWidth="@dimen/strokePrimary"
+                    app:hintTextColor="@color/primary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/username"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/textFieldHeight"
+                        android:hint="@string/username"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@android:color/secondary_text_light"
+                        android:textColorHint="@android:color/tertiary_text_light"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/textNormal" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password_input"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginSecondary"
+                    android:textColorHint="@android:color/tertiary_text_light"
+                    app:boxCornerRadiusBottomEnd="@dimen/radiusTertiary"
+                    app:boxCornerRadiusBottomStart="@dimen/radiusTertiary"
+                    app:boxCornerRadiusTopEnd="@dimen/radiusTertiary"
+                    app:boxCornerRadiusTopStart="@dimen/radiusTertiary"
+                    app:boxStrokeColor="@color/primary"
+                    app:boxStrokeWidth="@dimen/strokePrimary"
+                    app:hintTextColor="@color/primary"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@android:color/tab_indicator_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/textFieldHeight"
+                        android:hint="@string/password"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:textColor="@android:color/secondary_text_light"
+                        android:textColorHint="@android:color/tertiary_text_light"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/textNormal" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/retype_password_input"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginSecondary"
+                    android:textColorHint="@android:color/tertiary_text_light"
+                    app:boxCornerRadiusBottomEnd="@dimen/radiusTertiary"
+                    app:boxCornerRadiusBottomStart="@dimen/radiusTertiary"
+                    app:boxCornerRadiusTopEnd="@dimen/radiusTertiary"
+                    app:boxCornerRadiusTopStart="@dimen/radiusTertiary"
+                    app:boxStrokeColor="@color/primary"
+                    app:boxStrokeWidth="@dimen/strokePrimary"
+                    app:hintTextColor="@color/primary"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@android:color/tab_indicator_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/retype_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/textFieldHeight"
+                        android:hint="@string/retype_password"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:textColor="@android:color/secondary_text_light"
+                        android:textColorHint="@android:color/tertiary_text_light"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/textNormal" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/back_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/backBtn"
+                    android:textColor="@color/purple_button"
+                    android:textAllCaps="false"
+                    android:layout_margin="@dimen/marginTertiary"
+                    android:onClick="onBackButtonClick"
+                    android:background="@drawable/back_button"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/finish_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/finishBtn"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:layout_margin="@dimen/marginTertiary"
+                    android:onClick="onNextButtonClick"
+                    android:background="@drawable/next_button"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>

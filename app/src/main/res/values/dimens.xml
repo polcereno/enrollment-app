@@ -1,0 +1,48 @@
+<resources>
+    <dimen name="paddingPrimary">4dp</dimen>
+
+    <dimen name="marginPrimary">8dp</dimen>
+    <dimen name="marginSecondary">16dp</dimen>
+    <dimen name="marginTertiary">24dp</dimen>
+    <dimen name="marginQuaternary">32dp</dimen>
+    <dimen name="marginQuinary">48dp</dimen>
+
+    <dimen name="textExtraSmall">10sp</dimen>
+    <dimen name="textSmall">12sp</dimen>
+    <dimen name="textNormal">14sp</dimen>
+    <dimen name="textMedium">16sp</dimen>
+    <dimen name="textLarge">18sp</dimen>
+    <dimen name="textExtraLarge">20sp</dimen>
+    <dimen name="textH4">24sp</dimen>
+    <dimen name="textH3">28sp</dimen>
+    <dimen name="textH2">32sp</dimen>
+    <dimen name="textH1">36sp</dimen>
+
+    <dimen name="iconExtraSmall">16dp</dimen>
+    <dimen name="iconSmall">18dp</dimen>
+    <dimen name="iconNormal">20dp</dimen>
+    <dimen name="iconMedium">24dp</dimen>
+    <dimen name="iconLarge">30dp</dimen>
+    <dimen name="iconExtraLarge">36dp</dimen>
+    <dimen name="buttonHeight">40dp</dimen>
+
+    <dimen name="imageSmall">48dp</dimen>
+    <dimen name="imageMedium">64dp</dimen>
+    <dimen name="imageLarge2">80dp</dimen>
+    <dimen name="imageLarge">96dp</dimen>
+    <dimen name="imageExtraLarge">128dp</dimen>
+
+    <dimen name="radiusPrimary">12dp</dimen>
+    <dimen name="radiusSecondary">16dp</dimen>
+    <dimen name="radiusTertiary">5dp</dimen>
+
+    <dimen name="elevationPrimary">2dp</dimen>
+    <dimen name="elevationSecondary">4dp</dimen>
+
+    <dimen name="strokePrimary">2dp</dimen>
+
+    <dimen name="textFieldHeight">48dp</dimen>
+
+    <dimen name="toolbarPrimary">80dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+</resources>

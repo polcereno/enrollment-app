@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signup_navigation"
+    app:startDestination="@+id/fragment_signup_type">
+
+    <fragment
+        android:id="@+id/fragment_signup_type"
+        android:name="com.example.debug.signup_fragments.SignupTypeFragment"
+        tools:layout="@layout/fragment_signup_type">
+        <action
+            android:id="@+id/action_type_to_college"
+            app:destination="@id/fragment_signup_college"/>
+        <action
+            android:id="@+id/action_type_to_shs"
+            app:destination="@id/fragment_signup_shs"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_signup_college"
+        android:name="com.example.debug.signup_fragments.SignupCollegeFragment"
+        tools:layout="@layout/fragment_signup_college">
+        <action
+            android:id="@+id/action_college_next"
+            app:destination="@id/fragment_signup_personal"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_signup_shs"
+        android:name="com.example.debug.signup_fragments.SignupShsFragments"
+        tools:layout="@layout/fragment_signup_shs_fragments">
+        <action
+            android:id="@+id/action_shs_next"
+            app:destination="@id/fragment_signup_personal"/>
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/fragment_signup_personal"
+        android:name="com.example.debug.signup_fragments.SignupPersonalFragment"
+        tools:layout="@layout/fragment_signup_personal_fragment">
+        <action
+            android:id="@+id/action_personal_next"
+            app:destination="@id/fragment_signup_documents"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_signup_documents"
+        android:name="com.example.debug.signup_fragments.SignupDocumentsFragment"
+        tools:layout="@layout/fragment_signup_documents">
+        <action
+            android:id="@+id/action_document_next"
+            app:destination="@id/fragment_signup_account"/>
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/fragment_signup_account"
+        android:name="com.example.debug.signup_fragments.SignupAccpuntFragment"
+        tools:layout="@layout/fragment_signup_account">
+        <action
+            android:id="@+id/action_signup_account"
+            app:destination="@id/fragment_signup_done"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_signup_done"
+        android:name="com.example.debug.signup_fragments.SignupDoneFragment"
+        tools:layout="@layout/fragment_signup_done"/>
+
+</navigation>

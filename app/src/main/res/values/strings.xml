@@ -1,0 +1,114 @@
+<resources>
+    <string name="app_name">Enrollment System</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="get_admitted">Get Admitted</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Blank Fragment</string>
+
+    <string name="school">Holy Trinity College Seminary Foundation Inc.</string>
+
+    <!-- login -->
+    <string name="welcome">Welcome!</string>
+    <string name="username">Username</string>
+    <string name="enterUsername">Enter your Username</string>
+    <string name="password">Password</string>
+    <string name="enterPassword">Enter you Password</string>
+    <string name="login">Login</string>
+    <string name="no_account_yet">No account yet?</string>
+    <string name="register">Register</string>
+
+
+    <!-- navbar -->
+    <string name="transaction">Transactions</string>
+    <string name="changePassword">Change Password</string>
+    <string name="studentProfile">Student Profile</string>
+    <string name="dueAmount">Due Amount</string>
+    <string name="reports">Reports</string>
+    <string name="enrolledSubjects">Enrolled Subjects</string>
+    <string name="curriculumEvaluation">Curriculum Evaluation</string>
+    <string name="soa">Statement of Accounts</string>
+    <string name="schoolCalendar">School Calendar</string>
+    <string name="logout">Logout</string>
+
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
+
+    <!-- signup -->
+    <string name="type">What are you applying for?</string>
+    <string name="college">College</string>
+    <string name="shs">Senior High School</string>
+    <string name="continueBtn">Continue</string>
+    <string name="backBtn">Back</string>
+    <string name="finishBtn">Finish</string>
+
+    <string name="personal">Personal Information</string>
+
+    <string name="fname">First Name</string>
+    <string name="lname">Last Name</string>
+    <string name="mname">Middle Name</string>
+    <string name="sex">Sex</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="birthday">Birthdate</string>
+
+    <string name="address">Address</string>
+
+    <string name="province">Province</string>
+    <string name="city">City</string>
+    <string name="barangay">Barangay</string>
+    <string name="mainAddress">Purok and Street</string>
+
+    <string name="account">Account</string>
+    <string name="retype_password">Retype Password</string>
+
+    <string name="scholastic">Scholastic</string>
+    <string name="lrn">Learner Reference Number (LRN)</string>
+    <string name="shs_attended">SHS attended</string>
+    <string name="jhs_attended">JHS attended</string>
+    <string name="form137">Form 137/138</string>
+    <string name="shs_diploma">SHS Diploma</string>
+
+    <string name="if_undergrad">if undergrad</string>
+    <string name="if_from_private">if from private</string>
+    <string name="transcript_records">Transcript Records</string>
+    <string name="dismissal_cert">Certificate of Honorable Dismissal</string>
+
+    <string name="jhs_diploma">JHS Diploma</string>
+    <string name="esc_cert">ESC Certificate</string>
+
+    <string name="canonical">Canonical</string>
+    <string name="baptismal">Baptismal Certificate</string>
+    <string name="confirmation_cert">Confirmation Certificate</string>
+    <string name="birth_cert">NSO/PSA Certificate</string>
+    <string name="marriage">Marriage Certificate of Parents</string>
+    <string name="brgy_residence">Brgy. Residence Certificate</string>
+    <string name="indigency">Certificate of Indigency</string>
+    <string name="bir">2305 BIR Form of Parent/Guardian</string>
+    <string name="recommendation_letter">Recommendation Letter from the Parish Priest</string>
+    <string name="medical_cert">Medical Certificate</string>
+    <string name="civil">Civil</string>
+    <string name="other_documents">Other Documents</string>
+    <string name="parish">Parish</string>
+
+    <string name="signup_complete">Registration Complete</string>
+    <string name="please_wait">Please await an email confirming your admission.</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="municipality">Municipality</string>
+
+
+</resources>
