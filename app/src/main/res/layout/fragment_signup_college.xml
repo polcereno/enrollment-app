@@ -184,17 +184,6 @@
                 android:layout_gravity="bottom|end">
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/back_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/backBtn"
-                    android:textColor="@color/purple_button"
-                    android:textAllCaps="false"
-                    android:layout_margin="@dimen/marginTertiary"
-                    android:onClick="onBackButtonClick"
-                    android:background="@drawable/back_button"/>
-
-                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/continue_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

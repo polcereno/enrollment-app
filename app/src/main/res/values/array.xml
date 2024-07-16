@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name='gender_array'>
+        <item>Sex </item>
         <item>Male</item>
+    </string-array>
+
+    <string-array name="parish_array">
+        <item>Parish</item>
+        <item>St. John ( Daet)</item>
+        <item>St. Joseph ( Daet)</item>
+        <item>St. Peter ( Vinzons)</item>
+        <item>Our Lady of Candelaria Parish Church ( Paracale)</item>
+        <item>St. Raphael ( Basud)</item>
+        <item>Our Lady of the Most Holy Rosary Parish Church ( Jose Panganiban)</item>
+        <item>St. Francis ( Talisay)</item>
+        <item>St. Anthony ( Mercedes)</item>
+        <item>St. Vincent Ferrer ( San Vicente)</item>
+        <item>St. John the Evangelist ( Labo)</item>
+        <item>St. Lucy, Virgin, and Martyr, Jesus the Nazarene Shrine ( Capalonga)</item>
     </string-array>
 </resources>

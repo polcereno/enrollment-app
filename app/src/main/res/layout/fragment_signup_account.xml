@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".signup_fragments.SignupAccpuntFragment">
+    tools:context=".signup_fragments.SignupAccountFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -99,36 +99,6 @@
                         android:textSize="@dimen/textNormal" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/retype_password_input"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/marginSecondary"
-                    android:textColorHint="@android:color/tertiary_text_light"
-                    app:boxCornerRadiusBottomEnd="@dimen/radiusTertiary"
-                    app:boxCornerRadiusBottomStart="@dimen/radiusTertiary"
-                    app:boxCornerRadiusTopEnd="@dimen/radiusTertiary"
-                    app:boxCornerRadiusTopStart="@dimen/radiusTertiary"
-                    app:boxStrokeColor="@color/primary"
-                    app:boxStrokeWidth="@dimen/strokePrimary"
-                    app:hintTextColor="@color/primary"
-                    app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@android:color/tab_indicator_text">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/retype_password"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/textFieldHeight"
-                        android:hint="@string/retype_password"
-                        android:imeOptions="actionDone"
-                        android:inputType="textPassword"
-                        android:textColor="@android:color/secondary_text_light"
-                        android:textColorHint="@android:color/tertiary_text_light"
-                        android:textCursorDrawable="@null"
-                        android:textSize="@dimen/textNormal" />
-                </com.google.android.material.textfield.TextInputLayout>
-
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -136,17 +106,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end">
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/back_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/backBtn"
-                    android:textColor="@color/purple_button"
-                    android:textAllCaps="false"
-                    android:layout_margin="@dimen/marginTertiary"
-                    android:onClick="onBackButtonClick"
-                    android:background="@drawable/back_button"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/finish_button"

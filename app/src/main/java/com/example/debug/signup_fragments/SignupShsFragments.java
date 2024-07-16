@@ -1,14 +1,17 @@
 package com.example.debug.signup_fragments;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +19,20 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.debug.Controller.FileChooser;
+import com.example.debug.Models.SignUpViewModel;
 import com.example.debug.R;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.Objects;
 
 public class SignupShsFragments extends Fragment {
+
+    private SignUpViewModel signUpViewModel;
+    private TextInputEditText lrnEditText;
+    private TextInputEditText jhsAttendedEditText;
+    private TextInputLayout lrnLayout;
+    private TextInputLayout jhsAttendedLayout;
 
     private TextView form137;
     private TextView jhs_diploma;
@@ -32,7 +45,7 @@ public class SignupShsFragments extends Fragment {
     private static final int FILE_CHOOSER_3_REQUEST_CODE = 3;
 
     public SignupShsFragments() {
-
+        // Required empty public constructor
     }
 
     @Override
@@ -46,8 +59,16 @@ public class SignupShsFragments extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Initialize ViewModel
+        signUpViewModel = new ViewModelProvider(requireActivity()).get(SignUpViewModel.class);
+
+        lrnEditText = view.findViewById(R.id.lrn);
+        jhsAttendedEditText = view.findViewById(R.id.jhs_attended);
+        lrnLayout = view.findViewById(R.id.lrn_input);
+        jhsAttendedLayout = view.findViewById(R.id.jhs_attended_input);
+
         form137 = view.findViewById(R.id.form137);
-        jhs_diploma = view.findViewById(R.id.shs_diploma);
+        jhs_diploma = view.findViewById(R.id.jhs_diploma);
         esc_cert = view.findViewById(R.id.esc_cert);
 
         fileChooser1 = new FileChooser(requireContext(), form137);
@@ -58,42 +79,109 @@ public class SignupShsFragments extends Fragment {
         jhs_diploma.setOnClickListener(v -> fileChooser2.openFileChooser(SignupShsFragments.this, FILE_CHOOSER_2_REQUEST_CODE));
         esc_cert.setOnClickListener(v -> fileChooser3.openFileChooser(SignupShsFragments.this, FILE_CHOOSER_3_REQUEST_CODE));
 
-        // Initialize the continue button
-        Button continueButton = view.findViewById(R.id.continue_button);
-        // Initialize the back button
-        Button backButton = view.findViewById(R.id.back_button);
-
-        // Check if the continue button is not null before setting the click listener
-        if (continueButton != null) {
-            continueButton.setOnClickListener(v -> {
-                // Navigate to the next fragment
-                NavHostFragment.findNavController(SignupShsFragments.this)
-                        .navigate(R.id.action_shs_next);
-            });
-        } else {
-            Log.e("SignupPersonalFragment", "Continue button is null");
-        }
-
-        // Check if the back button is not null before setting the click listener
-        if (backButton != null) {
-            backButton.setOnClickListener(v -> {
-                // Navigate back to the previous fragment
-                NavHostFragment.findNavController(SignupShsFragments.this).popBackStack();
-            });
-        } else {
-            Log.e("SignupPersonalFragment", "Back button is null");
-        }
+        setupButtonListeners();
+        setupFieldListeners();
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Uri uri = data != null ? data.getData() : null;
         if (requestCode == FILE_CHOOSER_1_REQUEST_CODE) {
             fileChooser1.handleActivityResult(requestCode, resultCode, data);
+            signUpViewModel.setForm137(uri);
         } else if (requestCode == FILE_CHOOSER_2_REQUEST_CODE) {
             fileChooser2.handleActivityResult(requestCode, resultCode, data);
+            signUpViewModel.setJhsDiploma(uri);
         } else if (requestCode == FILE_CHOOSER_3_REQUEST_CODE) {
             fileChooser3.handleActivityResult(requestCode, resultCode, data);
+            signUpViewModel.setEscCertificate(uri);
         }
+    }
+
+    private void setupFieldListeners() {
+        // Set listeners for EditText fields to update ViewModel in real-time
+        lrnEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Not used
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                signUpViewModel.setLrn(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Not used
+            }
+        });
+
+        jhsAttendedEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Not used
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                signUpViewModel.setJhsAttended(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Not used
+            }
+        });
+    }
+
+    private void setupButtonListeners() {
+        Button continueButton = requireView().findViewById(R.id.continue_button);
+
+        continueButton.setOnClickListener(v -> {
+            if (isInputValid()) {
+                // Navigate to the next fragment
+                NavHostFragment.findNavController(this)
+                        .navigate(R.id.action_shs_next);
+            }
+        });
+    }
+
+    private boolean isInputValid() {
+        boolean isValid = true;
+
+        String lrn = Objects.requireNonNull(lrnEditText.getText()).toString().trim();
+        String jhsAttended = Objects.requireNonNull(jhsAttendedEditText.getText()).toString().trim();
+
+        if (lrn.isEmpty()) {
+            lrnLayout.setError("This field is required");
+            isValid = false;
+        } else {
+            lrnLayout.setError(null);
+        }
+
+        if (jhsAttended.isEmpty()) {
+            jhsAttendedLayout.setError("This field is required");
+            isValid = false;
+        } else {
+            jhsAttendedLayout.setError(null);
+        }
+
+        if (signUpViewModel.getForm137().getValue() == null) {
+            form137.setError("File is required");
+            isValid = false;
+        } else {
+            form137.setError(null);
+        }
+
+        if (signUpViewModel.getJhsDiploma().getValue() == null) {
+            jhs_diploma.setError("File is required");
+            isValid = false;
+        } else {
+            jhs_diploma.setError(null);
+        }
+
+        return isValid;
     }
 }

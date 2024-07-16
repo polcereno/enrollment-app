@@ -40,7 +40,7 @@
     <fragment
         android:id="@+id/fragment_signup_personal"
         android:name="com.example.debug.signup_fragments.SignupPersonalFragment"
-        tools:layout="@layout/fragment_signup_personal_fragment">
+        tools:layout="@layout/fragment_signup_personal">
         <action
             android:id="@+id/action_personal_next"
             app:destination="@id/fragment_signup_documents"/>
@@ -58,10 +58,10 @@
 
     <fragment
         android:id="@+id/fragment_signup_account"
-        android:name="com.example.debug.signup_fragments.SignupAccpuntFragment"
+        android:name="com.example.debug.signup_fragments.SignupAccountFragment"
         tools:layout="@layout/fragment_signup_account">
         <action
-            android:id="@+id/action_signup_account"
+            android:id="@+id/action_account_next"
             app:destination="@id/fragment_signup_done"/>
     </fragment>
 

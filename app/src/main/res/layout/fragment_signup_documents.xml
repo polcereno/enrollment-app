@@ -193,33 +193,12 @@
                     android:onClick="openFileChooser"
                     />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/parish_input"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/parish"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/textFieldHeight"
                     android:layout_marginTop="@dimen/marginSecondary"
-                    android:textColorHint="@android:color/tertiary_text_light"
-                    app:boxCornerRadiusBottomEnd="@dimen/radiusTertiary"
-                    app:boxCornerRadiusBottomStart="@dimen/radiusTertiary"
-                    app:boxCornerRadiusTopEnd="@dimen/radiusTertiary"
-                    app:boxCornerRadiusTopStart="@dimen/radiusTertiary"
-                    app:boxStrokeColor="@color/primary"
-                    app:boxStrokeWidth="@dimen/strokePrimary"
-                    app:hintTextColor="@color/primary">
-                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-                        android:id="@+id/parish"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/textFieldHeight"
-                        android:imeOptions="actionNext"
-                        android:hint="@string/parish"
-                        android:completionThreshold="1"
-                        android:inputType="text"
-                        android:textColor="@android:color/secondary_text_light"
-                        android:textColorHint="@android:color/tertiary_text_light"
-                        android:textCursorDrawable="@null"
-                        android:textSize="@dimen/textNormal" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:background="@drawable/spinner_background"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/medical_cert"
@@ -244,17 +223,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/marginTertiary"
                 android:layout_gravity="bottom|end">
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/back_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/backBtn"
-                    android:textColor="@color/purple_button"
-                    android:textAllCaps="false"
-                    android:layout_margin="@dimen/marginTertiary"
-                    android:onClick="onBackButtonClick"
-                    android:background="@drawable/back_button"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/continue_button"
