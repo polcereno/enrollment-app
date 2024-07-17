@@ -83,6 +83,8 @@ public class LoginActivity extends AppCompatActivity {
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
+                conn.setConnectTimeout(10000); // Set timeout for connection
+                conn.setReadTimeout(10000);    // Set timeout for reading response
 
                 // Send data
                 OutputStream os = conn.getOutputStream();
@@ -93,6 +95,8 @@ public class LoginActivity extends AppCompatActivity {
                 writer.flush();
                 writer.close();
                 os.close();
+
+                Log.d("LoginTask", "Post data: " + postData);
 
                 // Get response
                 BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -105,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                 response = responseBuilder.toString();
 
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.e("LoginTask", "Error during connection", e);
             }
 
             return response;
@@ -181,4 +185,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+
 }
