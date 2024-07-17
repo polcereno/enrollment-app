@@ -1,5 +1,6 @@
 [versions]
 agp = "8.5.0"
+drawerlayout = "1.2.0"
 fragmentKtx = "1.8.1"
 imageSupport = "2.0.0"
 junit = "4.13.2"
@@ -21,6 +22,7 @@ volley = "1.2.1"
 
 [libraries]
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+drawerlayout = { module = "androidx.drawerlayout:drawerlayout", version.ref = "drawerlayout" }
 fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 image-support = { module = "io.github.nikartm:image-support", version.ref = "imageSupport" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

@@ -53,4 +53,6 @@ dependencies {
     implementation(libs.navigation.fragment.ktx.v253)
     implementation(libs.navigation.ui.ktx)
 
+    implementation(libs.drawerlayout)
+
 }

@@ -14,10 +14,6 @@ import androidx.appcompat.widget.Toolbar;
 import ru.nikartm.support.ImageBadgeView;
 
 public class SignupActivity extends AppCompatActivity {
-    private Context context;
-    private Toolbar signupToolbar;
-    private ImageBadgeView backBtn;
-    private AppCompatTextView signupTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +21,8 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         // Initialize views
-        signupToolbar = findViewById(R.id.signup_toolbar);
-        backBtn = findViewById(R.id.backBtn);
+        Toolbar signupToolbar = findViewById(R.id.signup_toolbar);
+        ImageBadgeView backBtn = findViewById(R.id.backBtn);
 
         // Set up the toolbar
         setSupportActionBar(signupToolbar);
