@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.debug.LoginActivity;
+import com.example.debug.LogoutTask;
 import com.example.debug.R;
 import com.example.debug.SchoolCalendarActivity;
 import com.example.debug.registrar_activity.EnrollmentActivity;
@@ -80,10 +81,10 @@ public class StudentActivity extends AppCompatActivity {
                 .setTitle("Confirm Logout")
                 .setMessage("Click “Confirm” to logout of the system.")
                 .setPositiveButton("Confirm", (dialog, which) -> {
-                    startActivity(new Intent(StudentActivity.this, LoginActivity.class));
-                    finish();
+                    new LogoutTask(this).execute();
                 })
                 .setNegativeButton("Cancel", null)
                 .show();
     }
+
 }

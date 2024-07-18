@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatTextView;
 
 import com.example.debug.admin_activities.AdminActivity;
 import com.example.debug.benefactor_activities.BenefactorActivity;
@@ -45,11 +46,17 @@ public class LoginActivity extends AppCompatActivity {
 
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.password);
-        TextInputLayout usernameInputLayout = findViewById(R.id.username_input);
-        TextInputLayout passwordInputLayout = findViewById(R.id.password_input);
-        Button loginButton = findViewById(R.id.login_button);
+        final TextInputLayout usernameInputLayout = findViewById(R.id.username_input);
+        final TextInputLayout passwordInputLayout = findViewById(R.id.password_input);
+        final Button loginButton = findViewById(R.id.login_button);
+        final AppCompatTextView signup = findViewById(R.id.signup);
 
         loginButton.setOnClickListener(v -> attemptLogin());
+
+        signup.setOnClickListener(v -> {
+            Intent i = new Intent(LoginActivity.this, SignupActivity.class);
+            startActivity(i);
+        });
     }
 
     private void attemptLogin() {
@@ -205,6 +212,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
-
-
+    
 }
