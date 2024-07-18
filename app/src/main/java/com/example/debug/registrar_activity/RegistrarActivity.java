@@ -57,7 +57,11 @@ public class RegistrarActivity extends AppCompatActivity {
             if (id == R.id.nav_enrollment) {
                 startActivity(new Intent(RegistrarActivity.this, EnrollmentActivity.class));
             } else if (id == R.id.nav_assessment) {
-                // startActivity(new Intent(MainActivity.this, LogoutActivity.class));
+                // startActivity(new Intent(RegistrarActivity.this, .class));
+            } else if (id == R.id.nav_admission_results) {
+                startActivity(new Intent(RegistrarActivity.this, AdmissionResultsActivity.class));
+            } else if (id == R.id.nav_admission_applicants) {
+                startActivity(new Intent(RegistrarActivity.this, AdmissionApplicantsActivity.class));
             } else if (id == R.id.nav_fee_management) {
                 startActivity(new Intent(RegistrarActivity.this, FeeManagementActivity.class));
             } else if (id == R.id.nav_ledger) {

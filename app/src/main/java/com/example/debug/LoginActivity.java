@@ -11,6 +11,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.example.debug.admin_activities.AdminActivity;
 import com.example.debug.benefactor_activities.BenefactorActivity;
@@ -50,6 +53,12 @@ public class LoginActivity extends AppCompatActivity {
         final TextInputLayout passwordInputLayout = findViewById(R.id.password_input);
         final Button loginButton = findViewById(R.id.login_button);
         final AppCompatTextView signup = findViewById(R.id.signup);
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.login_activity), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
         loginButton.setOnClickListener(v -> attemptLogin());
 
@@ -212,5 +221,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
-    
+
 }

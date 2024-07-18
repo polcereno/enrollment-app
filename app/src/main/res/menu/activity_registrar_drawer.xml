@@ -8,9 +8,13 @@
             <group
                 android:id="@+id/menu_nav_transaction">
                 <item
-                    android:id="@+id/nav_admission"
+                    android:id="@+id/nav_admission_results"
                     android:icon="@drawable/baseline_circle_24"
-                    android:title="@string/admission"/>
+                    android:title="@string/admission_results"/>
+                <item
+                    android:id="@+id/nav_admission_applicants"
+                    android:icon="@drawable/baseline_circle_24"
+                    android:title="@string/admission_applicants"/>
                 <item
                     android:id="@+id/nav_enrollment"
                     android:icon="@drawable/icon_enroll_24"

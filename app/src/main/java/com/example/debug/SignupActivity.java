@@ -6,10 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import ru.nikartm.support.ImageBadgeView;
 
@@ -18,28 +22,20 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_signup);
 
-        // Initialize views
-        Toolbar signupToolbar = findViewById(R.id.signup_toolbar);
-        ImageBadgeView backBtn = findViewById(R.id.backBtn);
+        Toolbar toolbar = findViewById(R.id.signupToolbar);
+        setSupportActionBar(toolbar);
 
-        // Set up the toolbar
-        setSupportActionBar(signupToolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-        }
+        // Enable the back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_arrow_back_24);
 
-        // Set up the back button
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to LoginActivity
-                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.signup_activity), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
         });
-
     }
 }

@@ -21,27 +21,20 @@ public class AdmissionApplicantsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_admission_applicants);
 
-        // Initialize views
-        Toolbar admissionApplicantsToolbar = findViewById(R.id.admission_applicants_toolbar);
-        setSupportActionBar(admissionApplicantsToolbar);
+        Toolbar toolbar = findViewById(R.id.admissionApplicantsToolbar);
+        setSupportActionBar(toolbar);
 
-        // Set up the toolbar
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-        }
+        // Enable the back button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_arrow_back_24);
 
-        // Setup button listeners
-        setupButtonListeners();
-    }
-
-    private void setupButtonListeners() {
-        ImageBadgeView backBtn = findViewById(R.id.backBtn);
-
-        backBtn.setOnClickListener(v -> {
-            // Finish the current activity to go back to the previous activity
-            finish();
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.admission_applicants_activity), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
         });
     }
 }

@@ -5,6 +5,7 @@
     android:id="@+id/fee_management_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".registrar_activity.FeeManagementActivity">
 
     <androidx.appcompat.widget.Toolbar

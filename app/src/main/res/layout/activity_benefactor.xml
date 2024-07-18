@@ -5,6 +5,7 @@
     android:id="@+id/benefactor_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".benefactor_activities.BenefactorActivity"
     tools:openDrawer="start">
 

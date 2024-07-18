@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.DashboardFragment"
-    tools:showIn="@layout/activity_registrar">
+    android:background="@color/white"
+    tools:context=".Fragments.DashboardFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

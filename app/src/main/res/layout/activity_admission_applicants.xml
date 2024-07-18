@@ -1,48 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/admission_applicants_layout"
+    android:id="@+id/admission_applicants_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".registrar_activity.AdmissionApplicantsActivity"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/admissionApplicantsToolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/dark_primary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:title=" "
+        app:popupTheme="@style/Widget.Material3.PopupMenu">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/admission_applicants_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/primary">
+        <TextView
+            android:id="@+id/toolbarTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/admission_applicants"
+            android:textColor="@color/light_text_color"
+            android:textSize="22sp"
+            android:fontFamily="@font/roboto_bold"/>
 
-            <ru.nikartm.support.ImageBadgeView
-                android:id="@+id/backBtn"
-                android:layout_width="@dimen/imageSmall"
-                android:layout_height="@dimen/imageSmall"
-                android:layout_gravity="start"
-                android:padding="12dp"
-                app:ibv_badgeTextSize="@dimen/textExtraSmall"
-                app:ibv_fixedBadgeRadius="12dp"
-                app:ibv_badgeTextStyle="bold"
-                app:ibv_badgeTextColor="@android:color/white"
-                app:ibv_badgeColor="@android:color/holo_red_dark"
-                app:ibv_badgeLimitValue="true"
-                android:src="@drawable/baseline_arrow_back_ios_24"
-                android:tint="@color/white"/>
+    </androidx.appcompat.widget.Toolbar>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/admission_applicants"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textH4"
-                android:layout_gravity="center"/>
-
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
