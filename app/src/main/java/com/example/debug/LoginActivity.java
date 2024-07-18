@@ -17,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.debug.admin_activities.AdminActivity;
 import com.example.debug.benefactor_activities.BenefactorActivity;
+import com.example.debug.instructor_activities.InstructorActivity;
 import com.example.debug.parent_activities.ParentActivity;
 import com.example.debug.registrar_activity.RegistrarActivity;
 import com.example.debug.student_activities.StudentActivity;
@@ -197,6 +198,9 @@ public class LoginActivity extends AppCompatActivity {
                                 break;
                             case "parent":
                                 destinationActivity = ParentActivity.class;
+                                break;
+                            case "instructor":
+                                destinationActivity = InstructorActivity.class;
                                 break;
                             default:
                                 Toast.makeText(LoginActivity.this, "Unknown role: " + role, Toast.LENGTH_SHORT).show();

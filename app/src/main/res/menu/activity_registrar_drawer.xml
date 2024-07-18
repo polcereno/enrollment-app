@@ -27,6 +27,18 @@
                     android:id="@+id/nav_fee_management"
                     android:icon="@drawable/icon_enroll_24"
                     android:title="Fee Management" />
+                <item
+                    android:id="@+id/nav_course"
+                    android:icon="@drawable/baseline_circle_24"
+                    android:title="@string/course"/>
+                <item
+                    android:id="@+id/nav_curriculum"
+                    android:icon="@drawable/baseline_circle_24"
+                    android:title="@string/curriculum"/>
+                <item
+                    android:id="@+id/nav_certification"
+                    android:icon="@drawable/baseline_circle_24"
+                    android:title="@string/certification"/>
 
             </group>
         </menu>

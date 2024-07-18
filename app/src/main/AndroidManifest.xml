@@ -15,6 +15,30 @@
         android:theme="@style/Theme.Debug"
         tools:targetApi="31">
         <activity
+            android:name=".registrar_activity.CertificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".registrar_activity.CourseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin_activities.PrerequisitesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin_activities.CurriculumActivity"
+            android:exported="false" />
+        <activity
+            android:name=".instructor_activities.GradingSheetActivity"
+            android:exported="false" />
+        <activity
+            android:name=".instructor_activities.ScheduleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".instructor_activities.ClassListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".instructor_activities.InstructorActivity"
+            android:exported="false" />
+        <activity
             android:name=".admin_activities.ManageAccountActivity"
             android:exported="false" />
         <activity

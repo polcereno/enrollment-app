@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="Transaction">
+        <menu>
+            <group
+                android:id="@+id/menu_nav_transaction">
+                <item
+                    android:id="@+id/nav_class_list"
+                    android:icon="@drawable/list_icon"
+                    android:title="@string/class_list"/>
+                <item
+                    android:id="@+id/nav_schedule"
+                    android:icon="@drawable/icon_calendar_24"
+                    android:title="@string/schedule"/>
+                <item
+                    android:id="@+id/nav_grading_sheet"
+                    android:icon="@drawable/grading_icon"
+                    android:title="@string/grading_sheet" />
+
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Options">
+        <menu>
+            <group
+                android:id="@+id/menu_nav_settings">
+                <item
+                    android:id="@+id/nav_setup"
+                    android:icon="@drawable/icon_setup_24"
+                    android:title="Setup" />
+                <item
+                    android:id="@+id/nav_logout"
+                    android:icon="@drawable/icon_logout_24"
+                    android:title="Logout" />
+            </group>
+        </menu>
+    </item>
+
+</menu>

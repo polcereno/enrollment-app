@@ -158,6 +158,15 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="offerings">Offerings</string>
+    <string name="curriculum">Curriculum</string>
+    <string name="schedule">Schedule</string>
+    <string name="prerequisites">Pre-requisites</string>
+    <string name="corequisites">Co-requisites</string>
+    <string name="grading_sheet">Grading Sheet</string>
+    <string name="class_list">Class List</string>
+    <string name="course">Course</string>
+    <string name="certification">Certification</string>
 
 
 </resources>

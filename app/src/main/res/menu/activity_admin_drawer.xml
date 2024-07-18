@@ -15,6 +15,27 @@
                     android:id="@+id/nav_manage_account"
                     android:icon="@drawable/baseline_circle_24"
                     android:title="@string/manage_account"/>
+
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="@string/offerings">
+        <menu>
+            <group
+                android:id="@+id/menu_nav_offerings">
+                <item
+                    android:id="@+id/nav_curriculum"
+                    android:icon="@drawable/baseline_circle_24"
+                    android:title="@string/curriculum"/>
+                <item
+                    android:id="@+id/nav_schedule"
+                    android:icon="@drawable/baseline_circle_24"
+                    android:title="@string/schedule"/>
+                <item
+                    android:id="@+id/nav_prerequisites"
+                    android:icon="@drawable/baseline_circle_24"
+                    android:title="@string/prerequisites"/>
             </group>
         </menu>
     </item>

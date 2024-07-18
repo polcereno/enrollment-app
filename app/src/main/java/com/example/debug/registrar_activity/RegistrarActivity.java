@@ -19,6 +19,7 @@ import com.example.debug.Fragments.DashboardFragment;
 import com.example.debug.LoginActivity;
 import com.example.debug.LogoutTask;
 import com.example.debug.R;
+import com.example.debug.admin_activities.CurriculumActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
 
@@ -71,6 +72,12 @@ public class RegistrarActivity extends AppCompatActivity {
                 startActivity(new Intent(RegistrarActivity.this, Registrar2Activity.class));
             } else if (id == R.id.nav_setup) {
                 startActivity(new Intent(RegistrarActivity.this, SetupActivity.class));
+            } else if (id == R.id.nav_course) {
+                startActivity(new Intent(RegistrarActivity.this, CourseActivity.class));
+            } else if (id == R.id.nav_curriculum) {
+                startActivity(new Intent(RegistrarActivity.this, CurriculumActivity.class));
+            } else if (id == R.id.nav_certification) {
+                startActivity(new Intent(RegistrarActivity.this, CertificationActivity.class));
             } else if (id == R.id.nav_logout) {
                 showLogoutConfirmationDialog();
             }
