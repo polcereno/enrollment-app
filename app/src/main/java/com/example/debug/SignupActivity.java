@@ -3,6 +3,7 @@ package com.example.debug;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -14,6 +15,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.debug.student_activities.StudentActivity;
 
 import ru.nikartm.support.ImageBadgeView;
 
@@ -37,5 +40,19 @@ public class SignupActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        if (item.getItemId() == android.R.id.home) {
+            // Navigate back to MainActivity
+            Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

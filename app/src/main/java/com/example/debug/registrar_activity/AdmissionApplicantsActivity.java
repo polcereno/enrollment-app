@@ -1,7 +1,9 @@
 package com.example.debug.registrar_activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +15,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.debug.R;
+import com.example.debug.parent_activities.ChildActivity;
+import com.example.debug.parent_activities.ParentActivity;
 
 import ru.nikartm.support.ImageBadgeView;
 
@@ -36,6 +40,20 @@ public class AdmissionApplicantsActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        if (item.getItemId() == android.R.id.home) {
+            // Navigate back to MainActivity
+            Intent intent = new Intent(AdmissionApplicantsActivity.this, RegistrarActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

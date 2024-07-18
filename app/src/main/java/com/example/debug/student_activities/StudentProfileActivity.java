@@ -1,6 +1,8 @@
 package com.example.debug.student_activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,5 +34,19 @@ public class StudentProfileActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        if (item.getItemId() == android.R.id.home) {
+            // Navigate back to MainActivity
+            Intent intent = new Intent(StudentProfileActivity.this, StudentActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
