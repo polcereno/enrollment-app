@@ -1,5 +1,6 @@
 package com.example.debug;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -62,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class LoginTask extends AsyncTask<String, Void, String> {
 
         private ProgressDialog progressDialog;
@@ -78,9 +80,12 @@ public class LoginActivity extends AppCompatActivity {
             String password = params[1];
             String response = null;
 
+            HttpURLConnection conn = null;
+            BufferedReader reader = null;
+
             try {
                 URL url = new URL("http://lesterintheclouds.com/enrolment_app/login.php");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
                 conn.setConnectTimeout(10000); // Set timeout for connection
@@ -99,17 +104,32 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d("LoginTask", "Post data: " + postData);
 
                 // Get response
-                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuilder responseBuilder = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    responseBuilder.append(line);
+                int responseCode = conn.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    StringBuilder responseBuilder = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        responseBuilder.append(line);
+                    }
+                    response = responseBuilder.toString();
+                } else {
+                    Log.e("LoginTask", "HTTP error code: " + responseCode);
                 }
-                reader.close();
-                response = responseBuilder.toString();
 
             } catch (IOException e) {
                 Log.e("LoginTask", "Error during connection", e);
+            } finally {
+                if (conn != null) {
+                    conn.disconnect();
+                }
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (IOException e) {
+                        Log.e("LoginTask", "Error closing reader", e);
+                    }
+                }
             }
 
             return response;
@@ -185,5 +205,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+
 
 }

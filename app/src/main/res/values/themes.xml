@@ -6,6 +6,8 @@
     </style>
 
     <style name="Theme.Debug" parent="Base.Theme.Debug" />
+
     <style name="Theme.NavigationDrawer.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
+
     <style name="Theme.NavigationDrawer.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 </resources>
