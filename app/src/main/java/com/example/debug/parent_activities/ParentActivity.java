@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.debug.Fragments.DashboardFragment;
 import com.example.debug.LoginActivity;
 import com.example.debug.LogoutTask;
 import com.example.debug.R;
@@ -60,6 +61,11 @@ public class ParentActivity extends AppCompatActivity {
             drawer.closeDrawer(GravityCompat.START);
             return true;
         });
+
+        // Example: Adding a fragment dynamically
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frameLayout, new DashboardFragment())
+                .commit();
     }
 
     private void showLogoutConfirmationDialog() {

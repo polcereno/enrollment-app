@@ -1,5 +1,7 @@
 package com.example.debug.admin_activities;
 
+import static androidx.fragment.app.FragmentManagerKt.commit;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.debug.Fragments.DashboardFragment;
 import com.example.debug.LoginActivity;
 import com.example.debug.LogoutTask;
 import com.example.debug.R;
@@ -27,7 +30,6 @@ public class AdminActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_admin);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -38,12 +40,6 @@ public class AdminActivity extends AppCompatActivity {
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.admin_activity), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(item -> {
@@ -60,6 +56,11 @@ public class AdminActivity extends AppCompatActivity {
             drawer.closeDrawer(GravityCompat.START);
             return true;
         });
+
+        // Example: Adding a fragment dynamically
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frameLayout, new DashboardFragment())
+                .commit();
     }
 
     private void showLogoutConfirmationDialog() {
@@ -72,5 +73,4 @@ public class AdminActivity extends AppCompatActivity {
                 .setNegativeButton("Cancel", null)
                 .show();
     }
-
 }

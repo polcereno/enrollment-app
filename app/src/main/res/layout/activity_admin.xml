@@ -46,7 +46,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- Main content view -->
+        <!-- FrameLayout to contain fragments -->
         <FrameLayout
             android:id="@+id/frameLayout"
             android:layout_width="0dp"
@@ -56,7 +56,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
-            <!-- Your main content goes here -->
+            <!-- Fragments will be dynamically loaded here -->
         </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
