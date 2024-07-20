@@ -31,4 +31,52 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/curriculumEvaluationToolbar" >
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/marginTertiary"
+            android:orientation="vertical"
+            android:padding="@dimen/marginTertiary">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/curriculum"
+                    android:textSize="@dimen/textNormal"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="10dp"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/curriculum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/curriculum"
+                    android:textSize="@dimen/textNormal"
+                    android:textColor="@android:color/tertiary_text_light"
+                    android:padding="8dp"
+                    android:background="@drawable/edit_text_background"
+                    android:drawableTint="@android:color/tertiary_text_light"
+                    />
+
+            </LinearLayout>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

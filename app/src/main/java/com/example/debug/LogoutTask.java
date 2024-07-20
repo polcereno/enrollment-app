@@ -39,7 +39,7 @@ public class LogoutTask extends AsyncTask<Void, Void, String> {
         BufferedReader reader = null;
 
         try {
-            URL url = new URL("http://lesterintheclouds.com/enrolment_app/logout.php");
+            URL url = new URL("https://enrol.lesterintheclouds.com/authentication/logout.php");
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setConnectTimeout(10000); // Set timeout for connection

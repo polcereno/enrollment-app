@@ -41,10 +41,7 @@ public class ChildActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         if (item.getItemId() == android.R.id.home) {
-            // Navigate back to MainActivity
-            Intent intent = new Intent(ChildActivity.this, ParentActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+            // Navigate back to the previous activity
             finish();
             return true;
         }

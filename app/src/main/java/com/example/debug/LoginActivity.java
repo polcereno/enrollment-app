@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
             BufferedReader reader = null;
 
             try {
-                URL url = new URL("http://lesterintheclouds.com/enrolment_app/login.php");
+                URL url = new URL("https://enrol.lesterintheclouds.com/authentication/login.php");
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
@@ -209,7 +209,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         // Start the activity corresponding to the user's role
                         startActivity(new Intent(LoginActivity.this, destinationActivity));
-                        finish(); // Optionally finish LoginActivity to prevent going back
+                        finish(); // finish LoginActivity to prevent going back
                     } else {
                         // Handle other status scenarios (e.g., error messages)
                         String errorMessage = json.optString("message", "Unknown error");
