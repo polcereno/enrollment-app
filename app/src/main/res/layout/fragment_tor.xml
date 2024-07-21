@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.TorFragment">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Header -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Republic of the Philippines"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CAMARINES NORTE STATE COLLEGE"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Daet, Camarines Norte"
+                android:gravity="center"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OFFICE OF THE REGISTRAR"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OFFICIAL TRANSCRIPT OF RECORDS"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ENTRANCE DATA"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="100sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date Graduated/Last Attended: "
+                android:layout_marginTop="7dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category: "
+                android:layout_marginTop="7dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="High School/College: "
+                android:layout_marginTop="7dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date/Sem. Admitted: "
+                android:layout_marginTop="7dp" />
+
+            <!-- Personal Data -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name: "
+                android:textStyle="bold"
+                android:layout_marginTop="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address: "
+                android:layout_marginTop="7dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Degree/Title Course: "
+                android:layout_marginTop="7dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date Conferred: "
+                android:layout_marginTop="7dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Major/Specialization: "
+                android:layout_marginTop="7dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:src="@drawable/placeholder"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="COLLEGIATE RECORD"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp" />
+
+            <TableLayout
+                android:id="@+id/tablelayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*"
+                android:layout_marginTop="10dp">
+
+                <TableRow>
+                    <TextView android:text="@string/term_course_no" android:padding="3dp" android:background="#E0E0E0" android:textStyle="bold" android:textSize="12sp" />
+                    <TextView android:text="Descriptive Title" android:padding="3dp" android:background="#E0E0E0" android:textStyle="bold" android:textSize="12sp" />
+                    <TextView android:text="Units or Credits" android:padding="3dp" android:background="#E0E0E0" android:textStyle="bold" android:textSize="12sp" />
+                    <TextView android:text="Final" android:padding="3dp" android:background="#E0E0E0" android:textStyle="bold" android:textSize="12sp" />
+
+                </TableRow>
+
+                <TableLayout
+                    android:id="@+id/tablelayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="*"
+                    android:layout_marginTop="10dp">
+
+                </TableLayout>
+
+                <!-- Table Headers -->
+                <TableRow>
+                    <TextView android:text="-" android:padding="3dp" android:background="#FFFFFFFF" android:textStyle="bold" android:textSize="12sp" />
+                    <TextView android:text="-" android:padding="3dp" android:background="#FFFFFFFF" android:textStyle="bold" android:textSize="12sp" />
+                    <TextView android:text="- " android:padding="3dp" android:background="#FFFFFFFF" android:textStyle="bold" android:textSize="12sp" />
+                    <TextView android:text="-" android:padding="3dp" android:background="#FFFFFFFF" android:textStyle="bold" android:textSize="12sp" />
+                    <TextView android:text="-" android:padding="3dp" android:background="#FFFFFFFF" android:textStyle="bold" android:textSize="12sp" />
+                    <TextView android:text="-" android:padding="3dp" android:background="#FFFFFFFF" android:textStyle="bold" android:textSize="12sp" />
+                </TableRow>
+
+            </TableLayout>
+
+
+
+
+
+            <!-- Note and Remarks -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NOTE: This transcript is valid only when it bears the seal of the C.N.S.C and the original signature in ink of the College Registrar. Any erasure or alteration made on this copy renders the whole transcript invalid."
+                android:layout_marginTop="16dp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remarks: "
+                android:layout_marginTop="8dp"
+                android:textStyle="italic" />
+
+            <!-- Signatures -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prepared by: "
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Checked by: "
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sealed by: "
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="\nRegistrar III"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date Issued: "
+                android:layout_marginTop="8dp" />
+
+
+            <!-- Button to Generate PDF -->
+            <Button
+                android:id="@+id/btnGenerate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Generate PDF"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

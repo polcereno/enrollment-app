@@ -199,6 +199,7 @@
     <string name="semester">Semester</string>
     <string name="save">Save</string>
     <string name="add">Add</string>
+    <string name="term_course_no"><![CDATA[<![CDATA[Term & Course No.]]>]]></string>
 
 
 </resources>
