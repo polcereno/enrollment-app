@@ -126,7 +126,6 @@ public class SignupPersonalFragment extends Fragment {
         sexAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sexSpinner.setAdapter(sexAdapter);
 
-        // Set a listener to update ViewModel when gender is selected
         sexSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

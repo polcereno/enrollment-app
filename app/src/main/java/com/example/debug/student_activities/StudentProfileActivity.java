@@ -3,6 +3,7 @@ package com.example.debug.student_activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.debug.R;
 
 public class StudentProfileActivity extends AppCompatActivity {
+
+    private TextView firstName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -63,7 +63,7 @@
                         android:layout_height="@dimen/textFieldHeight"
                         android:hint="@string/username"
                         android:imeOptions="actionNext"
-                        android:inputType="textEmailAddress"
+                        android:inputType="text"
                         android:textColor="@android:color/secondary_text_light"
                         android:textColorHint="@android:color/tertiary_text_light"
                         android:textCursorDrawable="@null"

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <item android:title="Transaction">
+    <item android:title="@string/transaction">
         <menu>
             <group
                 android:id="@+id/menu_nav_transaction">
@@ -16,17 +16,21 @@
                     android:icon="@drawable/baseline_circle_24"
                     android:title="@string/admission_applicants"/>
                 <item
+                    android:id="@+id/nav_create_student_account"
+                    android:icon="@drawable/baseline_circle_24"
+                    android:title="@string/create_student_account"/>
+                <item
                     android:id="@+id/nav_enrollment"
                     android:icon="@drawable/icon_enroll_24"
-                    android:title="Enrollment" />
+                    android:title="@string/enrollment" />
                 <item
                     android:id="@+id/nav_assessment"
                     android:icon="@drawable/icon_assessment_24"
-                    android:title="Assessment" />
+                    android:title="@string/assessment" />
                 <item
                     android:id="@+id/nav_fee_management"
                     android:icon="@drawable/icon_enroll_24"
-                    android:title="Fee Management" />
+                    android:title="@string/fee_management" />
                 <item
                     android:id="@+id/nav_course"
                     android:icon="@drawable/baseline_circle_24"
@@ -44,34 +48,34 @@
         </menu>
     </item>
 
-    <item android:title="Reports">
+    <item android:title="@string/reports">
         <menu>
             <group
                 android:id="@+id/menu_google_apps">
                 <item
                     android:id="@+id/nav_ledger"
                     android:icon="@drawable/icon_topic_24"
-                    android:title="Student Ledger" />
+                    android:title="@string/student_ledger" />
                 <item
                     android:id="@+id/nav_registrar"
                     android:icon="@drawable/icon_topic_24"
-                    android:title="Registrar" />
+                    android:title="@string/registrar" />
             </group>
         </menu>
     </item>
 
-    <item android:title="Options">
+    <item android:title="@string/options">
         <menu>
             <group
                 android:id="@+id/menu_nav_settings">
                 <item
                     android:id="@+id/nav_setup"
                     android:icon="@drawable/icon_setup_24"
-                    android:title="Setup" />
+                    android:title="@string/setup" />
                 <item
                     android:id="@+id/nav_logout"
                     android:icon="@drawable/icon_logout_24"
-                    android:title="Logout" />
+                    android:title="@string/logout" />
             </group>
         </menu>
     </item>

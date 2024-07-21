@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.debug.Models.SignUpViewModel;
 import com.example.debug.R;
+import com.example.debug.FileUploadManager;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Objects;
@@ -52,7 +53,7 @@ public class SignupAccountFragment extends Fragment {
 
         setupFieldListeners(); // Setup listeners for EditText fields
 
-        setupButtonListeners(); // Setup listener for Continue button
+        setupButtonListeners(); // Setup listeners for buttons
     }
 
     private void setupFieldListeners() {
@@ -92,10 +93,11 @@ public class SignupAccountFragment extends Fragment {
         });
     }
 
-    private void setupButtonListeners() {
-        Button continueButton = requireView().findViewById(R.id.continue_button);
 
-        continueButton.setOnClickListener(v -> {
+    private void setupButtonListeners() {
+        Button finishButton = requireView().findViewById(R.id.finish_button);
+
+        finishButton.setOnClickListener(v -> {
             // Validate username and password fields
             String username = Objects.requireNonNull(usernameEditText.getText()).toString().trim();
             String password = Objects.requireNonNull(passwordEditText.getText()).toString().trim();
@@ -110,9 +112,28 @@ public class SignupAccountFragment extends Fragment {
                 return;
             }
 
-            // If validation passes, navigate to the next fragment
-            NavHostFragment.findNavController(this)
-                    .navigate(R.id.action_account_next);
+            // Set username and password in ViewModel
+            signUpViewModel.setUsername(username);
+            signUpViewModel.setPassword(password);
+
+            // Initialize FileUploadManager and upload data
+            FileUploadManager fileUploadManager = new FileUploadManager("https://enrol.lesterintheclouds.com", getContext());
+            fileUploadManager.uploadData(signUpViewModel, new FileUploadManager.UploadCallback() {
+                @Override
+                public void onSuccess() {
+                    // Navigate to the next fragment on success
+                    NavHostFragment.findNavController(SignupAccountFragment.this)
+                            .navigate(R.id.action_account_next);
+                }
+
+                @Override
+                public void onFailure(String errorMessage) {
+                    // Show error message on failure
+                    Toast.makeText(getContext(), "Upload failed: " + errorMessage, Toast.LENGTH_LONG).show();
+                }
+            });
         });
     }
+
+
 }

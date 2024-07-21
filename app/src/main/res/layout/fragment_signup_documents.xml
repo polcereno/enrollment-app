@@ -202,6 +202,13 @@
                     android:background="@drawable/spinner_background"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/parihsErrorText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red_button"
+                    android:visibility="gone"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/medical_cert"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/textFieldHeight"

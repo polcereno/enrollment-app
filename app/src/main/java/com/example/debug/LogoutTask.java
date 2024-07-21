@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -101,8 +103,16 @@ public class LogoutTask extends AsyncTask<Void, Void, String> {
                 String status = json.getString("status");
 
                 if (status.equals("success")) {
-                    // Logout successful, navigate to LoginActivity
+                    // Logout successful, clear SharedPreferences and navigate to LoginActivity
                     Toast.makeText(context, json.getString("message"), Toast.LENGTH_SHORT).show();
+
+                    // Clear SharedPreferences
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.clear();
+                    editor.apply();
+
+                    // Navigate to LoginActivity
                     context.startActivity(new Intent(context, LoginActivity.class));
                     if (context instanceof Activity) {
                         ((Activity) context).finish();
@@ -121,4 +131,5 @@ public class LogoutTask extends AsyncTask<Void, Void, String> {
             Toast.makeText(context, "JSON parsing error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+
 }

@@ -34,7 +34,6 @@ public class RegistrarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_registrar);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -64,6 +63,8 @@ public class RegistrarActivity extends AppCompatActivity {
                 startActivity(new Intent(RegistrarActivity.this, AdmissionResultsActivity.class));
             } else if (id == R.id.nav_admission_applicants) {
                 startActivity(new Intent(RegistrarActivity.this, AdmissionApplicantsActivity.class));
+            }else if (id == R.id.nav_create_student_account) {
+                startActivity(new Intent(RegistrarActivity.this, CreateStudentAccountActivity.class));
             } else if (id == R.id.nav_fee_management) {
                 startActivity(new Intent(RegistrarActivity.this, FeeManagementActivity.class));
             } else if (id == R.id.nav_ledger) {

@@ -3,8 +3,10 @@ package com.example.debug;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
@@ -60,6 +62,41 @@ public class LoginActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
+        if (isLoggedIn) {
+            String role = sharedPreferences.getString("role", "");
+
+            Class<?> destinationActivity;
+            switch (role) {
+                case "admin":
+                    destinationActivity = AdminActivity.class;
+                    break;
+                case "registrar":
+                    destinationActivity = RegistrarActivity.class;
+                    break;
+                case "student":
+                    destinationActivity = StudentActivity.class;
+                    break;
+                case "benefactor":
+                    destinationActivity = BenefactorActivity.class;
+                    break;
+                case "parent":
+                    destinationActivity = ParentActivity.class;
+                    break;
+                case "instructor":
+                    destinationActivity = InstructorActivity.class;
+                    break;
+                default:
+                    Toast.makeText(LoginActivity.this, "Unknown role: " + role, Toast.LENGTH_SHORT).show();
+                    return;
+            }
+
+            startActivity(new Intent(LoginActivity.this, destinationActivity));
+            finish();
+        }
 
         loginButton.setOnClickListener(v -> attemptLogin());
 
@@ -136,6 +173,7 @@ public class LoginActivity extends AppCompatActivity {
 
             } catch (IOException e) {
                 Log.e("LoginTask", "Error during connection", e);
+                e.printStackTrace();
             } finally {
                 if (conn != null) {
                     conn.disconnect();
@@ -152,6 +190,7 @@ public class LoginActivity extends AppCompatActivity {
             return response;
         }
 
+
         @Override
         protected void onPostExecute(String result) {
             // Dismiss the progress dialog
@@ -163,7 +202,7 @@ public class LoginActivity extends AppCompatActivity {
             if (result != null) {
                 handleLoginResponse(result);
             } else {
-                Toast.makeText(LoginActivity.this, "Failed to connect to server", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Please check your internet connection", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -180,6 +219,13 @@ public class LoginActivity extends AppCompatActivity {
                     if (status.equals("success")) {
                         // Login successful, retrieve 'role'
                         String role = json.getString("role");
+
+                        // Save login information in SharedPreferences
+                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("isLoggedIn", true);
+                        editor.putString("role", role);
+                        editor.apply();
 
                         // Navigate to respective activity based on role
                         Class<?> destinationActivity;

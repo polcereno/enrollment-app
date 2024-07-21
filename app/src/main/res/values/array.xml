@@ -5,6 +5,12 @@
         <item>Male</item>
     </string-array>
 
+    <string-array name='level_array'>
+        <item>Level </item>
+        <item>SHS</item>
+        <item>College</item>
+    </string-array>
+
     <string-array name="parish_array">
         <item>Parish</item>
         <item>St. John ( Daet)</item>

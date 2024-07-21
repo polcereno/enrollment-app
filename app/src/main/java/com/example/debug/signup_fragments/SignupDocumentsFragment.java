@@ -29,6 +29,7 @@ public class SignupDocumentsFragment extends Fragment {
     private SignUpViewModel signUpViewModel;
 
     private Spinner parishSpinner;
+    private TextView parishErrorText;
 
     private TextView baptismal;
     private TextView confirmation_cert;
@@ -39,8 +40,6 @@ public class SignupDocumentsFragment extends Fragment {
     private TextView bir;
     private TextView recommendation_letter;
     private TextView medical_cert;
-
-    private TextView parishErrorText;
 
     private FileChooser fileChooser1;
     private FileChooser fileChooser2;
@@ -81,6 +80,7 @@ public class SignupDocumentsFragment extends Fragment {
         signUpViewModel = new ViewModelProvider(requireActivity()).get(SignUpViewModel.class);
 
         parishSpinner = view.findViewById(R.id.parish);
+        parishErrorText = view.findViewById(R.id.parihsErrorText);
 
         baptismal = view.findViewById(R.id.baptismal);
         confirmation_cert = view.findViewById(R.id.confirmation_cert);
@@ -160,6 +160,7 @@ public class SignupDocumentsFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 signUpViewModel.setParish(parishSpinner.getSelectedItem().toString());
+                parishErrorText.setVisibility(View.GONE);
             }
 
             @Override
@@ -183,13 +184,6 @@ public class SignupDocumentsFragment extends Fragment {
 
     private boolean validateInputs() {
         boolean isValid = true;
-
-        // Validate Parish Spinner
-        if (parishSpinner.getSelectedItemPosition() == 0) {
-            isValid = false;
-        } else {
-            parishErrorText.setVisibility(View.GONE);
-        }
 
         if (signUpViewModel.getForm137().getValue() == null) {
             baptismal.setError("File is required");
