@@ -68,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (isLoggedIn) {
             String role = sharedPreferences.getString("role", "");
+            int userId = sharedPreferences.getInt("user_id", -1);
 
             Class<?> destinationActivity;
             switch (role) {
@@ -94,7 +95,9 @@ public class LoginActivity extends AppCompatActivity {
                     return;
             }
 
-            startActivity(new Intent(LoginActivity.this, destinationActivity));
+            Intent intent = new Intent(LoginActivity.this, destinationActivity);
+            intent.putExtra("user_id", userId);  // Pass user_id to the next activity if needed
+            startActivity(intent);
             finish();
         }
 
@@ -190,7 +193,6 @@ public class LoginActivity extends AppCompatActivity {
             return response;
         }
 
-
         @Override
         protected void onPostExecute(String result) {
             // Dismiss the progress dialog
@@ -217,14 +219,16 @@ public class LoginActivity extends AppCompatActivity {
                     String status = json.getString("status");
 
                     if (status.equals("success")) {
-                        // Login successful, retrieve 'role'
+                        // Login successful, retrieve 'role' and 'user_id'
                         String role = json.getString("role");
+                        int userId = json.getInt("user_id");
 
                         // Save login information in SharedPreferences
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putBoolean("isLoggedIn", true);
                         editor.putString("role", role);
+                        editor.putInt("user_id", userId); // Save user_id
                         editor.apply();
 
                         // Navigate to respective activity based on role
@@ -254,7 +258,9 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                         // Start the activity corresponding to the user's role
-                        startActivity(new Intent(LoginActivity.this, destinationActivity));
+                        Intent intent = new Intent(LoginActivity.this, destinationActivity);
+                        intent.putExtra("user_id", userId);  // Pass user_id to the next activity if needed
+                        startActivity(intent);
                         finish(); // finish LoginActivity to prevent going back
                     } else {
                         // Handle other status scenarios (e.g., error messages)
@@ -271,5 +277,4 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
-
 }

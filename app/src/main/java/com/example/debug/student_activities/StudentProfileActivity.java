@@ -18,6 +18,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.debug.R;
@@ -36,10 +37,11 @@ import java.util.Map;
 
 public class StudentProfileActivity extends AppCompatActivity {
 
+    private TextView firstName, lastName, middleName, sex, birthdate, email, phone, province, municipality, barangay, purokAndStreet, level, lrn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_student_profile);
 
         Toolbar toolbar = findViewById(R.id.studentProfileToolbar);
@@ -56,20 +58,67 @@ public class StudentProfileActivity extends AppCompatActivity {
         });
 
         // Initialize views
-        TextView firstName = findViewById(R.id.firstName);
-        TextView lastName = findViewById(R.id.lastName);
-        TextView middleName = findViewById(R.id.middleName);
-        TextView sex = findViewById(R.id.sex);
-        TextView birthdate = findViewById(R.id.birthdate);
-        TextView email = findViewById(R.id.email);
-        TextView phone = findViewById(R.id.phone);
-        TextView province = findViewById(R.id.province);
-        TextView municipality = findViewById(R.id.municipality);
-        TextView barangay = findViewById(R.id.barangay);
-        TextView purokAndStreet = findViewById(R.id.purokAndStreet);
-        TextView level = findViewById(R.id.level);
-        TextView lrn = findViewById(R.id.lrn);
+        firstName = findViewById(R.id.firstName);
+        lastName = findViewById(R.id.lastName);
+        middleName = findViewById(R.id.middleName);
+        sex = findViewById(R.id.sex);
+        birthdate = findViewById(R.id.birthdate);
+        email = findViewById(R.id.email);
+        phone = findViewById(R.id.phone);
+        province = findViewById(R.id.province);
+        municipality = findViewById(R.id.municipality);
+        barangay = findViewById(R.id.barangay);
+        purokAndStreet = findViewById(R.id.purokAndStreet);
+        level = findViewById(R.id.level);
+        lrn = findViewById(R.id.lrn);
 
+        // Get user_id from Intent
+        int userId = getIntent().getIntExtra("user_id", -1);
+
+        if (userId != -1) {
+            fetchStudentData(userId);
+        } else {
+            Toast.makeText(this, "Invalid user ID", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void fetchStudentData(int userId) {
+        String url = "https://enrol.lesterintheclouds.com/authentication/fetch_student.php?user_id=" + userId;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                response -> {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        if (jsonObject.has("error")) {
+                            Toast.makeText(StudentProfileActivity.this, jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        // Set the fetched data to the views
+                        firstName.setText(jsonObject.getString("fname"));
+                        lastName.setText(jsonObject.getString("lname"));
+                        middleName.setText(jsonObject.optString("mname", ""));
+                        sex.setText(jsonObject.getString("sex"));
+                        birthdate.setText(jsonObject.getString("birthdate"));
+                        email.setText(jsonObject.getString("email"));
+                        phone.setText(jsonObject.getString("phone"));
+                        province.setText(jsonObject.getString("province"));
+                        municipality.setText(jsonObject.getString("municipality"));
+                        barangay.setText(jsonObject.getString("barangay"));
+                        purokAndStreet.setText(jsonObject.getString("purok"));
+                        level.setText(jsonObject.getString("level"));
+                        lrn.setText(jsonObject.getString("lrn"));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(StudentProfileActivity.this, "Error parsing data", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                error -> Toast.makeText(StudentProfileActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show()
+        );
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 
 
