@@ -1,5 +1,6 @@
 package com.example.debug.student_activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -19,8 +20,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.debug.R;
 import com.example.debug.UserUtil;
-import com.example.debug.registrar_activity.AdmissionResultsActivity;
-import com.example.debug.registrar_activity.RegistrarActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -34,6 +33,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     private TextInputLayout passwordLayout, newPasswordLayout;
     private TextInputEditText passwordEditText, newPasswordEditText;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +73,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 changePassword(currentPassword, newPassword);
             }
         });
-
     }
 
     @Override
@@ -93,13 +92,27 @@ public class ChangePasswordActivity extends AppCompatActivity {
         // Replace with actual user ID if needed
         int userId = UserUtil.getUserId(this);
 
+        // Show progress dialog
+        progressDialog = new ProgressDialog(ChangePasswordActivity.this);
+        progressDialog.setMessage("Changing password...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
         // Create a request using Volley
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 response -> {
+                    // Dismiss the progress dialog
+                    if (progressDialog != null && progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
                     // Handle the server response
                     handleResponse(response);
                 },
                 error -> {
+                    // Dismiss the progress dialog
+                    if (progressDialog != null && progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
                     // Handle error
                     Toast.makeText(ChangePasswordActivity.this, "Network error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                 }) {
@@ -136,5 +149,4 @@ public class ChangePasswordActivity extends AppCompatActivity {
             Toast.makeText(ChangePasswordActivity.this, "JSON parsing error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-
 }
