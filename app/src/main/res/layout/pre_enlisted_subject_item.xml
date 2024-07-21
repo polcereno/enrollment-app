@@ -14,7 +14,6 @@
         android:layout_marginVertical="5dp"
         android:backgroundTint="#FFFFFF"
         android:elevation="@dimen/cardview_compat_inset_shadow"
-
         app:cardCornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

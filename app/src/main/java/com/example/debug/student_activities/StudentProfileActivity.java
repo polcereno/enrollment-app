@@ -72,55 +72,7 @@ public class StudentProfileActivity extends AppCompatActivity {
         level = findViewById(R.id.level);
         lrn = findViewById(R.id.lrn);
 
-        // Get user_id from Intent
-        int userId = getIntent().getIntExtra("user_id", -1);
-
-        if (userId != -1) {
-            fetchStudentData(userId);
-        } else {
-            Toast.makeText(this, "Invalid user ID", Toast.LENGTH_SHORT).show();
-        }
     }
-
-    private void fetchStudentData(int userId) {
-        String url = "https://enrol.lesterintheclouds.com/authentication/fetch_student.php?user_id=" + userId;
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                response -> {
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        if (jsonObject.has("error")) {
-                            Toast.makeText(StudentProfileActivity.this, jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-
-                        // Set the fetched data to the views
-                        firstName.setText(jsonObject.getString("fname"));
-                        lastName.setText(jsonObject.getString("lname"));
-                        middleName.setText(jsonObject.optString("mname", ""));
-                        sex.setText(jsonObject.getString("sex"));
-                        birthdate.setText(jsonObject.getString("birthdate"));
-                        email.setText(jsonObject.getString("email"));
-                        phone.setText(jsonObject.getString("phone"));
-                        province.setText(jsonObject.getString("province"));
-                        municipality.setText(jsonObject.getString("municipality"));
-                        barangay.setText(jsonObject.getString("barangay"));
-                        purokAndStreet.setText(jsonObject.getString("purok"));
-                        level.setText(jsonObject.getString("level"));
-                        lrn.setText(jsonObject.getString("lrn"));
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Toast.makeText(StudentProfileActivity.this, "Error parsing data", Toast.LENGTH_SHORT).show();
-                    }
-                },
-                error -> Toast.makeText(StudentProfileActivity.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show()
-        );
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

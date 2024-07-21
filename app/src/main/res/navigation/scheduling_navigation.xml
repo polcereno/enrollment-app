@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scheduling_navigation"
+    app:startDestination="@+id/scheduleFirst">
+
+    <fragment
+        android:id="@+id/scheduleFirst"
+        android:name="com.example.debug.admin_fragments.ScheduleFragment"
+        tools:layout="@layout/fragment_schedule">
+        <action
+            android:id="@+id/add_action"
+            app:destination="@+id/scheduleSecond"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/scheduleSecond"
+        android:name="com.example.debug.admin_fragments.CreateScheduleFragment"
+        tools:layout="@layout/fragment_create_schedule">
+        <action
+            android:id="@+id/back_action"
+            app:destination="@+id/scheduleFirst"/>
+    </fragment>
+
+</navigation>

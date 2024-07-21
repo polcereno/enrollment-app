@@ -53,7 +53,7 @@ public class AdminActivity extends AppCompatActivity {
             } else if (id == R.id.nav_curriculum) {
                 startActivity(new Intent(AdminActivity.this, CurriculumActivity.class));
             } else if (id == R.id.nav_schedule) {
-                startActivity(new Intent(AdminActivity.this, ScheduleActivity.class));
+                startActivity(new Intent(AdminActivity.this, SchedulingActivity.class));
             } else if (id == R.id.nav_prerequisites) {
                 startActivity(new Intent(AdminActivity.this, PrerequisitesActivity.class));
             } else if (id == R.id.nav_logout) {
