@@ -3,6 +3,7 @@ package com.example.debug.ui.student;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,7 +24,7 @@ import org.json.JSONObject;
 
 public class StudentProfileActivity extends AppCompatActivity {
 
-    private TextView firstName, lastName, middleName, sex, birthdate, email, phone, province, municipality, barangay, purokAndStreet, level, lrn;
+    private TextView studentID, firstName, lastName, middleName, sex, birthdate, email, phone, province, municipality, barangay, purokAndStreet, level, lrn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class StudentProfileActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_arrow_back_24);
 
         // Initialize views
+        studentID = findViewById(R.id.studentID); // Initialize studentID TextView
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
         middleName = findViewById(R.id.middleName);
@@ -85,29 +87,33 @@ public class StudentProfileActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        Log.d("StudentProfileActivity", "Response: " + response.toString()); // Log the raw JSON response
+
                         try {
                             String status = response.getString("status");
                             if (status.equals("success")) {
                                 JSONObject data = response.getJSONObject("data");
+
                                 // Update the UI with student data
-                                firstName.setText(data.getString("first_name"));
+                                studentID.setText(data.optString("student_id", "N/A")); // Update studentID
+                                firstName.setText(data.optString("first_name", "N/A"));
                                 middleName.setText(data.optString("middle_name", "N/A"));
-                                lastName.setText(data.getString("last_name"));
-                                sex.setText(data.getString("sex"));
-                                birthdate.setText(data.getString("birthdate"));
-                                email.setText(data.getString("email"));
-                                phone.setText(data.getString("phone"));
-                                province.setText(data.getString("province"));
-                                municipality.setText(data.getString("municipality"));
-                                barangay.setText(data.getString("barangay"));
-                                purokAndStreet.setText(data.getString("purok_and_street"));
-                                level.setText(data.getString("level"));
-                                lrn.setText(data.getString("lrn"));
+                                lastName.setText(data.optString("last_name", "N/A"));
+                                sex.setText(data.optString("sex", "N/A"));
+                                birthdate.setText(data.optString("birthdate", "N/A"));
+                                email.setText(data.optString("email", "N/A"));
+                                phone.setText(data.optString("phone", "N/A"));
+                                province.setText(data.optString("province", "N/A"));
+                                municipality.setText(data.optString("municipality", "N/A"));
+                                barangay.setText(data.optString("barangay", "N/A"));
+                                purokAndStreet.setText(data.optString("purok_and_street", "N/A"));
+                                level.setText(data.optString("level", "N/A"));
+                                lrn.setText(data.optString("lrn", "N/A"));
                             } else {
                                 Toast.makeText(StudentProfileActivity.this, response.getString("message"), Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            Log.e("StudentProfileActivity", "JSON parsing error: " + e.getMessage()); // Log JSON parsing error
                             Toast.makeText(StudentProfileActivity.this, "JSON parsing error", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -115,7 +121,7 @@ public class StudentProfileActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
+                        Log.e("StudentProfileActivity", "Network error: " + error.getMessage()); // Log network error
                         Toast.makeText(StudentProfileActivity.this, "Network error", Toast.LENGTH_SHORT).show();
                     }
                 }

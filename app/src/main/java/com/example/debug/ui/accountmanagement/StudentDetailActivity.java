@@ -1,5 +1,8 @@
 package com.example.debug.ui.accountmanagement;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -32,15 +35,17 @@ import org.json.JSONObject;
 import android.app.ProgressDialog; // Add this import
 import android.os.AsyncTask; // Add this import
 
+import java.util.Calendar;
+
 public class StudentDetailActivity extends AppCompatActivity {
 
-    private TextView studentIDTextView; // Changed variable name to avoid conflict
+    private TextView studentIDTextView;
     private TextInputLayout firstNameLayout, lastNameLayout, middleNameLayout, sexLayout, birthdateLayout, emailLayout, phoneLayout, provinceLayout, municipalityLayout, barangayLayout, purokLayout, levelLayout, lrnLayout;
     private TextInputEditText firstName, lastName, middleName, sex, birthdate, email, phone, province, municipality, barangay, purok, level, lrn;
     private Button saveButton;
     private String studentID;
     private boolean isDataChanged = false;
-    private ProgressDialog progressDialog; // Declare the ProgressDialog
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +56,6 @@ public class StudentDetailActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.studentDetailToolbar);
         setSupportActionBar(toolbar);
 
-        // Enable the back button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_arrow_back_24);
 
@@ -61,10 +65,8 @@ public class StudentDetailActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Initialize the TextView for studentID
         studentIDTextView = findViewById(R.id.studentID);
 
-        // Initialize TextInputLayouts
         firstNameLayout = findViewById(R.id.firstNameLayout);
         lastNameLayout = findViewById(R.id.lastNameLayout);
         middleNameLayout = findViewById(R.id.middleNameLayout);
@@ -79,7 +81,6 @@ public class StudentDetailActivity extends AppCompatActivity {
         levelLayout = findViewById(R.id.levelLayout);
         lrnLayout = findViewById(R.id.lrnLayout);
 
-        // Initialize TextInputEditTexts
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
         middleName = findViewById(R.id.middleName);
@@ -96,24 +97,19 @@ public class StudentDetailActivity extends AppCompatActivity {
 
         saveButton = findViewById(R.id.saveButton);
 
-        // Initialize ProgressDialog
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Saving data...");
         progressDialog.setCancelable(false);
 
-        // Retrieve studentID from intent extras
         studentID = getIntent().getStringExtra("studentID");
-
-        // Display studentID in the TextView
         studentIDTextView.setText(studentID);
 
-        // Fetch student data
         fetchStudentData();
 
-        // Set text change listeners to detect changes
         setTextChangeListeners();
 
-        // Handle save button click
+        birthdate.setOnClickListener(v -> showDatePickerDialog());
+
         saveButton.setOnClickListener(v -> saveStudentData());
     }
 
@@ -147,59 +143,69 @@ public class StudentDetailActivity extends AppCompatActivity {
         lrn.addTextChangedListener(textWatcher);
     }
 
+    private void showDatePickerDialog() {
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                (view, year1, monthOfYear, dayOfMonth1) -> {
+                    String selectedDate = dayOfMonth1 + "/" + (monthOfYear + 1) + "/" + year1;
+                    birthdate.setText(selectedDate);
+                },
+                year, month, dayOfMonth);
+
+        datePickerDialog.show();
+    }
+
     private void fetchStudentData() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "http://enrol.lesterintheclouds.com/get_student.php?studentID=" + studentID;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String firstNameText = response.optString("firstName", "N/A");
-                            String lastNameText = response.optString("lastName", "N/A");
-                            String middleNameText = response.optString("middleName", "N/A");
-                            String sexText = response.optString("sex", "N/A");
-                            String birthdateText = response.optString("birthdate", "N/A");
-                            String emailText = response.optString("email", "N/A");
-                            String phoneText = response.optString("phone", "N/A");
-                            String provinceText = response.optString("province", "N/A");
-                            String municipalityText = response.optString("municipality", "N/A");
-                            String barangayText = response.optString("barangay", "N/A");
-                            String purokText = response.optString("purok", "N/A");
-                            String levelText = response.optString("level", "N/A");
-                            String lrnText = response.optString("lrn", "N/A");
+                response -> {
+                    try {
+                        String firstNameText = response.optString("firstName", "N/A");
+                        String lastNameText = response.optString("lastName", "N/A");
+                        String middleNameText = response.optString("middleName", "N/A");
+                        String sexText = response.optString("sex", "N/A");
+                        String birthdateText = response.optString("birthdate", "N/A");
+                        String emailText = response.optString("email", "N/A");
+                        String phoneText = response.optString("phone", "N/A");
+                        String provinceText = response.optString("province", "N/A");
+                        String municipalityText = response.optString("municipality", "N/A");
+                        String barangayText = response.optString("barangay", "N/A");
+                        String purokText = response.optString("purok", "N/A");
+                        String levelText = response.optString("level", "N/A");
+                        String lrnText = response.optString("lrn", "N/A");
 
-                            firstName.setText(firstNameText);
-                            lastName.setText(lastNameText);
-                            middleName.setText(middleNameText);
-                            sex.setText(sexText);
-                            birthdate.setText(birthdateText);
-                            email.setText(emailText);
-                            phone.setText(phoneText);
-                            province.setText(provinceText);
-                            municipality.setText(municipalityText);
-                            barangay.setText(barangayText);
-                            purok.setText(purokText);
-                            level.setText(levelText);
-                            lrn.setText(lrnText);
+                        firstName.setText(firstNameText);
+                        lastName.setText(lastNameText);
+                        middleName.setText(middleNameText);
+                        sex.setText(sexText);
+                        birthdate.setText(birthdateText);
+                        email.setText(emailText);
+                        phone.setText(phoneText);
+                        province.setText(provinceText);
+                        municipality.setText(municipalityText);
+                        barangay.setText(barangayText);
+                        purok.setText(purokText);
+                        level.setText(levelText);
+                        lrn.setText(lrnText);
 
-                            // Reset isDataChanged to false after data is loaded
-                            isDataChanged = false;
-                            saveButton.setEnabled(false);
+                        isDataChanged = false;
+                        saveButton.setEnabled(false);
 
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            Toast.makeText(StudentDetailActivity.this, "Error parsing data: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Toast.makeText(StudentDetailActivity.this, "Error parsing data: " + e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                        Toast.makeText(StudentDetailActivity.this, "Error fetching data: " + error.getMessage(), Toast.LENGTH_LONG).show();
-                    }
+                error -> {
+                    error.printStackTrace();
+                    Toast.makeText(StudentDetailActivity.this, "Error fetching data: " + error.getMessage(), Toast.LENGTH_LONG).show();
                 });
 
         requestQueue.add(jsonObjectRequest);
@@ -208,7 +214,6 @@ public class StudentDetailActivity extends AppCompatActivity {
     private void saveStudentData() {
         if (!isDataChanged) return;
 
-        // Show ProgressDialog
         progressDialog.show();
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -236,38 +241,29 @@ public class StudentDetailActivity extends AppCompatActivity {
         }
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            boolean success = response.getBoolean("success");
-                            if (success) {
-                                Toast.makeText(StudentDetailActivity.this, "Data saved successfully", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(StudentDetailActivity.this, "Error saving data", Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(StudentDetailActivity.this, "Error parsing response: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        } finally {
-                            // Dismiss ProgressDialog
-                            progressDialog.dismiss();
+                response -> {
+                    try {
+                        boolean success = response.getBoolean("success");
+                        if (success) {
+                            Toast.makeText(StudentDetailActivity.this, "Data saved successfully", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(StudentDetailActivity.this, "Error saving data", Toast.LENGTH_SHORT).show();
                         }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                        Toast.makeText(StudentDetailActivity.this, "Error saving data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                        // Dismiss ProgressDialog
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(StudentDetailActivity.this, "Error parsing response: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    } finally {
                         progressDialog.dismiss();
                     }
+                },
+                error -> {
+                    error.printStackTrace();
+                    Toast.makeText(StudentDetailActivity.this, "Error saving data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 });
 
         requestQueue.add(jsonObjectRequest);
 
-        // Reset flag and disable the save button
         isDataChanged = false;
         saveButton.setEnabled(false);
     }

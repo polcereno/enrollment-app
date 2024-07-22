@@ -301,6 +301,7 @@
                             android:textColor="@android:color/secondary_text_light"
                             android:textColorHint="@android:color/tertiary_text_light"
                             android:textCursorDrawable="@null"
+                            android:focusable="true"
                             android:clickable="true"
                             android:onClick="showDatePickerDialog"
                             android:textSize="@dimen/textNormal" />
