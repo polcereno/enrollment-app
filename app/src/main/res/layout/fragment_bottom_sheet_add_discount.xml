@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingHorizontal="24dp"
     android:background="@drawable/background_bottom_sheet"
-    tools:context=".registrar_fragments.BottomSheetAddDiscountFragment">
+    tools:context=".ui.feemanagement.BottomSheetAddDiscountFragment">
 
     <com.google.android.material.bottomsheet.BottomSheetDragHandleView
         android:id="@+id/handle"

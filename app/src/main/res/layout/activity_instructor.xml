@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:openDrawer="start"
-    tools:context=".instructor_activities.InstructorActivity">
+    tools:context=".ui.InstructorActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

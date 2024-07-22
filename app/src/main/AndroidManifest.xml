@@ -23,111 +23,115 @@
         android:theme="@style/Theme.Debug"
         tools:targetApi="31">
         <activity
-            android:name=".registrar_activity.PaymentManagementActivity"
-            android:exported="false" />
-        <activity
-            android:name=".admin_activities.SchedulingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".registrar_activity.CreateStudentAccountActivity"
+            android:name=".ui.assessment.AssessmentActivity"
             android:exported="false"
             android:theme="@style/Theme.Debug" />
         <activity
-            android:name=".registrar_activity.CertificationActivity"
+            android:name=".ui.paymentmanagement.PaymentManagementActivity"
             android:exported="false" />
         <activity
-            android:name=".registrar_activity.CourseActivity"
+            android:name=".ui.schedulemanagement.SchedulingActivity"
             android:exported="false" />
         <activity
-            android:name=".admin_activities.PrerequisitesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".admin_activities.CurriculumActivity"
-            android:exported="false" />
-        <activity
-            android:name=".instructor_activities.GradingSheetActivity"
-            android:exported="false" />
-        <activity
-            android:name=".instructor_activities.ScheduleActivity"
-            android:exported="false" />
-        <activity
-            android:name=".instructor_activities.ClassListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".instructor_activities.InstructorActivity"
-            android:exported="false" />
-        <activity
-            android:name=".admin_activities.ManageAccountActivity"
-            android:exported="false" />
-        <activity
-            android:name=".admin_activities.CreateAccountActivity"
+            android:name=".ui.accountmanagement.CreateStudentAccountActivity"
             android:exported="false"
             android:theme="@style/Theme.Debug" />
         <activity
-            android:name=".parent_activities.ChildActivity"
+            android:name=".ui.CertificationActivity"
             android:exported="false" />
         <activity
-            android:name=".benefactor_activities.BeneficiariesActivity"
+            android:name=".ui.coursemanagement.CourseActivity"
             android:exported="false" />
         <activity
-            android:name=".SchoolCalendarActivity"
+            android:name=".ui.PrerequisitesActivity"
             android:exported="false" />
         <activity
-            android:name=".student_activities.StatementOfAccountsActivity"
+            android:name=".ui.curriculummanagement.CurriculumActivity"
             android:exported="false" />
         <activity
-            android:name=".student_activities.CurriculumEvaluationActivity"
+            android:name=".ui.instructor.GradingSheetActivity"
             android:exported="false" />
         <activity
-            android:name=".student_activities.EnrolledSubjectsActivity"
+            android:name=".ui.schedulemanagement.ScheduleActivity"
             android:exported="false" />
         <activity
-            android:name=".student_activities.DueAmountActivity"
+            android:name=".ui.instructor.ClassListActivity"
             android:exported="false" />
         <activity
-            android:name=".student_activities.StudentProfileActivity"
+            android:name=".ui.InstructorActivity"
             android:exported="false" />
         <activity
-            android:name=".student_activities.ChangePasswordActivity"
+            android:name=".ui.accountmanagement.ManageAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".registrar_activity.Registrar2Activity"
+            android:name=".ui.accountmanagement.CreateAccountActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Debug" />
+        <activity
+            android:name=".ui.parent.ChildActivity"
             android:exported="false" />
         <activity
-            android:name=".registrar_activity.SetupActivity"
+            android:name=".ui.benefactor.BeneficiariesActivity"
             android:exported="false" />
         <activity
-            android:name=".registrar_activity.StudentLedgerActivity"
+            android:name=".ui.SchoolCalendarActivity"
             android:exported="false" />
         <activity
-            android:name=".registrar_activity.FeeManagementActivity"
+            android:name=".ui.student.StatementOfAccountsActivity"
             android:exported="false" />
         <activity
-            android:name=".registrar_activity.EnrollmentActivity"
+            android:name=".ui.student.CurriculumEvaluationActivity"
             android:exported="false" />
         <activity
-            android:name=".registrar_activity.AdmissionResultsActivity"
+            android:name=".ui.student.EnrolledSubjectsActivity"
             android:exported="false" />
         <activity
-            android:name=".registrar_activity.AdmissionApplicantsActivity"
+            android:name=".ui.student.DueAmountActivity"
             android:exported="false" />
         <activity
-            android:name=".parent_activities.ParentActivity"
+            android:name=".ui.student.StudentProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".benefactor_activities.BenefactorActivity"
+            android:name=".ui.student.ChangePasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".student_activities.StudentActivity"
+            android:name=".ui.registrar.Registrar2Activity"
             android:exported="false" />
         <activity
-            android:name=".registrar_activity.RegistrarActivity"
+            android:name=".ui.SetupActivity"
             android:exported="false" />
         <activity
-            android:name=".admin_activities.AdminActivity"
+            android:name=".ui.studentledger.StudentLedgerActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.feemanagement.FeeManagementActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.enrollment.EnrollmentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.admission.AdmissionResultsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.admission.AdmissionApplicantsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ParentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.BenefactorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.StudentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.RegistrarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.AdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -136,10 +140,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SignupActivity"
+            android:name=".ui.signup.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".student_activities.StatementOfAccountsActivity">
+    tools:context=".ui.student.StatementOfAccountsActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/statementOfAccountsToolbar"

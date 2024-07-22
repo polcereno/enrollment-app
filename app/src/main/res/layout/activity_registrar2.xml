@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:fitsSystemWindows="true"
-    tools:context=".registrar_activity.Registrar2Activity">
+    tools:context=".ui.registrar.Registrar2Activity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/registrarToolbar"

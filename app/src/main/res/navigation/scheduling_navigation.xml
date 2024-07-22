@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/scheduleFirst"
-        android:name="com.example.debug.admin_fragments.ScheduleFragment"
+        android:name="com.example.debug.ui.schedulemanagement.ScheduleFragment"
         tools:layout="@layout/fragment_schedule">
         <action
             android:id="@+id/add_action"
@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/scheduleSecond"
-        android:name="com.example.debug.admin_fragments.CreateScheduleFragment"
+        android:name="com.example.debug.ui.schedulemanagement.CreateScheduleFragment"
         tools:layout="@layout/fragment_create_schedule">
         <action
             android:id="@+id/back_action"

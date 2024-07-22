@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_signup_type"
-        android:name="com.example.debug.signup_fragments.SignupTypeFragment"
+        android:name="com.example.debug.ui.signup.SignupTypeFragment"
         tools:layout="@layout/fragment_signup_type">
         <action
             android:id="@+id/action_type_to_college"
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/fragment_signup_college"
-        android:name="com.example.debug.signup_fragments.SignupCollegeFragment"
+        android:name="com.example.debug.ui.signup.SignupCollegeFragment"
         tools:layout="@layout/fragment_signup_college">
         <action
             android:id="@+id/action_college_next"
@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/fragment_signup_shs"
-        android:name="com.example.debug.signup_fragments.SignupShsFragments"
+        android:name="com.example.debug.ui.signup.SignupShsFragments"
         tools:layout="@layout/fragment_signup_shs_fragments">
         <action
             android:id="@+id/action_shs_next"
@@ -38,7 +38,7 @@
 
     <fragment
         android:id="@+id/fragment_signup_personal"
-        android:name="com.example.debug.signup_fragments.SignupPersonalFragment"
+        android:name="com.example.debug.ui.signup.SignupPersonalFragment"
         tools:layout="@layout/fragment_signup_personal">
         <action
             android:id="@+id/action_personal_next"
@@ -47,7 +47,7 @@
 
     <fragment
         android:id="@+id/fragment_signup_documents"
-        android:name="com.example.debug.signup_fragments.SignupDocumentsFragment"
+        android:name="com.example.debug.ui.signup.SignupDocumentsFragment"
         tools:layout="@layout/fragment_signup_documents">
         <action
             android:id="@+id/action_document_next"
@@ -57,7 +57,7 @@
 
     <fragment
         android:id="@+id/fragment_signup_account"
-        android:name="com.example.debug.signup_fragments.SignupAccountFragment"
+        android:name="com.example.debug.ui.signup.SignupAccountFragment"
         tools:layout="@layout/fragment_signup_account">
         <action
             android:id="@+id/action_account_next"
@@ -66,7 +66,7 @@
 
     <fragment
         android:id="@+id/fragment_signup_done"
-        android:name="com.example.debug.signup_fragments.SignupDoneFragment"
+        android:name="com.example.debug.ui.signup.SignupDoneFragment"
         tools:layout="@layout/fragment_signup_done"/>
 
 </navigation>
