@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:id="@+id/studentCard"
+    android:layout_width="match_parent"
+    android:layout_height="136dp"
+    android:layout_marginVertical="5dp"
+    android:backgroundTint="#FFFFFF"
+    android:elevation="@dimen/cardview_compat_inset_shadow"
+    android:strokeColor="@color/black"
+    app:cardElevation="@dimen/strokePrimary"
+    app:cardCornerRadius="12dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="22dp"
+        android:backgroundTint="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/roleTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/role"
+            android:textSize="12sp"
+            android:textColor="@color/dark_icon_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/roleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/admin"
+            android:textSize="16sp"
+            android:textColor="@color/dark_text_color"
+            app:layout_constraintStart_toStartOf="@+id/roleTitleTextView"
+            app:layout_constraintTop_toBottomOf="@+id/roleTitleTextView"/>
+
+        <!-- ============================================================================ -->
+
+        <TextView
+            android:id="@+id/accountIDTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/account_id"
+            android:textColor="@color/dark_icon_color"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/roleTitleTextView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/accountIDTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="1"
+            android:textColor="@color/dark_text_color"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/accountIDTitleTextView"
+            app:layout_constraintTop_toBottomOf="@+id/accountIDTitleTextView" />
+
+
+        <!-- ============================================================================ -->
+
+        <TextView
+            android:id="@+id/usernameTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/username"
+            android:textColor="@color/dark_icon_color"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/usernameTextView"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/usernameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/username"
+            android:textColor="@color/dark_text_color"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/usernameTitleTextView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
+

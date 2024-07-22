@@ -8,44 +8,40 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.debug.Models.Account;
-import com.example.debug.Models.DiscountFee;
-import com.example.debug.Models.Student;
+import com.example.debug.Models.AccountStudent;
 import com.example.debug.R;
 import com.example.debug.ui.accountmanagement.StudentDetailActivity;
-import com.google.android.material.chip.Chip;
 
 import java.util.List;
 
 public class StudentAccountAdapter extends RecyclerView.Adapter<StudentAccountAdapter.StudentAccountViewHolder> {
 
-    private List<Account> accountList;
+    private List<AccountStudent> accountStudentList;
     private Context context;
 
-    public StudentAccountAdapter(Context context, List<Account> accountList) {
+    public StudentAccountAdapter(Context context, List<AccountStudent> accountStudentList) {
         this.context = context;
-        this.accountList = accountList;
+        this.accountStudentList = accountStudentList;
     }
 
     @Override
     public int getItemCount() {
-        return accountList.size();
+        return accountStudentList.size();
     }
 
     @Override
     public void onBindViewHolder(@NonNull StudentAccountAdapter.StudentAccountViewHolder holder, int position) {
-        Account account = accountList.get(position);
-        holder.nameTextView.setText(account.getAccountName());
-        holder.studentIDTextView.setText(account.getAccountStudentID());
-        holder.levelTextView.setText(account.getAccountLevel());
+        AccountStudent accountStudent = accountStudentList.get(position);
+        holder.nameTextView.setText(accountStudent.getAccountName());
+        holder.studentIDTextView.setText(accountStudent.getAccountStudentID());
+        holder.levelTextView.setText(accountStudent.getAccountLevel());
 
         // Set click listener
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, StudentDetailActivity.class);
-            intent.putExtra("studentID", account.getAccountStudentID());
+            intent.putExtra("studentID", accountStudent.getAccountStudentID());
             context.startActivity(intent);
         });
     }

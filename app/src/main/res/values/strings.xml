@@ -28,7 +28,7 @@
     <string name="password">Password</string>
     <string name="enterPassword">Enter you Password</string>
     <string name="login">Login</string>
-    <string name="no_account_yet">No account yet?</string>
+    <string name="no_account_yet">No accountStudent yet?</string>
     <string name="register">Register</string>
 
 
@@ -72,7 +72,7 @@
     <string name="barangay">Barangay</string>
     <string name="mainAddress">Purok and Street</string>
 
-    <string name="account">Account</string>
+    <string name="accountStudent">Account</string>
     <string name="retype_password">Retype Password</string>
 
     <string name="scholastic">Scholastic</string>
@@ -204,6 +204,9 @@
     <string name="search_student">Search Student</string>
     <string name="student_accounts">Student Accounts</string>
     <string name="create">Create</string>
+    <string name="role">Role</string>
+    <string name="admin">Admin</string>
+    <string name="account_id">Account ID</string>
 
 
 </resources>

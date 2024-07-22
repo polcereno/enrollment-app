@@ -3,7 +3,6 @@ package com.example.debug.ui.accountmanagement;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
@@ -17,8 +16,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.debug.Adapters.StudentAccountAdapter;
-import com.example.debug.Models.Account;
-import com.example.debug.Models.Student;
+import com.example.debug.Models.AccountStudent;
 import com.example.debug.R;
 
 import org.json.JSONException;
@@ -31,7 +29,7 @@ public class ManageStudentAccountActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private StudentAccountAdapter adapter;
-    private List<Account> accountList;
+    private List<AccountStudent> accountStudentList;
     private RequestQueue requestQueue;
     private static final String URL = "http://enrol.lesterintheclouds.com/fetch_students_account.php";
 
@@ -48,8 +46,8 @@ public class ManageStudentAccountActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.accountRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        accountList = new ArrayList<>();
-        adapter = new StudentAccountAdapter(this, accountList);
+        accountStudentList = new ArrayList<>();
+        adapter = new StudentAccountAdapter(this, accountStudentList);
         recyclerView.setAdapter(adapter);
 
         // Initialize Volley RequestQueue
@@ -80,7 +78,7 @@ public class ManageStudentAccountActivity extends AppCompatActivity {
                 response -> {
                     try {
                         // Clear the existing list
-                        accountList.clear();
+                        accountStudentList.clear();
 
                         // Parse the JSON response
                         for (int i = 0; i < response.length(); i++) {
@@ -91,7 +89,7 @@ public class ManageStudentAccountActivity extends AppCompatActivity {
                             String studentID = jsonObject.getString("studentID");
 
                             // Add to the list
-                            accountList.add(new Account(0, name, "", "", level, studentID));
+                            accountStudentList.add(new AccountStudent(0, name, "", "", level, studentID));
                         }
 
                         // Notify the adapter of data changes

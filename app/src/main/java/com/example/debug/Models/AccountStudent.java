@@ -1,6 +1,6 @@
 package com.example.debug.Models;
 
-public class Account {
+public class AccountStudent {
     private int id;
     private String firstName;
     private String lastName;
@@ -8,7 +8,7 @@ public class Account {
     private String level;
     private String studentID;
 
-    public Account(int id, String firstName, String lastName, String middleName, String level, String studentID){
+    public AccountStudent(int id, String firstName, String lastName, String middleName, String level, String studentID){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
