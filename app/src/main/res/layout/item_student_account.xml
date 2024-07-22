@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:id="@+id/studentCard"
+    android:layout_width="match_parent"
+    android:layout_height="136dp"
+    android:layout_marginVertical="5dp"
+    android:backgroundTint="#FFFFFF"
+    android:elevation="@dimen/cardview_compat_inset_shadow"
+    android:strokeColor="@color/black"
+    app:cardElevation="@dimen/strokePrimary"
+    app:cardCornerRadius="12dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="22dp"
+            android:backgroundTint="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/levelTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/level"
+                android:textSize="12sp"
+                android:textColor="@color/dark_icon_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/levelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/college"
+                android:textSize="16sp"
+                android:textColor="@color/dark_text_color"
+                app:layout_constraintStart_toStartOf="@+id/levelTitleTextView"
+                app:layout_constraintTop_toBottomOf="@+id/levelTitleTextView"/>
+
+            <!-- ============================================================================ -->
+
+            <TextView
+                android:id="@+id/studentIDTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/student_id"
+                android:textColor="@color/dark_icon_color"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/levelTitleTextView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/studentIDTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="24-0001"
+                android:textColor="@color/dark_text_color"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/studentIDTitleTextView"
+                app:layout_constraintTop_toBottomOf="@+id/studentIDTitleTextView" />
+
+
+            <!-- ============================================================================ -->
+
+            <TextView
+                android:id="@+id/nameTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Name"
+                android:textColor="@color/dark_icon_color"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/nameTextView"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/nameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Dan Carlo C. Bardon"
+                android:textColor="@color/dark_text_color"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/nameTitleTextView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
+

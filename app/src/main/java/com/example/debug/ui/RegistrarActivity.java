@@ -15,6 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.example.debug.ui.Fragments.DashboardFragment;
 import com.example.debug.Controller.LogoutTask;
 import com.example.debug.R;
+import com.example.debug.ui.accountmanagement.ManageStudentAccountActivity;
 import com.example.debug.ui.curriculummanagement.CurriculumActivity;
 import com.example.debug.ui.admission.AdmissionApplicantsActivity;
 import com.example.debug.ui.admission.AdmissionResultsActivity;
@@ -61,8 +62,10 @@ public class RegistrarActivity extends AppCompatActivity {
                 startActivity(new Intent(RegistrarActivity.this, AdmissionResultsActivity.class));
             } else if (id == R.id.nav_admission_applicants) {
                 startActivity(new Intent(RegistrarActivity.this, AdmissionApplicantsActivity.class));
-            }else if (id == R.id.nav_create_student_account) {
+            } else if (id == R.id.nav_create_student_account) {
                 startActivity(new Intent(RegistrarActivity.this, CreateStudentAccountActivity.class));
+            }else if (id == R.id.nav_manage_student_account) {
+                startActivity(new Intent(RegistrarActivity.this, ManageStudentAccountActivity.class));
             } else if (id == R.id.nav_fee_management) {
                 startActivity(new Intent(RegistrarActivity.this, FeeManagementActivity.class));
             } else if (id == R.id.nav_ledger) {

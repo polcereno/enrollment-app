@@ -23,6 +23,12 @@
         android:theme="@style/Theme.Debug"
         tools:targetApi="31">
         <activity
+            android:name=".ui.accountmanagement.StudentDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.accountmanagement.ManageStudentAccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.assessment.AssessmentActivity"
             android:exported="false"
             android:theme="@style/Theme.Debug" />

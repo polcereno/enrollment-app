@@ -201,6 +201,8 @@
     <string name="add">Add</string>
     <string name="term_course_no"><![CDATA[Term & Course No.]]></string>
     <string name="manage_student_account">Manage Student Account</string>
+    <string name="search_student">Search Student</string>
+    <string name="student_accounts">Student Accounts</string>
 
 
 </resources>
