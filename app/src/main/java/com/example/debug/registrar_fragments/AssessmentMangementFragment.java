@@ -129,7 +129,7 @@ public class AssessmentMangementFragment extends Fragment {
             public void run() {
                 try {
                     // Replace with your server URL
-                    URL url = new URL("http://lesterintheclouds.com/crud-android/getAssessmentFee.php");
+                    URL url = new URL("http://enrol.lesterintheclouds.com/crud-android/getAssessmentFee.php");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");
 
@@ -205,7 +205,7 @@ public class AssessmentMangementFragment extends Fragment {
             public void run() {
                 try {
                     // Replace with your server URL
-                    URL url = new URL("http://lesterintheclouds.com/crud-android/addAssessmentFee.php");
+                    URL url = new URL("http://enrol.lesterintheclouds.com/crud-android/addAssessmentFee.php");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
                     conn.setDoOutput(true);
@@ -267,7 +267,7 @@ public class AssessmentMangementFragment extends Fragment {
             public void run() {
                 try {
                     // Replace with your server URL
-                    URL url = new URL("http://lesterintheclouds.com/crud-android/getAssessmentFee.php");
+                    URL url = new URL("http://enrol.lesterintheclouds.com/crud-android/getAssessmentFee.php");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");
 
@@ -325,7 +325,7 @@ public class AssessmentMangementFragment extends Fragment {
             public void run() {
                 try {
                     // Replace with your server URL
-                    URL url = new URL("http://lesterintheclouds.com/crud-android/deleteAssessmentFee.php?id=" + assessmentFee.getAssessmentId());
+                    URL url = new URL("http://enrol.lesterintheclouds.com/crud-android/deleteAssessmentFee.php?id=" + assessmentFee.getAssessmentId());
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");
 

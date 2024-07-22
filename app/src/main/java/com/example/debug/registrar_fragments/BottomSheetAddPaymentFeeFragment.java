@@ -118,7 +118,7 @@ public class BottomSheetAddPaymentFeeFragment extends BottomSheetDialogFragment 
             public void run() {
                 try {
                     // Replace with your server URL
-                    URL url = new URL("http://lesterintheclouds.com/crud-android/addPaymentFee.php");
+                    URL url = new URL("http://enrol.lesterintheclouds.com/crud-android/addPaymentFee.php");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
                     conn.setDoOutput(true);

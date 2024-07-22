@@ -107,7 +107,7 @@ public class PaymentManagementActivity extends AppCompatActivity implements Bott
             public void run() {
                 try {
                     // Replace with your server URL
-                    URL url = new URL("http://lesterintheclouds.com/crud-android/getPaymentFee.php");
+                    URL url = new URL("http://enrol.lesterintheclouds.com/crud-android/getPaymentFee.php");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");
 
@@ -165,7 +165,7 @@ public class PaymentManagementActivity extends AppCompatActivity implements Bott
             public void run() {
                 try {
                     // Replace with your server URL
-                    URL url = new URL("http://lesterintheclouds.com/crud-android/deletePaymentFee.php?id=" + paymentFee.getPaymentId());
+                    URL url = new URL("http://enrol.lesterintheclouds.com/crud-android/deletePaymentFee.php?id=" + paymentFee.getPaymentId());
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");
 

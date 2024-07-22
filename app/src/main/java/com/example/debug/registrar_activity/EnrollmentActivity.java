@@ -139,7 +139,7 @@ public class EnrollmentActivity extends AppCompatActivity implements EnrollmentD
     private void fetchDataFromServer() {
         new Thread(() -> {
             try {
-                URL url = new URL("http://localhost/enrollmentsystem/getStudents.php");
+                URL url = new URL("http://enrol.localhost/enrollmentsystem/getStudents.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
 
