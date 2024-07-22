@@ -23,6 +23,9 @@
         android:theme="@style/Theme.Debug"
         tools:targetApi="31">
         <activity
+            android:name=".registrar_activity.PaymentManagementActivity"
+            android:exported="false" />
+        <activity
             android:name=".admin_activities.SchedulingActivity"
             android:exported="false" />
         <activity
