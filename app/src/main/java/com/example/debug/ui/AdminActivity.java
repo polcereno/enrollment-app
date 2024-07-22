@@ -13,6 +13,7 @@ import com.example.debug.ui.Fragments.DashboardFragment;
 import com.example.debug.Controller.LogoutTask;
 import com.example.debug.R;
 import com.example.debug.ui.accountmanagement.CreateAccountActivity;
+import com.example.debug.ui.accountmanagement.ManageStudentAccountActivity;
 import com.example.debug.ui.curriculummanagement.CurriculumActivity;
 import com.example.debug.ui.accountmanagement.ManageAccountActivity;
 import com.example.debug.ui.schedulemanagement.SchedulingActivity;
@@ -44,6 +45,8 @@ public class AdminActivity extends AppCompatActivity {
                 startActivity(new Intent(AdminActivity.this, CreateAccountActivity.class));
             } else if (id == R.id.nav_create_student_account) {
                 startActivity(new Intent(AdminActivity.this, CreateStudentAccountActivity.class));
+            } else if (id == R.id.nav_manage_student_account) {
+                startActivity(new Intent(AdminActivity.this, ManageStudentAccountActivity.class));
             } else if (id == R.id.nav_manage_account) {
                 startActivity(new Intent(AdminActivity.this, ManageAccountActivity.class));
             } else if (id == R.id.nav_curriculum) {

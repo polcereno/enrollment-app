@@ -203,6 +203,7 @@
     <string name="manage_student_account">Manage Student Account</string>
     <string name="search_student">Search Student</string>
     <string name="student_accounts">Student Accounts</string>
+    <string name="create">Create</string>
 
 
 </resources>

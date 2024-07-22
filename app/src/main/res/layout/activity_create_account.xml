@@ -32,5 +32,109 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createAccountToolbar"
+        android:padding="@dimen/marginTertiary">
 
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="@dimen/marginTertiary"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/marginTertiary">
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/role"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/textFieldHeight"
+                    android:layout_marginTop="@dimen/marginSecondary"
+                    android:background="@drawable/spinner_background" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/roleErrorText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red_button"
+                    android:visibility="gone" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/username_input"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginSecondary"
+                    android:textColorHint="@android:color/tertiary_text_light"
+                    app:boxCornerRadiusBottomEnd="@dimen/radiusTertiary"
+                    app:boxCornerRadiusBottomStart="@dimen/radiusTertiary"
+                    app:boxCornerRadiusTopEnd="@dimen/radiusTertiary"
+                    app:boxCornerRadiusTopStart="@dimen/radiusTertiary"
+                    app:boxStrokeColor="@color/primary"
+                    app:boxStrokeWidth="@dimen/strokePrimary"
+                    app:hintTextColor="@color/primary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/username"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/textFieldHeight"
+                        android:hint="@string/username"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textColor="@android:color/secondary_text_light"
+                        android:textColorHint="@android:color/tertiary_text_light"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/textNormal" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password_input"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginSecondary"
+                    android:textColorHint="@android:color/tertiary_text_light"
+                    app:boxCornerRadiusBottomEnd="@dimen/radiusTertiary"
+                    app:boxCornerRadiusBottomStart="@dimen/radiusTertiary"
+                    app:boxCornerRadiusTopEnd="@dimen/radiusTertiary"
+                    app:boxCornerRadiusTopStart="@dimen/radiusTertiary"
+                    app:boxStrokeColor="@color/primary"
+                    app:boxStrokeWidth="@dimen/strokePrimary"
+                    app:hintTextColor="@color/primary"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@android:color/tab_indicator_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/textFieldHeight"
+                        android:hint="@string/password"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:textColor="@android:color/secondary_text_light"
+                        android:textColorHint="@android:color/tertiary_text_light"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/textNormal" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/create_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/create"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="@dimen/marginTertiary"
+                    android:layout_gravity="end"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/next_button"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

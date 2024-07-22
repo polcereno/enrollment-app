@@ -48,4 +48,13 @@
         <item>2023</item>
     </string-array>
 
+    <string-array name="role_array">
+        <item>Role</item>
+        <item>admin</item>
+        <item>registrar</item>
+        <item>instructor</item>
+        <item>parent</item>
+        <item>benefactor</item>
+    </string-array>
+
 </resources>
