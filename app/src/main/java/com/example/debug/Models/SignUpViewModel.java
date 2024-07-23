@@ -145,4 +145,6 @@ public class SignUpViewModel extends ViewModel {
     public void setUsername(String username) { this.username.setValue(username); }
     public MutableLiveData<String> getPassword() { return password; }
     public void setPassword(String password) { this.password.setValue(password); }
+
+
 }

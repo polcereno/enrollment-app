@@ -184,7 +184,7 @@ public class SignupDocumentsFragment extends Fragment {
     private boolean validateInputs() {
         boolean isValid = true;
 
-        if (signUpViewModel.getForm137().getValue() == null) {
+        /*if (signUpViewModel.getForm137().getValue() == null) {
             baptismal.setError("File is required");
             isValid = false;
         } else {
@@ -231,7 +231,7 @@ public class SignupDocumentsFragment extends Fragment {
             isValid = false;
         } else {
             medical_cert.setError(null);
-        }
+        }*/
 
         return isValid;
     }

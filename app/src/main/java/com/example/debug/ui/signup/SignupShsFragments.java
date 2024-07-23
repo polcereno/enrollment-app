@@ -168,7 +168,7 @@ public class SignupShsFragments extends Fragment {
             jhsAttendedLayout.setError(null);
         }
 
-        if (signUpViewModel.getForm137().getValue() == null) {
+        /*if (signUpViewModel.getForm137().getValue() == null) {
             form137.setError("File is required");
             isValid = false;
         } else {
@@ -180,7 +180,7 @@ public class SignupShsFragments extends Fragment {
             isValid = false;
         } else {
             jhs_diploma.setError(null);
-        }
+        }*/
 
         return isValid;
     }

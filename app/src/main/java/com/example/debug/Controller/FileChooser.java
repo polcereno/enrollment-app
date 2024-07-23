@@ -24,7 +24,7 @@ public class FileChooser {
 
     public void openFileChooser(Activity activity, int requestCode) {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.setType("*/*");
+        intent.setType("application/pdf");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         activity.startActivityForResult(intent, requestCode);
@@ -32,7 +32,7 @@ public class FileChooser {
 
     public void openFileChooser(Fragment fragment, int requestCode) {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.setType("*/*");
+        intent.setType("application/pdf");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         fragment.startActivityForResult(intent, requestCode);
@@ -95,4 +95,3 @@ public class FileChooser {
         return fileUris;
     }
 }
-
