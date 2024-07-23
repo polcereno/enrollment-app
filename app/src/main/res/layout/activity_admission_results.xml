@@ -38,7 +38,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/admissionResultsToolbar" >
+        app:layout_constraintTop_toBottomOf="@+id/admissionResultsToolbar"
+        android:padding="@dimen/marginTertiary">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -46,11 +47,10 @@
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/subjectsRecyclerView"
+                android:id="@+id/resultRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/divider"
-                tools:listitem="@layout/item_admission_result" />
+                app:layout_constraintTop_toBottomOf="@+id/divider"/>
 
             <!--  ================================================== -->
 

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="136dp"
         android:layout_marginVertical="5dp"
-        android:backgroundTint="#FFFFFF"
+        android:backgroundTint="#EDEDED"
         android:elevation="@dimen/cardview_compat_inset_shadow"
 
         app:cardCornerRadius="12dp"
@@ -43,7 +43,7 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
-                android:id="@+id/typeTextView"
+                android:id="@+id/levelTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
@@ -105,28 +105,6 @@
 
             <!-- ============================================================================ -->
 
-            <TextView
-                android:id="@+id/studentID"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/student_id"
-                android:textColor="@color/dark_icon_color"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@+id/unitTextView"
-                app:layout_constraintStart_toEndOf="@+id/nameTextView" />
-
-            <TextView
-                android:id="@+id/unitTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:text="24-1"
-                android:textColor="@color/dark_text_color"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/studentID" />
 
 
             <!-- ============================================================================ -->
