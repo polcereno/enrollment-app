@@ -424,8 +424,8 @@ public class SignupPersonalFragment extends Fragment {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 requireContext(),
                 (view, year1, monthOfYear, dayOfMonth1) -> {
-                    // Update the TextInputEditText with the selected date
-                    String selectedDate = dayOfMonth1 + "/" + (monthOfYear + 1) + "/" + year1;
+                    // Format the date as needed
+                    String selectedDate = String.format("%04d-%02d-%02d", year1, monthOfYear + 1, dayOfMonth1);
                     birthdateEditText.setText(selectedDate);
                     signUpViewModel.setBirthdate(selectedDate); // Update ViewModel with birthdate
                 },

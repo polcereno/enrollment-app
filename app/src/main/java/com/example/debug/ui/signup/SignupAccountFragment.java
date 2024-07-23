@@ -21,13 +21,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.debug.Models.SignUpViewModel;
 import com.example.debug.R;
-import com.example.debug.Controller.FileUploadManager;
+import com.example.debug.network.SignUpDataUploader;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.HashMap;
@@ -109,47 +105,33 @@ public class SignupAccountFragment extends Fragment {
         params.put("username", getValueOrEmpty(signUpViewModel.getUsername()));
         params.put("password", getValueOrEmpty(signUpViewModel.getPassword()));
 
-        // Create a request queue
-        RequestQueue queue = Volley.newRequestQueue(requireContext());
+        Log.d("ViewModelDebug", "Province Value: " + signUpViewModel.getProvince().getValue());
+        Log.d("ViewModelDebug", "Municipality Value: " + signUpViewModel.getMunicipality().getValue());
 
-        // URL of the PHP script
-        String url = "https://enrol.lesterintheclouds.com/signup.php";
 
-        // Create a POST request
-        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                response -> {
-                    // Hide progress dialog
-                    progressDialog.dismiss();
-
-                    // Handle response from server
-                    if ("Username already exists".equals(response.trim())) {
-                        // Show error message if username exists
-                        Toast.makeText(requireContext(), "Username already exists", Toast.LENGTH_LONG).show();
-                    } else if ("New record created successfully".equals(response.trim())) {
-                        // Navigate to the next fragment if successful
-                        NavController navController = NavHostFragment.findNavController(SignupAccountFragment.this);
-                        navController.navigate(R.id.action_account_next); // Update with your action ID
-                    } else {
-                        // Show error message if there's another issue
-                        Toast.makeText(requireContext(), "Error Uploading Data: " + response, Toast.LENGTH_LONG).show();
-                    }
-                },
-                error -> {
-                    // Hide progress dialog
-                    progressDialog.dismiss();
-
-                    // Handle error
-                    Toast.makeText(requireContext(), "Error Uploading Data: " + error.getMessage(), Toast.LENGTH_LONG).show();
-                }
-        ) {
+        // Create an instance of SignUpDataUploader and upload data
+        SignUpDataUploader uploader = new SignUpDataUploader(requireContext(), new SignUpDataUploader.UploadCallback() {
             @Override
-            protected Map<String, String> getParams() {
-                return params;
-            }
-        };
+            public void onSuccess(String response) {
+                // Hide progress dialog
+                progressDialog.dismiss();
 
-        // Add request to queue
-        queue.add(postRequest);
+                // Navigate to the next fragment if successful
+                NavController navController = NavHostFragment.findNavController(SignupAccountFragment.this);
+                navController.navigate(R.id.action_account_next); // Update with your action ID
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                // Hide progress dialog
+                progressDialog.dismiss();
+
+                // Show error message
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        uploader.uploadData(params);
     }
 
     private String getValueOrEmpty(MutableLiveData<String> data) {

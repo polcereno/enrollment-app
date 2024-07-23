@@ -487,7 +487,6 @@
                         android:textAllCaps="false"
                         android:textColor="@color/white"
                         android:layout_marginHorizontal="@dimen/marginTertiary"
-                        android:enabled="false"
                         android:background="@drawable/red_button"/>
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -497,7 +496,6 @@
                         android:text="@string/accept"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:enabled="false"
                         android:background="@drawable/green_button"/>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>

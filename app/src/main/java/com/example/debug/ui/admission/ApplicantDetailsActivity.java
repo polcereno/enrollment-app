@@ -1,5 +1,7 @@
 package com.example.debug.ui.admission;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -13,23 +15,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.debug.R;
+import com.example.debug.network.FetchApplicantDetailsTask;
+import com.example.debug.network.SubmitApplicantResultTask;
 
-import org.json.JSONObject;
-import java.util.HashMap;
-import java.util.Map;
-
-
-public class ApplicantDetailsActivity extends AppCompatActivity {
+public class ApplicantDetailsActivity extends AppCompatActivity implements FetchApplicantDetailsTask.FetchApplicantDetailsCallback {
 
     private Button acceptButton, denyButton;
     private TextView level, lrn, jhsAttended, shsAttended, firstName, lastName, middleName, sex, birthdate, email, phone, province, municipality, barangay, purokAndStreet;
-    private RequestQueue requestQueue;
-    private static final String URL = "http://enrol.lesterintheclouds.com/fetch_applicant_details.php";
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +43,7 @@ public class ApplicantDetailsActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Initialize views
         level = findViewById(R.id.level);
         lrn = findViewById(R.id.lrn);
         jhsAttended = findViewById(R.id.jhsAttended);
@@ -65,121 +60,94 @@ public class ApplicantDetailsActivity extends AppCompatActivity {
         barangay = findViewById(R.id.barangay);
         purokAndStreet = findViewById(R.id.purokAndStreet);
 
-        requestQueue = Volley.newRequestQueue(this);
+        // Initialize ProgressDialog
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false); // Prevent dialog from being dismissed by tapping outside
+
+        setupButtonListeners();
         fetchApplicantDetails();
     }
 
     private void setupButtonListeners() {
-        Button acceptButton = findViewById(R.id.acceptButton);
-        Button denyButton = findViewById(R.id.denyButton);
+        acceptButton = findViewById(R.id.acceptButton);
+        denyButton = findViewById(R.id.denyButton);
 
-        acceptButton.setOnClickListener(v -> handleAcceptClick());
-        denyButton.setOnClickListener(v -> handleDenyClick());
+        acceptButton.setOnClickListener(v -> showConfirmationDialog("accept"));
+        denyButton.setOnClickListener(v -> showConfirmationDialog("deny"));
+    }
+
+    private void showConfirmationDialog(String action) {
+        new AlertDialog.Builder(this)
+                .setTitle("Confirmation")
+                .setMessage("Are you sure you want to " + (action.equals("accept") ? "accept" : "deny") + " this applicant?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    // Perform action
+                    if (action.equals("accept")) {
+                        handleAcceptClick();
+                    } else {
+                        handleDenyClick();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 
     private void handleAcceptClick() {
-        // Get applicant ID from the intent
         int applicantID = getIntent().getIntExtra("applicantID", -1);
         if (applicantID != -1) {
-            // Perform network operation to accept the applicant
-            submitApplicantResult(applicantID, "accepted");
+            // Execute SubmitApplicantResultTask with "accepted"
+            SubmitApplicantResultTask task = new SubmitApplicantResultTask(this, applicantID, "accepted");
+            task.execute();
         }
     }
 
     private void handleDenyClick() {
-        // Get applicant ID from the intent
         int applicantID = getIntent().getIntExtra("applicantID", -1);
         if (applicantID != -1) {
-            // Perform network operation to deny the applicant
-            submitApplicantResult(applicantID, "denied");
+            // Execute SubmitApplicantResultTask with "denied"
+            SubmitApplicantResultTask task = new SubmitApplicantResultTask(this, applicantID, "denied");
+            task.execute();
         }
     }
 
-    private void submitApplicantResult(int applicantID, String result) {
-        // URL for the PHP script
-        String url = "http://enrol.lesterintheclouds.com/submit_applicant_result.php";
-
-        // Create the request parameters
-        Map<String, String> params = new HashMap<>();
-        params.put("applicantID", String.valueOf(applicantID));
-        params.put("result", result);
-
-        // Create a JsonObjectRequest to submit the result
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params),
-                response -> {
-                    // Handle success
-                    Toast.makeText(ApplicantDetailsActivity.this, "Applicant " + result, Toast.LENGTH_SHORT).show();
-                    // Redirect to another activity or update UI as needed
-                    finish(); // Close the current activity
-                },
-                error -> {
-                    // Handle error
-                    Toast.makeText(ApplicantDetailsActivity.this, "Error submitting result", Toast.LENGTH_SHORT).show();
-                }
-        );
-
-        // Add the request to the RequestQueue
-        requestQueue.add(jsonObjectRequest);
+    private void fetchApplicantDetails() {
+        // Create and execute FetchApplicantDetailsTask
+        int applicantID = getIntent().getIntExtra("applicantID", -1);
+        if (applicantID != -1) {
+            FetchApplicantDetailsTask task = new FetchApplicantDetailsTask(this, this);
+            task.fetchApplicantDetails(applicantID);
+        }
     }
 
+    @Override
+    public void onStartLoading() {
+        progressDialog.show();
+    }
 
+    @Override
+    public void onSuccess(String level, String lrn, String jhsAttended, String shsAttended, String firstName, String lastName, String middleName, String sex, String birthdate, String email, String phone, String province, String municipality, String barangay, String purokAndStreet) {
+        // Set the TextViews
+        this.level.setText(level);
+        this.lrn.setText(lrn);
+        this.jhsAttended.setText(jhsAttended);
+        this.shsAttended.setText(shsAttended);
+        this.firstName.setText(firstName);
+        this.lastName.setText(lastName);
+        this.middleName.setText(middleName);
+        this.sex.setText(sex);
+        this.birthdate.setText(birthdate);
+        this.email.setText(email);
+        this.phone.setText(phone);
+        this.province.setText(province);
+        this.municipality.setText(municipality);
+        this.barangay.setText(barangay);
+        this.purokAndStreet.setText(purokAndStreet);
+    }
 
-    private void fetchApplicantDetails() {
-        // Get applicant ID from intent extras
-        int applicantID = getIntent().getIntExtra("applicantID", -1);
-
-        // Create a JsonObjectRequest to fetch applicant details from the server
-        String url = URL + "?applicantID=" + applicantID;
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                response -> {
-                    try {
-                        // Parse the JSON response
-                        String levelValue = response.optString("type");
-                        String lrnValue = response.optString("lrn");
-                        String jhsAttendedValue = response.optString("jhs_attended");
-                        String shsAttendedValue = response.optString("shs_attended");
-                        String firstNameValue = response.optString("fname");
-                        String lastNameValue = response.optString("lname");
-                        String middleNameValue = response.optString("mname");
-                        String sexValue = response.optString("sex");
-                        String birthdateValue = response.optString("birthdate");
-                        String emailValue = response.optString("email");
-                        String phoneValue = response.optString("phone");
-                        String provinceValue = response.optString("province");
-                        String municipalityValue = response.optString("municipality");
-                        String barangayValue = response.optString("barangay");
-                        String purokAndStreetValue = response.optString("purok");
-
-                        // Set the TextViews
-                        level.setText(levelValue);
-                        lrn.setText(lrnValue);
-                        jhsAttended.setText(jhsAttendedValue);
-                        shsAttended.setText(shsAttendedValue);
-                        firstName.setText(firstNameValue);
-                        lastName.setText(lastNameValue);
-                        middleName.setText(middleNameValue);
-                        sex.setText(sexValue);
-                        birthdate.setText(birthdateValue);
-                        email.setText(emailValue);
-                        phone.setText(phoneValue);
-                        province.setText(provinceValue);
-                        municipality.setText(municipalityValue);
-                        barangay.setText(barangayValue);
-                        purokAndStreet.setText(purokAndStreetValue);
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        Toast.makeText(ApplicantDetailsActivity.this, "Error parsing data", Toast.LENGTH_SHORT).show();
-                    }
-                },
-                error -> {
-                    // Handle error
-                    Toast.makeText(ApplicantDetailsActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show();
-                }
-        );
-
-        // Add the request to the RequestQueue
-        requestQueue.add(jsonObjectRequest);
+    @Override
+    public void onFinishLoading() {
+        progressDialog.dismiss();
     }
 
     @Override

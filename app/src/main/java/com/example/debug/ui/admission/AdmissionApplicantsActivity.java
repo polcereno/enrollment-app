@@ -38,7 +38,7 @@ public class AdmissionApplicantsActivity extends AppCompatActivity {
     private ApplicantAdapter adapter;
     private List<Applicant> applicantList;
     private RequestQueue requestQueue;
-    private static final String URL = "http://enrol.lesterintheclouds.com/fetch_applicants.php";
+    private static final String URL = "http://enrol.lesterintheclouds.com/admission/fetch_applicants.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
