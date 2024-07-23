@@ -1,6 +1,7 @@
 package com.example.debug.Models;
 
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -33,11 +34,46 @@ public class SignUpViewModel extends ViewModel {
     private final MutableLiveData<String> email = new MutableLiveData<>();
     private final MutableLiveData<String> phone = new MutableLiveData<>();
 
-    // ADDRESS
-    private final MutableLiveData<String> province = new MutableLiveData<>();
-    private final MutableLiveData<String> municipality = new MutableLiveData<>();
-    private final MutableLiveData<String> barangay = new MutableLiveData<>();
-    private final MutableLiveData<String> purok = new MutableLiveData<>();
+    private final MutableLiveData<String> province = new MutableLiveData<>("");
+    private final MutableLiveData<String> municipality = new MutableLiveData<>("");
+    private final MutableLiveData<String> barangay = new MutableLiveData<>("");
+    private final MutableLiveData<String> purok = new MutableLiveData<>("");
+
+    // ADDRESS GETTERS
+    public MutableLiveData<String> getProvince() {
+        Log.d("ViewModelGet", "Getting province: " + province.getValue());
+        return province;
+    }
+    public MutableLiveData<String> getMunicipality() {
+        Log.d("ViewModelGet", "Getting municipality: " + municipality.getValue());
+        return municipality;
+    }
+    public MutableLiveData<String> getBarangay() {
+        Log.d("ViewModelGet", "Getting barangay: " + barangay.getValue());
+        return barangay;
+    }
+    public MutableLiveData<String> getPurok() {
+        Log.d("ViewModelGet", "Getting purok: " + purok.getValue());
+        return purok;
+    }
+
+    public void setProvince(String province) {
+        Log.d("ViewModelSet", "Setting province: " + province);
+        this.province.setValue(province);
+    }
+    public void setMunicipality(String municipality) {
+        Log.d("ViewModelSet", "Setting municipality: " + municipality);
+        this.municipality.setValue(municipality);
+    }
+    public void setBarangay(String barangay) {
+        Log.d("ViewModelSet", "Setting barangay: " + barangay);
+        this.barangay.setValue(barangay);
+    }
+    public void setPurok(String purok) {
+        Log.d("ViewModelSet", "Setting purok: " + purok);
+        this.purok.setValue(purok);
+    }
+
 
     // DOCUMENTS
     // CANONICAL
@@ -104,15 +140,6 @@ public class SignUpViewModel extends ViewModel {
     public MutableLiveData<String> getPhone() { return phone; }
     public void setPhone(String phone) { this.phone.setValue(phone); }
 
-    // ADDRESS GETTERS
-    public MutableLiveData<String> getProvince() { return province; }
-    public void setProvince(String province) { this.province.setValue(province); }
-    public MutableLiveData<String> getMunicipality() { return municipality; }
-    public void setMunicipality(String municipality) { this.municipality.setValue(municipality); }
-    public MutableLiveData<String> getBarangay() { return barangay; }
-    public void setBarangay(String barangay) { this.barangay.setValue(barangay); }
-    public MutableLiveData<String> getPurok() { return purok; }
-    public void setPurok(String purok) { this.purok.setValue(purok); }
 
     // CANONICAL GETTERS
     public MutableLiveData<Uri> getBaptismal() { return baptismal; }

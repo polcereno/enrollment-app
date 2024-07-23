@@ -2,7 +2,6 @@ package com.example.debug.ui;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,9 +12,6 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -66,6 +62,7 @@ public class PrerequisitesActivity extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(this);
 
+        // Initialize Spinners and Adapters
         currAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, currList);
         currAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         currSpinner.setAdapter(currAdapter);
@@ -86,6 +83,7 @@ public class PrerequisitesActivity extends AppCompatActivity {
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeSpinner.setAdapter(typeAdapter);
 
+        // Set Spinner Item Selected Listener
         currSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -96,6 +94,7 @@ public class PrerequisitesActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
+        // Set Save Button Click Listener
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +102,7 @@ public class PrerequisitesActivity extends AppCompatActivity {
             }
         });
 
+        // Fetch initial data
         fetchCurriculums();
     }
 
@@ -149,6 +149,8 @@ public class PrerequisitesActivity extends AppCompatActivity {
                             }
                             subAdapter.notifyDataSetChanged();
 
+                            fetchRequiredCourses(curriculum); // Fetch required courses with the curriculum
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -170,7 +172,7 @@ public class PrerequisitesActivity extends AppCompatActivity {
     }
 
     private void fetchRequiredCourses(String curriculum) {
-        String url = "https://enrol.lesterintheclouds.com/fetchreq.php";
+        String url = "https://enrol.lesterintheclouds.com/fetchrequired.php";
         StringRequest request = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -193,7 +195,6 @@ public class PrerequisitesActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                // Log the error for debugging
                 Log.e("VolleyError", error.toString());
                 Toast.makeText(PrerequisitesActivity.this, "Error fetching required courses", Toast.LENGTH_SHORT).show();
             }
@@ -214,7 +215,7 @@ public class PrerequisitesActivity extends AppCompatActivity {
         String selectedRequired = reqSpinner.getSelectedItem().toString();
         String selectedType = typeSpinner.getSelectedItem().toString();
 
-        String url = "https://enrol.lesterintheclouds.com/fetchreq.php";
+        String url = "https://enrol.lesterintheclouds.com/saveprerequisites.php"; // Update URL to correct endpoint for saving data
         StringRequest request = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override

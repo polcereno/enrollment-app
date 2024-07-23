@@ -101,7 +101,7 @@ public class AdmissionApplicantsActivity extends AppCompatActivity {
                 },
                 error -> {
                     // Handle error
-                    Toast.makeText(AdmissionApplicantsActivity.this, "No Applicants", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AdmissionApplicantsActivity.this, "No Applicants Available", Toast.LENGTH_SHORT).show();
                 }
         );
 

@@ -30,10 +30,7 @@ public class SignUpDataUploader {
     }
 
     public void uploadData(Map<String, String> params) {
-        // Show progress dialog
-        // Use a progress dialog or other indicator if needed
 
-        // Log parameters for debugging
         Log.d("SignUpDataUploader", "Params: " + params.toString());
 
         // Create a request queue

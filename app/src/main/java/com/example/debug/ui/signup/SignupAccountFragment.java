@@ -78,13 +78,11 @@ public class SignupAccountFragment extends Fragment {
     }
 
     private void uploadData() {
-        // Show progress dialog
         progressDialog = new ProgressDialog(requireContext());
         progressDialog.setMessage("Signing up...");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        // Get data from ViewModel
         Map<String, String> params = new HashMap<>();
         params.put("type", getValueOrEmpty(signUpViewModel.getType()));
         params.put("lrn", getValueOrEmpty(signUpViewModel.getLrn()));
@@ -97,36 +95,30 @@ public class SignupAccountFragment extends Fragment {
         params.put("birthdate", getValueOrEmpty(signUpViewModel.getBirthdate()));
         params.put("email", getValueOrEmpty(signUpViewModel.getEmail()));
         params.put("phone", getValueOrEmpty(signUpViewModel.getPhone()));
-        params.put("province", getValueOrEmpty(signUpViewModel.getProvince()));
-        params.put("municipality", getValueOrEmpty(signUpViewModel.getMunicipality()));
-        params.put("barangay", getValueOrEmpty(signUpViewModel.getBarangay()));
-        params.put("purok", getValueOrEmpty(signUpViewModel.getPurok()));
+        params.put("province", getValueOrEmpty(signUpViewModel.getProvince())); // Use the overload here
+        params.put("municipality", getValueOrEmpty(signUpViewModel.getMunicipality())); // Use the overload here
+        params.put("barangay", getValueOrEmpty(signUpViewModel.getBarangay())); // Use the overload here
+        params.put("purok", getValueOrEmpty(signUpViewModel.getPurok())); // Use the overload here
         params.put("parish", getValueOrEmpty(signUpViewModel.getParish()));
         params.put("username", getValueOrEmpty(signUpViewModel.getUsername()));
         params.put("password", getValueOrEmpty(signUpViewModel.getPassword()));
 
-        Log.d("ViewModelDebug", "Province Value: " + signUpViewModel.getProvince().getValue());
-        Log.d("ViewModelDebug", "Municipality Value: " + signUpViewModel.getMunicipality().getValue());
+        // Example logging of parameters
+        Log.d("UploadData", "Province: " + getValueOrEmpty(signUpViewModel.getProvince()));
+        Log.d("UploadData", "Municipality: " + getValueOrEmpty(signUpViewModel.getMunicipality()));
 
 
-        // Create an instance of SignUpDataUploader and upload data
         SignUpDataUploader uploader = new SignUpDataUploader(requireContext(), new SignUpDataUploader.UploadCallback() {
             @Override
             public void onSuccess(String response) {
-                // Hide progress dialog
                 progressDialog.dismiss();
-
-                // Navigate to the next fragment if successful
                 NavController navController = NavHostFragment.findNavController(SignupAccountFragment.this);
-                navController.navigate(R.id.action_account_next); // Update with your action ID
+                navController.navigate(R.id.action_account_next);
             }
 
             @Override
             public void onError(String errorMessage) {
-                // Hide progress dialog
                 progressDialog.dismiss();
-
-                // Show error message
                 Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show();
             }
         });
@@ -134,9 +126,13 @@ public class SignupAccountFragment extends Fragment {
         uploader.uploadData(params);
     }
 
-    private String getValueOrEmpty(MutableLiveData<String> data) {
-        return data.getValue() != null ? data.getValue() : "";
+
+    private String getValueOrEmpty(MutableLiveData<String> liveData) {
+        String value = liveData.getValue();
+        return value != null ? value : "";
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

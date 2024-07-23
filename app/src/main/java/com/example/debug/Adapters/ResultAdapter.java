@@ -35,7 +35,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultView
     @Override
     public void onBindViewHolder(@NonNull ResultViewHolder holder, int position) {
         Result result = resultList.get(position);
-        holder.levelTextView.setText(String.valueOf(result.getResultId())); // Convert int to String
+        holder.levelTextView.setText(String.valueOf(result.getResultLevel()));
         holder.nameTextView.setText(result.getApplicantFullName());
 
         // Set text and color based on result

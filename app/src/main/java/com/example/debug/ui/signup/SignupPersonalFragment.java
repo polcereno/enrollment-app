@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.Consumer;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
@@ -141,50 +143,38 @@ public class SignupPersonalFragment extends Fragment {
     }
 
     private void loadProvinces() {
+        Log.d("LoadProvinces", "Loading provinces...");
+
         dataFetcher.loadProvinces(provinceSpinner, municipalitySpinner, barangaySpinner);
 
-        // Set a listener to update ViewModel when province is selected
-        provinceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        // Set listeners
+        setSpinnerListener(provinceSpinner, signUpViewModel::setProvince, provinceErrorText);
+        setSpinnerListener(municipalitySpinner, signUpViewModel::setMunicipality, municipalityErrorText);
+        setSpinnerListener(barangaySpinner, signUpViewModel::setBarangay, barangayErrorText);
+
+        Log.d("LoadProvinces", "Provinces listeners set.");
+    }
+
+    private void setSpinnerListener(Spinner spinner, Consumer<String> onItemSelected, TextView errorText) {
+        Log.d("SetSpinnerListener", "Setting listener for spinner: " + spinner.getId());
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                signUpViewModel.setProvince(provinceSpinner.getSelectedItem().toString());
-                provinceErrorText.setVisibility(View.GONE);
+                String selectedItem = spinner.getSelectedItem().toString();
+                Log.d("SpinnerSelection", "Selected item in spinner " + spinner.getId() + ": " + selectedItem);
+                onItemSelected.accept(selectedItem);
+                errorText.setVisibility(View.GONE);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // Handle no selection if needed
-            }
-        });
-
-        // Set a listener to update ViewModel when municipality is selected
-        municipalitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                signUpViewModel.setMunicipality(municipalitySpinner.getSelectedItem().toString());
-                municipalityErrorText.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // Handle no selection if needed
-            }
-        });
-
-        // Set a listener to update ViewModel when barangay is selected
-        barangaySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                signUpViewModel.setBarangay(barangaySpinner.getSelectedItem().toString());
-                barangayErrorText.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                Log.d("SpinnerSelection", "No item selected in spinner " + spinner.getId());
                 // Handle no selection if needed
             }
         });
     }
+
 
     private void setupFieldListeners() {
         // Set listeners for EditText fields to update ViewModel in real-time
