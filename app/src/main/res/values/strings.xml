@@ -207,6 +207,10 @@
     <string name="role">Role</string>
     <string name="admin">Admin</string>
     <string name="account_id">Account ID</string>
+    <string name="applicant_details">Applicant Details</string>
+    <string name="applying_for">Applying for</string>
+    <string name="accept">Accept</string>
+    <string name="deny">Deny</string>
 
 
 </resources>
