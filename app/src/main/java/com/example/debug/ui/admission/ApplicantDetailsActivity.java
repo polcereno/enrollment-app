@@ -17,9 +17,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.debug.R;
 import com.example.debug.network.FetchApplicantDetailsTask;
+import com.example.debug.network.SubmitApplicantResultCallback;
 import com.example.debug.network.SubmitApplicantResultTask;
 
-public class ApplicantDetailsActivity extends AppCompatActivity implements FetchApplicantDetailsTask.FetchApplicantDetailsCallback {
+public class ApplicantDetailsActivity extends AppCompatActivity
+        implements FetchApplicantDetailsTask.FetchApplicantDetailsCallback, SubmitApplicantResultCallback {
 
     private Button acceptButton, denyButton;
     private TextView level, lrn, jhsAttended, shsAttended, firstName, lastName, middleName, sex, birthdate, email, phone, province, municipality, barangay, purokAndStreet;
@@ -97,7 +99,7 @@ public class ApplicantDetailsActivity extends AppCompatActivity implements Fetch
         int applicantID = getIntent().getIntExtra("applicantID", -1);
         if (applicantID != -1) {
             // Execute SubmitApplicantResultTask with "accepted"
-            SubmitApplicantResultTask task = new SubmitApplicantResultTask(this, applicantID, "accepted");
+            SubmitApplicantResultTask task = new SubmitApplicantResultTask(this, applicantID, "accepted", this);
             task.execute();
         }
     }
@@ -106,7 +108,7 @@ public class ApplicantDetailsActivity extends AppCompatActivity implements Fetch
         int applicantID = getIntent().getIntExtra("applicantID", -1);
         if (applicantID != -1) {
             // Execute SubmitApplicantResultTask with "denied"
-            SubmitApplicantResultTask task = new SubmitApplicantResultTask(this, applicantID, "denied");
+            SubmitApplicantResultTask task = new SubmitApplicantResultTask(this, applicantID, "denied", this);
             task.execute();
         }
     }
@@ -148,6 +150,15 @@ public class ApplicantDetailsActivity extends AppCompatActivity implements Fetch
     @Override
     public void onFinishLoading() {
         progressDialog.dismiss();
+    }
+
+    @Override
+    public void onResultSubmitted(boolean success, String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        if (success) {
+            // Finish activity if the result was submitted successfully
+            finish();
+        }
     }
 
     @Override

@@ -2,9 +2,6 @@ package com.example.debug.network;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.os.AsyncTask;
-import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -23,11 +20,13 @@ public class SubmitApplicantResultTask {
     private final int applicantID;
     private final String result;
     private ProgressDialog progressDialog;
+    private final SubmitApplicantResultCallback callback;
 
-    public SubmitApplicantResultTask(Activity activity, int applicantID, String result) {
+    public SubmitApplicantResultTask(Activity activity, int applicantID, String result, SubmitApplicantResultCallback callback) {
         this.activity = activity;
         this.applicantID = applicantID;
         this.result = result;
+        this.callback = callback;
     }
 
     public void execute() {
@@ -54,15 +53,11 @@ public class SubmitApplicantResultTask {
                     // Handle successful response
                     try {
                         JSONObject jsonResponse = new JSONObject(response);
-                        if (jsonResponse.optBoolean("success")) {
-                            Toast.makeText(activity, "Result submitted successfully.", Toast.LENGTH_SHORT).show();
-                            // Close the current activity and go back to the previous one
-                            activity.finish();
-                        } else {
-                            Toast.makeText(activity, "Failed to submit result: " + jsonResponse.optString("error"), Toast.LENGTH_SHORT).show();
-                        }
+                        boolean success = jsonResponse.optBoolean("success");
+                        String message = success ? "Result submitted successfully." : "Failed to submit result: " + jsonResponse.optString("error");
+                        callback.onResultSubmitted(success, message);
                     } catch (Exception e) {
-                        Toast.makeText(activity, "Error parsing response: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        callback.onResultSubmitted(false, "Error parsing response: " + e.getMessage());
                     }
                 },
                 error -> {
@@ -72,7 +67,7 @@ public class SubmitApplicantResultTask {
                     }
 
                     // Handle error
-                    Toast.makeText(activity, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    callback.onResultSubmitted(false, "Result submitted successfully. " );
                 }) {
 
             @Override
