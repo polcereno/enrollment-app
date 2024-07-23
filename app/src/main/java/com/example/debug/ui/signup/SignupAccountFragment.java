@@ -121,9 +121,18 @@ public class SignupAccountFragment extends Fragment {
                     // Hide progress dialog
                     progressDialog.dismiss();
 
-                    // Navigate to the next fragment
-                    NavController navController = NavHostFragment.findNavController(SignupAccountFragment.this);
-                    navController.navigate(R.id.action_account_next); // Update with your action ID
+                    // Handle response from server
+                    if ("Username already exists".equals(response.trim())) {
+                        // Show error message if username exists
+                        Toast.makeText(requireContext(), "Username already exists", Toast.LENGTH_LONG).show();
+                    } else if ("New record created successfully".equals(response.trim())) {
+                        // Navigate to the next fragment if successful
+                        NavController navController = NavHostFragment.findNavController(SignupAccountFragment.this);
+                        navController.navigate(R.id.action_account_next); // Update with your action ID
+                    } else {
+                        // Show error message if there's another issue
+                        Toast.makeText(requireContext(), "Error Uploading Data: " + response, Toast.LENGTH_LONG).show();
+                    }
                 },
                 error -> {
                     // Hide progress dialog
