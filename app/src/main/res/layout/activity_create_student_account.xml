@@ -274,7 +274,7 @@
                         android:textStyle="bold" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
-                        android:id="@+id/spinner_province"
+                        android:id="@+id/province_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/textFieldHeight"
                         android:layout_marginTop="@dimen/marginSecondary"
@@ -288,7 +288,7 @@
                         android:visibility="gone" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
-                        android:id="@+id/spinner_municipality"
+                        android:id="@+id/municipality_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/textFieldHeight"
                         android:layout_marginTop="@dimen/marginSecondary"
@@ -302,7 +302,7 @@
                         android:visibility="gone" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
-                        android:id="@+id/spinner_barangay"
+                        android:id="@+id/barangay_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/textFieldHeight"
                         android:layout_marginTop="@dimen/marginSecondary"

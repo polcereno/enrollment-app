@@ -102,9 +102,9 @@ public class CreateStudentAccountActivity extends AppCompatActivity {
         phoneEditText = findViewById(R.id.phone);
         purokEditText = findViewById(R.id.purok);
         birthdateEditText = findViewById(R.id.birthdate);
-        provinceSpinner = findViewById(R.id.spinner_province);
-        municipalitySpinner = findViewById(R.id.spinner_municipality);
-        barangaySpinner = findViewById(R.id.spinner_barangay);
+        provinceSpinner = findViewById(R.id.province_spinner);
+        municipalitySpinner = findViewById(R.id.municipality_spinner);
+        barangaySpinner = findViewById(R.id.barangay_spinner);
         lrnEditText = findViewById(R.id.lrn);
         levelSpinner = findViewById(R.id.level);
         usernameEditText = findViewById(R.id.username);

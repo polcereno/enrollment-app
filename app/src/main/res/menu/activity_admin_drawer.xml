@@ -23,6 +23,38 @@
                     android:id="@+id/nav_manage_account"
                     android:icon="@drawable/baseline_circle_24"
                     android:title="@string/manage_account"/>
+                <item
+                    android:id="@+id/nav_admission_results"
+                    android:icon="@drawable/baseline_circle_24"
+                    android:title="@string/admission_results"/>
+                <item
+                    android:id="@+id/nav_admission_applicants"
+                    android:icon="@drawable/baseline_circle_24"
+                    android:title="@string/admission_applicants"/>
+                <item
+                    android:id="@+id/nav_enrollment"
+                    android:icon="@drawable/icon_enroll_24"
+                    android:title="@string/enrollment" />
+                <item
+                    android:id="@+id/nav_assessment"
+                    android:icon="@drawable/icon_assessment_24"
+                    android:title="@string/assessment" />
+                <item
+                    android:id="@+id/nav_fee_management"
+                    android:icon="@drawable/icon_enroll_24"
+                    android:title="@string/fee_management" />
+                <item
+                    android:id="@+id/nav_course"
+                    android:icon="@drawable/baseline_circle_24"
+                    android:title="@string/course"/>
+                <item
+                    android:id="@+id/nav_curriculum"
+                    android:icon="@drawable/baseline_circle_24"
+                    android:title="@string/curriculum"/>
+                <item
+                    android:id="@+id/nav_certification"
+                    android:icon="@drawable/baseline_circle_24"
+                    android:title="@string/certification"/>
 
             </group>
         </menu>
@@ -33,9 +65,13 @@
             <group
                 android:id="@+id/menu_nav_offerings">
                 <item
-                    android:id="@+id/nav_curriculum"
-                    android:icon="@drawable/baseline_circle_24"
-                    android:title="@string/curriculum"/>
+                    android:id="@+id/nav_ledger"
+                    android:icon="@drawable/icon_topic_24"
+                    android:title="@string/student_ledger" />
+                <item
+                    android:id="@+id/nav_registrar"
+                    android:icon="@drawable/icon_topic_24"
+                    android:title="@string/registrar" />
                 <item
                     android:id="@+id/nav_schedule"
                     android:icon="@drawable/baseline_circle_24"

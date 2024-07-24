@@ -1,8 +1,13 @@
 package com.example.debug.ui.schedulemanagement;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -11,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.debug.R;
 
@@ -50,28 +56,48 @@ public class CreateScheduleFragment extends Fragment {
         View units = view.findViewById(R.id.units);
         View semesterInput = view.findViewById(R.id.semester_input);
         View semester = view.findViewById(R.id.semester);
-        View backButton = view.findViewById(R.id.back_button);
-        View continueButton = view.findViewById(R.id.save_button);
+        Button backButton = view.findViewById(R.id.back_button);
+        Button saveButton = view.findViewById(R.id.save_button);
 
-        setupButtonListeners();
+        // Set up button listeners
+        backButton.setOnClickListener(v ->
+                NavHostFragment.findNavController(this)
+                        .navigate(R.id.back_action)
+        );
 
-    }
+        saveButton.setOnClickListener(v -> showFirstDialog());
 
-    private void setupButtonListeners() {
-        Button backButton = requireView().findViewById(R.id.back_button);
-        Button saveButton = requireView().findViewById(R.id.save_button);
-
-        // Setup back button listener
-        backButton.setOnClickListener(v -> {
-            NavController navController = NavHostFragment.findNavController(this);
-            navController.navigate(R.id.back_action);  // Ensure this action is defined in nav_graph.xml
-        });
-
-        // Setup save button listener
-        saveButton.setOnClickListener(v -> {
-            // Add logic for save button here
+        // Handle back press
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                showFirstDialog();
+            }
         });
     }
 
+    private void showFirstDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Confirmation")
+                .setMessage("Do you want to proceed with adding this schedule?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getContext(), "Added Successfully", Toast.LENGTH_SHORT).show();
+                        navigateToSchedulingActivity();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 
+    private void navigateToSchedulingActivity() {
+        startActivity(new Intent(getActivity(), SchedulingActivity.class));
+        requireActivity().finish(); // Finish current activity if needed
+    }
 }
