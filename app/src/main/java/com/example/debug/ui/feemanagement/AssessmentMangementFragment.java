@@ -17,9 +17,9 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.debug.Adapters.AssessmentFeeAdapter;
-import com.example.debug.Models.AssessmentFee;
-import com.example.debug.Models.SubFee;
+import com.example.debug.adapter.AssessmentFeeAdapter;
+import com.example.debug.model.AssessmentFee;
+import com.example.debug.model.SubFee;
 import com.example.debug.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;

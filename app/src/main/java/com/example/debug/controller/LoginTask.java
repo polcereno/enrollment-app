@@ -1,4 +1,4 @@
-package com.example.debug.Controller;
+package com.example.debug.controller;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;

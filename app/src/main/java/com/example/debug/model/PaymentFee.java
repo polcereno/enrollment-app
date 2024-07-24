@@ -1,32 +1,31 @@
-package com.example.debug.Models;
+package com.example.debug.model;
 
-public class AssessmentFee {
+public class PaymentFee {
     private int id;
     private String title;
     private String amount;
     private String description;
 
-    public AssessmentFee(int id, String title, String amount, String description) {
+    public PaymentFee(int id, String title, String amount, String description) {
         this.id = id;
         this.title = title;
         this.amount = amount;
         this.description = description;
     }
 
-    public int getAssessmentId() {
+    public int getPaymentId() {
         return id;
     }
 
-    public String getAssessmentTitle() {
+    public String getPaymentTitle() {
         return title;
     }
 
-    public String getAssessmentAmount() {
+    public String getPaymentAmount() {
         return amount;
     }
 
-    public String getAssessmentDescription() {
+    public String getPaymentDescription() {
         return description;
     }
 }
-

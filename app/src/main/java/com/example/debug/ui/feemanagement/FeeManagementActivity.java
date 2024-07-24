@@ -12,8 +12,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.debug.Models.AssessmentFee;
-import com.example.debug.Models.DiscountFee;
+import com.example.debug.model.AssessmentFee;
+import com.example.debug.model.DiscountFee;
 import com.example.debug.R;
 import com.google.android.material.tabs.TabLayout;
 

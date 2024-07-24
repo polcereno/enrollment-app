@@ -1,4 +1,4 @@
-package com.example.debug.Adapters;
+package com.example.debug.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,9 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.debug.Models.Applicant;
+import com.example.debug.model.Applicant;
 import com.example.debug.R;
-import com.example.debug.ui.accountmanagement.StudentDetailActivity;
 import com.example.debug.ui.admission.ApplicantDetailsActivity;
 
 import java.util.List;

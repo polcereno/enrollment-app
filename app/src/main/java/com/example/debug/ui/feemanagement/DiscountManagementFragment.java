@@ -15,8 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.debug.Adapters.DiscountFeeAdapter;
-import com.example.debug.Models.DiscountFee;
+import com.example.debug.adapter.DiscountFeeAdapter;
+import com.example.debug.model.DiscountFee;
 import com.example.debug.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;

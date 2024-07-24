@@ -17,8 +17,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.debug.Adapters.AccountsAdapter;
-import com.example.debug.Models.Accounts;
+import com.example.debug.adapter.AccountsAdapter;
+import com.example.debug.model.Accounts;
 import com.example.debug.R;
 
 import org.json.JSONException;

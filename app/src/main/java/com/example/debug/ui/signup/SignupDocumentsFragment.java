@@ -19,8 +19,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.debug.Controller.FileChooser;
-import com.example.debug.Models.SignUpViewModel;
+import com.example.debug.controller.FileChooser;
+import com.example.debug.model.SignUpViewModel;
 import com.example.debug.R;
 
 public class SignupDocumentsFragment extends Fragment {

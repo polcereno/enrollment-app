@@ -13,7 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.debug.Models.Student;
+import com.example.debug.model.Student;
 import com.example.debug.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 

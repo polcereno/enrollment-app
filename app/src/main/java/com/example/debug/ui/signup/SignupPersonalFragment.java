@@ -22,8 +22,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.debug.Controller.DataFetcher;
-import com.example.debug.Models.SignUpViewModel;
+import com.example.debug.controller.DataFetcher;
+import com.example.debug.model.SignUpViewModel;
 import com.example.debug.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;

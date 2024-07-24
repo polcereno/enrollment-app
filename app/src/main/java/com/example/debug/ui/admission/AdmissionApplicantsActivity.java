@@ -15,17 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.debug.Adapters.ApplicantAdapter;
-import com.example.debug.Adapters.StudentAccountAdapter;
-import com.example.debug.Models.AccountStudent;
-import com.example.debug.Models.Applicant;
+import com.example.debug.adapter.ApplicantAdapter;
+import com.example.debug.model.Applicant;
 import com.example.debug.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

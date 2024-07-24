@@ -13,8 +13,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.debug.Adapters.PaymentFeeAdapter;
-import com.example.debug.Models.PaymentFee;
+import com.example.debug.adapter.PaymentFeeAdapter;
+import com.example.debug.model.PaymentFee;
 import com.example.debug.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

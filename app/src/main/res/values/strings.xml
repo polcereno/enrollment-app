@@ -135,7 +135,7 @@
     <string name="name">Name</string>
     <string name="period">Period</string>
     <string name="period_name">Period Name</string>
-    <string name="enrollment_status">Enrollment_status</string>
+    <string name="enrollment_status">Enrollment Status</string>
     <string name="total_balance">Total balance</string>
     <string name="address_and_contacts">Address and Contacts</string>
     <string name="purok_and_street">Purok and Street</string>
@@ -211,6 +211,14 @@
     <string name="applying_for">Applying for</string>
     <string name="accept">Accept</string>
     <string name="deny">Deny</string>
+    <string name="remarks">Remarks</string>
+    <string name="take1">Take 1</string>
+    <string name="take2">Take 2</string>
+    <string name="take3">Take 3</string>
+    <string name="take4">take4</string>
+    <string name="subject_code">Subject Code</string>
+    <string name="Class">Class</string>
+
 
 
 </resources>

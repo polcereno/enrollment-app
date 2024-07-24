@@ -18,7 +18,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.debug.R;
-import com.example.debug.Models.UserUtil;
+import com.example.debug.model.UserUtil;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 

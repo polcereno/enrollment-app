@@ -1,4 +1,4 @@
-package com.example.debug.Models;
+package com.example.debug.model;
 
 public class StudentAccount {
     private String fname;

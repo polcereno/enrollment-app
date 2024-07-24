@@ -10,7 +10,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.debug.ui.Fragments.DashboardFragment;
-import com.example.debug.Controller.LogoutTask;
+import com.example.debug.controller.LogoutTask;
 import com.example.debug.R;
 import com.example.debug.ui.instructor.ClassListActivity;
 import com.example.debug.ui.instructor.GradingSheetActivity;

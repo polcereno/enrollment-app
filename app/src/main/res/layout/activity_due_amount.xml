@@ -65,7 +65,7 @@
                     android:id="@+id/studentID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/student_id"
+                    android:text="@string/total_balance"
                     android:textSize="@dimen/textNormal"
                     android:textColor="@android:color/tertiary_text_light"
                     android:padding="8dp"

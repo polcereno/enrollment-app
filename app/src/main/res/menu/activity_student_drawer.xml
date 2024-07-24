@@ -9,16 +9,16 @@
                 android:id="@+id/menu_nav_transaction">
                 <item
                     android:id="@+id/nav_change_password"
-                    android:icon="@drawable/baseline_circle_24"
+                    android:icon="@drawable/baseline_password_24"
                     android:title="@string/changePassword"/>
                 <item
                     android:id="@+id/nav_student_profile"
-                    android:icon="@drawable/baseline_circle_24"
+                    android:icon="@drawable/baseline_account_circle_24"
                     android:title="@string/studentProfile" />
                 <item
                     android:id="@+id/nav_due_amount"
-                    android:icon="@drawable/baseline_circle_24"
-                    android:title="@string/assessment" />
+                    android:icon="@drawable/baseline_attach_money_24"
+                    android:title="@string/dueAmount" />
             </group>
         </menu>
     </item>

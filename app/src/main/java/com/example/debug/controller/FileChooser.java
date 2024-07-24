@@ -1,4 +1,4 @@
-package com.example.debug.Controller;
+package com.example.debug.controller;
 
 import android.app.Activity;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.example.debug.Models;
+package com.example.debug.model;
 
 import android.content.Context;
 import android.content.SharedPreferences;

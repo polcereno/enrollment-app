@@ -31,7 +31,7 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <FrameLayout
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/fragment_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -42,7 +42,7 @@
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/marginTertiary"
             android:orientation="vertical"
             android:padding="@dimen/marginTertiary">
@@ -159,7 +159,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/marginPrimary">
+                android:layout_marginBottom="@dimen/marginTertiary">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="120dp"
@@ -182,8 +182,70 @@
                     />
             </LinearLayout>
 
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="UselessLeaf">
+                <TableLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TableRow>
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/Class"
+                            android:textSize="@dimen/textNormal"
+                            android:paddingVertical="@dimen/marginPrimary"
+                            android:paddingHorizontal="@dimen/marginTertiary"/>
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/subject_code"
+                            android:textSize="@dimen/textNormal"
+                            android:paddingVertical="@dimen/marginPrimary"
+                            android:paddingHorizontal="@dimen/marginTertiary"/>
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/description"
+                            android:textSize="@dimen/textNormal"
+                            android:paddingVertical="@dimen/marginPrimary"
+                            android:paddingHorizontal="@dimen/marginTertiary"/>
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/units"
+                            android:textSize="@dimen/textNormal"
+                            android:paddingVertical="@dimen/marginPrimary"
+                            android:paddingHorizontal="@dimen/marginTertiary"/>
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/schedule"
+                            android:textSize="@dimen/textNormal"
+                            android:paddingVertical="@dimen/marginPrimary"
+                            android:paddingHorizontal="@dimen/marginTertiary"/>
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/instructor"
+                            android:textSize="@dimen/textNormal"
+                            android:paddingVertical="@dimen/marginPrimary"
+                            android:paddingHorizontal="@dimen/marginTertiary"/>
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/section"
+                            android:textSize="@dimen/textNormal"
+                            android:paddingVertical="@dimen/marginPrimary"
+                            android:paddingHorizontal="@dimen/marginTertiary"/>
 
+                    </TableRow>
+                </TableLayout>
+
+            </HorizontalScrollView>
         </androidx.appcompat.widget.LinearLayoutCompat>
-    </FrameLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

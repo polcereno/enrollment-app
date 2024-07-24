@@ -1,4 +1,4 @@
-package com.example.debug.Models;
+package com.example.debug.model;
 
 import android.net.Uri;
 import android.util.Log;

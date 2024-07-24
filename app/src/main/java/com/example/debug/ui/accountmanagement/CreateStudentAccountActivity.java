@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.debug.Controller.DataFetcher;
+import com.example.debug.controller.DataFetcher;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;

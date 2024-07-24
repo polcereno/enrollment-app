@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioGroup;
 
-import com.example.debug.Models.SignUpViewModel;
+import com.example.debug.model.SignUpViewModel;
 import com.example.debug.R;
 
 public class SignupTypeFragment extends Fragment {

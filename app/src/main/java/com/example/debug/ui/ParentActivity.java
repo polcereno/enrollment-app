@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.debug.ui.Fragments.DashboardFragment;
-import com.example.debug.Controller.LogoutTask;
+import com.example.debug.controller.LogoutTask;
 import com.example.debug.R;
 import com.example.debug.ui.parent.ChildActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;

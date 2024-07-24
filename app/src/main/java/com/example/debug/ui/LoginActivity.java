@@ -13,7 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.debug.Controller.LoginTask;
+import com.example.debug.controller.LoginTask;
 import com.example.debug.R;
 import com.example.debug.ui.signup.SignupActivity;
 import com.google.android.material.textfield.TextInputEditText;

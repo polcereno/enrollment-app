@@ -21,7 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.debug.Models.SignUpViewModel;
+import com.example.debug.model.SignUpViewModel;
 import com.example.debug.R;
 import com.example.debug.network.SignUpDataUploader;
 import com.google.android.material.textfield.TextInputEditText;

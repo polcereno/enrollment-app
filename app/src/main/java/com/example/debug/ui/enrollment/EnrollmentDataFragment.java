@@ -14,7 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.debug.Models.Student;
+import com.example.debug.model.Student;
 import com.example.debug.R;
 
 public class EnrollmentDataFragment extends Fragment {

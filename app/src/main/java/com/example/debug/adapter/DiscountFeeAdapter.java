@@ -1,4 +1,4 @@
-package com.example.debug.Adapters;
+package com.example.debug.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.debug.Models.DiscountFee;
+import com.example.debug.model.DiscountFee;
 import com.example.debug.R;
 import com.google.android.material.chip.Chip;
 

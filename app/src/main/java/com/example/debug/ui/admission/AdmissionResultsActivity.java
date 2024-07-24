@@ -19,10 +19,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.debug.Adapters.ApplicantAdapter;
-import com.example.debug.Adapters.ResultAdapter;
-import com.example.debug.Models.Applicant;
-import com.example.debug.Models.Result;
+import com.example.debug.adapter.ResultAdapter;
+import com.example.debug.model.Result;
 import com.example.debug.R;
 
 import org.json.JSONArray;

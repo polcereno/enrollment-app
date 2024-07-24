@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.debug.Models.PaymentFee;
+import com.example.debug.model.PaymentFee;
 import com.example.debug.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.textfield.TextInputEditText;

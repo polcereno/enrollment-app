@@ -9,11 +9,11 @@
                 android:id="@+id/menu_nav_transaction">
                 <item
                     android:id="@+id/nav_child"
-                    android:icon="@drawable/baseline_circle_24"
+                    android:icon="@drawable/baseline_person_24"
                     android:title="@string/child"/>
                 <item
                     android:id="@+id/nav_school_calendar"
-                    android:icon="@drawable/icon_enroll_24"
+                    android:icon="@drawable/baseline_calendar_month_24"
                     android:title="@string/schoolCalendar" />
             </group>
         </menu>
