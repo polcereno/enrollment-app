@@ -62,7 +62,6 @@ public class PrerequisitesActivity extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(this);
 
-        // Initialize Spinners and Adapters
         currAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, currList);
         currAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         currSpinner.setAdapter(currAdapter);
@@ -75,6 +74,7 @@ public class PrerequisitesActivity extends AppCompatActivity {
         reqAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         reqSpinner.setAdapter(reqAdapter);
 
+        typeList.add("Select type");
         typeList.add("Pre-requisites");
         typeList.add("Co-requisites");
         typeList.add("Pre-requisite Any");
@@ -83,18 +83,18 @@ public class PrerequisitesActivity extends AppCompatActivity {
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeSpinner.setAdapter(typeAdapter);
 
-        // Set Spinner Item Selected Listener
         currSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 fetchSubjectsAndRequired(currList.get(position));
+                fetchRequiredCourses(currList.get(position));
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
 
-        // Set Save Button Click Listener
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +102,6 @@ public class PrerequisitesActivity extends AppCompatActivity {
             }
         });
 
-        // Fetch initial data
         fetchCurriculums();
     }
 
@@ -149,8 +148,6 @@ public class PrerequisitesActivity extends AppCompatActivity {
                             }
                             subAdapter.notifyDataSetChanged();
 
-                            fetchRequiredCourses(curriculum); // Fetch required courses with the curriculum
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -195,6 +192,7 @@ public class PrerequisitesActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                // Log the error for debugging
                 Log.e("VolleyError", error.toString());
                 Toast.makeText(PrerequisitesActivity.this, "Error fetching required courses", Toast.LENGTH_SHORT).show();
             }
@@ -210,12 +208,12 @@ public class PrerequisitesActivity extends AppCompatActivity {
     }
 
     private void saveData() {
-        String selectedCurriculum = currSpinner.getSelectedItem().toString();
+        // String selectedCurriculum = currSpinner.getSelectedItem().toString();
         String selectedSubject = subSpinner.getSelectedItem().toString();
         String selectedRequired = reqSpinner.getSelectedItem().toString();
         String selectedType = typeSpinner.getSelectedItem().toString();
 
-        String url = "https://enrol.lesterintheclouds.com/saveprerequisites.php"; // Update URL to correct endpoint for saving data
+        String url = "https://enrol.lesterintheclouds.com/fetchsavepre.php";
         StringRequest request = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -231,7 +229,7 @@ public class PrerequisitesActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("curriculum", selectedCurriculum);
+                // params.put("curriculum", selectedCurriculum);
                 params.put("subject", selectedSubject);
                 params.put("required", selectedRequired);
                 params.put("type", selectedType);

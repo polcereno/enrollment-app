@@ -5,7 +5,6 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +13,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.util.Consumer;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
@@ -92,9 +91,9 @@ public class SignupPersonalFragment extends Fragment {
         phoneEditText = view.findViewById(R.id.phone);
         purokEditText = view.findViewById(R.id.purok);
         birthdateEditText = view.findViewById(R.id.birthdate);
-        provinceSpinner = view.findViewById(R.id.spinner_province);
-        municipalitySpinner = view.findViewById(R.id.spinner_municipality);
-        barangaySpinner = view.findViewById(R.id.spinner_barangay);
+        provinceSpinner = view.findViewById(R.id.province_spinner);
+        municipalitySpinner = view.findViewById(R.id.municipality_spinner);
+        barangaySpinner = view.findViewById(R.id.barangay_spinner);
 
         fnameLayout = view.findViewById(R.id.fname_input);
         mnameLayout = view.findViewById(R.id.mname_input);
@@ -143,37 +142,80 @@ public class SignupPersonalFragment extends Fragment {
     }
 
     private void loadProvinces() {
-        Log.d("LoadProvinces", "Loading provinces...");
-
+        // Set up data for spinners first
         dataFetcher.loadProvinces(provinceSpinner, municipalitySpinner, barangaySpinner);
 
-        // Set listeners
-        setSpinnerListener(provinceSpinner, signUpViewModel::setProvince, provinceErrorText);
-        setSpinnerListener(municipalitySpinner, signUpViewModel::setMunicipality, municipalityErrorText);
-        setSpinnerListener(barangaySpinner, signUpViewModel::setBarangay, barangayErrorText);
-
-        Log.d("LoadProvinces", "Provinces listeners set.");
+        // Set listeners after spinners are populated
+        setUpProvinceSpinnerListener();
+        setUpMunicipalitySpinnerListener();
+        setUpBarangaySpinnerListener();
     }
 
-    private void setSpinnerListener(Spinner spinner, Consumer<String> onItemSelected, TextView errorText) {
-        Log.d("SetSpinnerListener", "Setting listener for spinner: " + spinner.getId());
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    private void setUpProvinceSpinnerListener() {
+        provinceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItem = spinner.getSelectedItem().toString();
-                Log.d("SpinnerSelection", "Selected item in spinner " + spinner.getId() + ": " + selectedItem);
-                onItemSelected.accept(selectedItem);
-                errorText.setVisibility(View.GONE);
+                if (provinceSpinner.getSelectedItem() != null) {
+                    String selectedProvince = provinceSpinner.getSelectedItem().toString();
+                    Toast.makeText(parent.getContext(), "Selected Province: " + selectedProvince, Toast.LENGTH_SHORT).show();
+                    signUpViewModel.setProvince(selectedProvince);
+                    provinceErrorText.setVisibility(View.GONE);
+                } else {
+                    Toast.makeText(parent.getContext(), "Selected Province is null", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Log.d("SpinnerSelection", "No item selected in spinner " + spinner.getId());
-                // Handle no selection if needed
+                Toast.makeText(parent.getContext(), "No Province selected", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+    private void setUpMunicipalitySpinnerListener() {
+        municipalitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (municipalitySpinner.getSelectedItem() != null) {
+                    String selectedMunicipality = municipalitySpinner.getSelectedItem().toString();
+                    Toast.makeText(parent.getContext(), "Selected Municipality: " + selectedMunicipality, Toast.LENGTH_SHORT).show();
+                    signUpViewModel.setMunicipality(selectedMunicipality);
+                    municipalityErrorText.setVisibility(View.GONE);
+                } else {
+                    Toast.makeText(parent.getContext(), "Selected Municipality is null", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(parent.getContext(), "No Municipality selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setUpBarangaySpinnerListener() {
+        barangaySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (barangaySpinner.getSelectedItem() != null) {
+                    String selectedBarangay = barangaySpinner.getSelectedItem().toString();
+                    Toast.makeText(parent.getContext(), "Selected Barangay: " + selectedBarangay, Toast.LENGTH_SHORT).show();
+                    signUpViewModel.setBarangay(selectedBarangay);
+                    barangayErrorText.setVisibility(View.GONE);
+                } else {
+                    Toast.makeText(parent.getContext(), "Selected Barangay is null", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(parent.getContext(), "No Barangay selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+
 
 
     private void setupFieldListeners() {

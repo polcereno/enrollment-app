@@ -2,6 +2,8 @@ package com.example.debug.ui;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +15,11 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.debug.R;
 
 public class CertificationActivity extends AppCompatActivity {
+
+    private RadioGroup radioGroup;
+    private Spinner spinner;
+    private String selectedRadioOption = "";
+    private String selectedSpinnerItem = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,8 @@ public class CertificationActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        radioGroup = findViewById(R.id.radioGroupButton);
     }
 
     @Override
