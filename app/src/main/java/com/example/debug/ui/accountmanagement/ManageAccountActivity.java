@@ -32,7 +32,7 @@ public class ManageAccountActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private AccountsAdapter accountsAdapter;
     private List<Accounts> accountsList = new ArrayList<>();
-    private static final String URL = "http://enrol.lesterintheclouds.com/authentication/fetch_accounts.php";
+    private static final String URL = "http://enrol.lesterintheclouds.com/accounts/fetch_accounts.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

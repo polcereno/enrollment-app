@@ -162,7 +162,7 @@ public class StudentDetailActivity extends AppCompatActivity {
 
     private void fetchStudentData() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String url = "http://enrol.lesterintheclouds.com/get_student.php?studentID=" + studentID;
+        String url = "http://enrol.lesterintheclouds.com/accounts/get_student.php?studentID=" + studentID;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
@@ -217,7 +217,7 @@ public class StudentDetailActivity extends AppCompatActivity {
         progressDialog.show();
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String url = "http://enrol.lesterintheclouds.com/update_student.php";
+        String url = "http://enrol.lesterintheclouds.com/accounts/update_student.php";
 
         JSONObject jsonObject = new JSONObject();
         try {

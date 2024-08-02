@@ -51,14 +51,14 @@ public class SignupTypeFragment extends Fragment {
 
                 if (selectedId == R.id.college_radio) {
                     // Update ViewModel with the selected sign-up type
-                    signUpViewModel.setType("college");
+                    signUpViewModel.setType("College");
                     // Navigate to the fragment for college selection
                     Log.d("SignupTypeFragment", "Navigating to college fragment");
                     NavHostFragment.findNavController(SignupTypeFragment.this)
                             .navigate(R.id.action_type_to_college);
                 } else if (selectedId == R.id.shs_radio) {
                     // Update ViewModel with the selected sign-up type
-                    signUpViewModel.setType("shs");
+                    signUpViewModel.setType("SHS");
                     // Navigate to the fragment for SHS selection
                     Log.d("SignupTypeFragment", "Navigating to SHS fragment");
                     NavHostFragment.findNavController(SignupTypeFragment.this)

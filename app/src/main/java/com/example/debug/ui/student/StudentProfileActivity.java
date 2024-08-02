@@ -77,7 +77,7 @@ public class StudentProfileActivity extends AppCompatActivity {
             return;
         }
 
-        String url = "https://enrol.lesterintheclouds.com/student_profile.php?user_id=" + userId;
+        String url = "https://enrol.lesterintheclouds.com/students/student_profile.php?user_id=" + userId;
 
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(

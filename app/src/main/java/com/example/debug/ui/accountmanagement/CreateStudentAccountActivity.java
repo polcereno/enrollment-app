@@ -341,7 +341,7 @@ public class CreateStudentAccountActivity extends AppCompatActivity {
     }
 
     private void submitForm() {
-        String url = "https://enrol.lesterintheclouds.com/submit_student.php";
+        String url = "https://enrol.lesterintheclouds.com/accounts/submit_student.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 response -> {
                     progressDialog.dismiss();

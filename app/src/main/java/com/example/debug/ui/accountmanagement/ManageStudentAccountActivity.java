@@ -31,7 +31,7 @@ public class ManageStudentAccountActivity extends AppCompatActivity {
     private StudentAccountAdapter adapter;
     private List<AccountStudent> accountStudentList;
     private RequestQueue requestQueue;
-    private static final String URL = "http://enrol.lesterintheclouds.com/fetch_students_account.php";
+    private static final String URL = "http://enrol.lesterintheclouds.com/accounts/fetch_students_account.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
