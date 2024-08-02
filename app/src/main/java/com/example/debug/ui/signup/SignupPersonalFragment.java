@@ -5,11 +5,13 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -17,10 +19,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.Consumer;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.debug.controller.AddressSelector;
 import com.example.debug.controller.DataFetcher;
 import com.example.debug.model.SignUpViewModel;
 import com.example.debug.R;
@@ -40,26 +44,26 @@ public class SignupPersonalFragment extends Fragment {
     private Spinner sexSpinner;
     private TextInputEditText emailEditText;
     private TextInputEditText phoneEditText;
+    private AutoCompleteTextView province;
+    private AutoCompleteTextView municipality;
+    private AutoCompleteTextView barangay;
     private TextInputEditText purokEditText;
     private TextInputEditText birthdateEditText;
-    private Spinner provinceSpinner;
-    private Spinner municipalitySpinner;
-    private Spinner barangaySpinner;
 
     private TextInputLayout fnameLayout;
     private TextInputLayout mnameLayout;
     private TextInputLayout lnameLayout;
     private TextInputLayout emailLayout;
     private TextInputLayout phoneLayout;
+    private TextInputLayout provinceLayout;
+    private TextInputLayout municipalityLayout;
+    private TextInputLayout barangayLayout;
     private TextInputLayout purokLayout;
     private TextInputLayout birthdateLayout;
 
     private TextView sexErrorText;
-    private TextView provinceErrorText;
-    private TextView municipalityErrorText;
-    private TextView barangayErrorText;
 
-    private DataFetcher dataFetcher;
+    private AddressSelector addressSelector;
 
     public SignupPersonalFragment() {
         // Required empty public constructor
@@ -80,7 +84,7 @@ public class SignupPersonalFragment extends Fragment {
         signUpViewModel = new ViewModelProvider(requireActivity()).get(SignUpViewModel.class);
 
         // Initialize DataFetcher
-        dataFetcher = new DataFetcher(requireContext());
+        addressSelector = new AddressSelector(this);
 
         // Initialize Views
         fnameEditText = view.findViewById(R.id.fname);
@@ -91,9 +95,14 @@ public class SignupPersonalFragment extends Fragment {
         phoneEditText = view.findViewById(R.id.phone);
         purokEditText = view.findViewById(R.id.purok);
         birthdateEditText = view.findViewById(R.id.birthdate);
-        provinceSpinner = view.findViewById(R.id.province_spinner);
-        municipalitySpinner = view.findViewById(R.id.municipality_spinner);
-        barangaySpinner = view.findViewById(R.id.barangay_spinner);
+
+        province = view.findViewById(R.id.province);
+        municipality = view.findViewById(R.id.municipality);
+        barangay = view.findViewById(R.id.barangay);
+
+        provinceLayout = view.findViewById(R.id.provinceLayout);
+        municipalityLayout = view.findViewById(R.id.municipalityLayout);
+        barangayLayout = view.findViewById(R.id.barangayLayout);
 
         fnameLayout = view.findViewById(R.id.fname_input);
         mnameLayout = view.findViewById(R.id.mname_input);
@@ -104,20 +113,10 @@ public class SignupPersonalFragment extends Fragment {
         birthdateLayout = view.findViewById(R.id.birthdate_input);
 
         sexErrorText = view.findViewById(R.id.sexErrorText);
-        provinceErrorText = view.findViewById(R.id.provinceErrorText);
-        municipalityErrorText = view.findViewById(R.id.municipalityErrorText);
-        barangayErrorText = view.findViewById(R.id.barangayErrorText);
 
-        // Set up Gender Spinner
+        addressSelector.loadProvinces(province, municipality, barangay);
         setupGenderSpinner();
-
-        // Load Provinces into the Spinner
-        loadProvinces();
-
-        // Set listeners to update ViewModel in real-time
         setupFieldListeners();
-
-        // Set Click Listeners for Buttons
         setupButtonListeners();
     }
 
@@ -141,86 +140,24 @@ public class SignupPersonalFragment extends Fragment {
         });
     }
 
-    private void loadProvinces() {
-        // Set up data for spinners first
-        dataFetcher.loadProvinces(provinceSpinner, municipalitySpinner, barangaySpinner);
-
-        // Set listeners after spinners are populated
-        setUpProvinceSpinnerListener();
-        setUpMunicipalitySpinnerListener();
-        setUpBarangaySpinnerListener();
-    }
-
-    private void setUpProvinceSpinnerListener() {
-        provinceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (provinceSpinner.getSelectedItem() != null) {
-                    String selectedProvince = provinceSpinner.getSelectedItem().toString();
-                    Toast.makeText(parent.getContext(), "Selected Province: " + selectedProvince, Toast.LENGTH_SHORT).show();
-                    signUpViewModel.setProvince(selectedProvince);
-                    provinceErrorText.setVisibility(View.GONE);
-                } else {
-                    Toast.makeText(parent.getContext(), "Selected Province is null", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(parent.getContext(), "No Province selected", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void setUpMunicipalitySpinnerListener() {
-        municipalitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (municipalitySpinner.getSelectedItem() != null) {
-                    String selectedMunicipality = municipalitySpinner.getSelectedItem().toString();
-                    Toast.makeText(parent.getContext(), "Selected Municipality: " + selectedMunicipality, Toast.LENGTH_SHORT).show();
-                    signUpViewModel.setMunicipality(selectedMunicipality);
-                    municipalityErrorText.setVisibility(View.GONE);
-                } else {
-                    Toast.makeText(parent.getContext(), "Selected Municipality is null", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(parent.getContext(), "No Municipality selected", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void setUpBarangaySpinnerListener() {
-        barangaySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (barangaySpinner.getSelectedItem() != null) {
-                    String selectedBarangay = barangaySpinner.getSelectedItem().toString();
-                    Toast.makeText(parent.getContext(), "Selected Barangay: " + selectedBarangay, Toast.LENGTH_SHORT).show();
-                    signUpViewModel.setBarangay(selectedBarangay);
-                    barangayErrorText.setVisibility(View.GONE);
-                } else {
-                    Toast.makeText(parent.getContext(), "Selected Barangay is null", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(parent.getContext(), "No Barangay selected", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-
-
-
-
     private void setupFieldListeners() {
         // Set listeners for EditText fields to update ViewModel in real-time
-        fnameEditText.addTextChangedListener(new TextWatcher() {
+        fnameEditText.addTextChangedListener(createTextWatcher(signUpViewModel::setFname));
+        mnameEditText.addTextChangedListener(createTextWatcher(signUpViewModel::setMname));
+        lnameEditText.addTextChangedListener(createTextWatcher(signUpViewModel::setLname));
+        emailEditText.addTextChangedListener(createTextWatcher(signUpViewModel::setEmail));
+        phoneEditText.addTextChangedListener(createTextWatcher(signUpViewModel::setPhone));
+        purokEditText.addTextChangedListener(createTextWatcher(signUpViewModel::setPurok));
+        birthdateEditText.addTextChangedListener(createTextWatcher(signUpViewModel::setBirthdate));
+
+        // Add TextWatcher to AutoCompleteTextView fields
+        province.addTextChangedListener(createTextWatcher(signUpViewModel::setProvince));
+        municipality.addTextChangedListener(createTextWatcher(signUpViewModel::setMunicipality));
+        barangay.addTextChangedListener(createTextWatcher(signUpViewModel::setBarangay));
+    }
+
+    private TextWatcher createTextWatcher(Consumer<String> updateMethod) {
+        return new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 // Not used
@@ -228,118 +165,14 @@ public class SignupPersonalFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                signUpViewModel.setFname(s.toString());
+                updateMethod.accept(s.toString());
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 // Not used
             }
-        });
-
-        mnameEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Not used
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                signUpViewModel.setMname(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // Not used
-            }
-        });
-
-        lnameEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Not used
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                signUpViewModel.setLname(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // Not used
-            }
-        });
-
-        // Set similar listeners for emailEditText, phoneEditText, purokEditText, and birthdateEditText
-        // Example for emailEditText:
-        emailEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Not used
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                signUpViewModel.setEmail(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // Not used
-            }
-        });
-
-        phoneEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Not used
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                signUpViewModel.setPhone(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // Not used
-            }
-        });
-
-        purokEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Not used
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                signUpViewModel.setPurok(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // Not used
-            }
-        });
-
-        birthdateEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Not used
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                signUpViewModel.setBirthdate(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // Not used
-            }
-        });
+        };
     }
 
     private void setupButtonListeners() {
@@ -417,31 +250,26 @@ public class SignupPersonalFragment extends Fragment {
             sexErrorText.setVisibility(View.GONE);
         }
 
-        // Validate Province Spinner
-        if (provinceSpinner.getSelectedItemPosition() == 0) {
-            provinceErrorText.setVisibility(View.VISIBLE);
-            provinceErrorText.setText("Province is required");
+        // Validate Address Fields
+        if (Objects.requireNonNull(province.getText()).toString().trim().isEmpty()) {
+            provinceLayout.setError("Province is required");
             isValid = false;
         } else {
-            provinceErrorText.setVisibility(View.GONE);
+            provinceLayout.setError(null);
         }
 
-        // Validate Municipality Spinner
-        if (municipalitySpinner.getSelectedItemPosition() == 0) {
-            municipalityErrorText.setVisibility(View.VISIBLE);
-            municipalityErrorText.setText("Municipality is required");
+        if (Objects.requireNonNull(municipality.getText()).toString().trim().isEmpty()) {
+            municipalityLayout.setError("Municipality is required");
             isValid = false;
         } else {
-            municipalityErrorText.setVisibility(View.GONE);
+            municipalityLayout.setError(null);
         }
 
-        // Validate Barangay Spinner
-        if (barangaySpinner.getSelectedItemPosition() == 0) {
-            barangayErrorText.setVisibility(View.VISIBLE);
-            barangayErrorText.setText("Barangay is required");
+        if (Objects.requireNonNull(barangay.getText()).toString().trim().isEmpty()) {
+            barangayLayout.setError("Barangay is required");
             isValid = false;
         } else {
-            barangayErrorText.setVisibility(View.GONE);
+            barangayLayout.setError(null);
         }
 
         return isValid;
@@ -454,14 +282,10 @@ public class SignupPersonalFragment extends Fragment {
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(
-                requireContext(),
-                (view, year1, monthOfYear, dayOfMonth1) -> {
-                    // Format the date as needed
-                    String selectedDate = String.format("%04d-%02d-%02d", year1, monthOfYear + 1, dayOfMonth1);
-                    birthdateEditText.setText(selectedDate);
-                    signUpViewModel.setBirthdate(selectedDate); // Update ViewModel with birthdate
-                },
-                year, month, dayOfMonth);
+                requireContext(), (view, selectedYear, selectedMonth, selectedDay) -> {
+            String date = selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear;
+            birthdateEditText.setText(date);
+        }, year, month, dayOfMonth);
 
         datePickerDialog.show();
     }

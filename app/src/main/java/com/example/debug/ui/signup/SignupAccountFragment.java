@@ -95,10 +95,10 @@ public class SignupAccountFragment extends Fragment {
         params.put("birthdate", getValueOrEmpty(signUpViewModel.getBirthdate()));
         params.put("email", getValueOrEmpty(signUpViewModel.getEmail()));
         params.put("phone", getValueOrEmpty(signUpViewModel.getPhone()));
-        params.put("province", getValueOrEmpty(signUpViewModel.getProvince())); // Use the overload here
-        params.put("municipality", getValueOrEmpty(signUpViewModel.getMunicipality())); // Use the overload here
-        params.put("barangay", getValueOrEmpty(signUpViewModel.getBarangay())); // Use the overload here
-        params.put("purok", getValueOrEmpty(signUpViewModel.getPurok())); // Use the overload here
+        params.put("province", getValueOrEmpty(signUpViewModel.getProvince()));
+        params.put("municipality", getValueOrEmpty(signUpViewModel.getMunicipality()));
+        params.put("barangay", getValueOrEmpty(signUpViewModel.getBarangay()));
+        params.put("purok", getValueOrEmpty(signUpViewModel.getPurok()));
         params.put("parish", getValueOrEmpty(signUpViewModel.getParish()));
         params.put("username", getValueOrEmpty(signUpViewModel.getUsername()));
         params.put("password", getValueOrEmpty(signUpViewModel.getPassword()));

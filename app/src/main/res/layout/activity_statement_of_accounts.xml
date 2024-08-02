@@ -31,4 +31,69 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/fragment_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statementOfAccountsToolbar" >
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/marginTertiary"
+            android:orientation="vertical"
+            android:padding="@dimen/marginTertiary">
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="UselessLeaf">
+                <TableLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TableRow tools:ignore="UselessParent"
+                        android:background="@color/purple_200">
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/date"
+                            android:textSize="@dimen/textNormal"
+                            android:paddingVertical="@dimen/marginPrimary"
+                            android:paddingHorizontal="@dimen/marginTertiary"/>
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/transaction"
+                            android:textSize="@dimen/textNormal"
+                            android:paddingVertical="@dimen/marginPrimary"
+                            android:paddingHorizontal="@dimen/marginTertiary"/>
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/debit"
+                            android:textSize="@dimen/textNormal"
+                            android:paddingVertical="@dimen/marginPrimary"
+                            android:paddingHorizontal="@dimen/marginTertiary"/>
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/credit"
+                            android:textSize="@dimen/textNormal"
+                            android:paddingVertical="@dimen/marginPrimary"
+                            android:paddingHorizontal="@dimen/marginTertiary"/>
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/balance"
+                            android:textSize="@dimen/textNormal"
+                            android:paddingVertical="@dimen/marginPrimary"
+                            android:paddingHorizontal="@dimen/marginTertiary"/>
+                    </TableRow>
+                </TableLayout>
+            </HorizontalScrollView>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

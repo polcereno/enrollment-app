@@ -37,7 +37,7 @@ public class SignUpDataUploader {
         RequestQueue queue = Volley.newRequestQueue(context);
 
         // URL of the PHP script
-        String url = "https://enrol.lesterintheclouds.com/authentication/signup.php";
+        String url = "https://enrol.lesterintheclouds.com/admission/signup.php";
 
         // Create a POST request
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,

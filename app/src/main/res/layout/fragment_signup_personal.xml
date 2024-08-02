@@ -241,47 +241,92 @@
                     android:textStyle="bold"
                     android:layout_marginTop="@dimen/marginTertiary"/>
 
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/province_spinner"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/provinceLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/textFieldHeight"
-                    android:layout_marginTop="@dimen/marginSecondary"
-                    android:background="@drawable/spinner_background"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/provinceErrorText"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/red_button"
-                    android:visibility="gone"/>
+                    android:layout_marginTop="@dimen/marginSecondary"
+                    android:textColorHint="@android:color/tertiary_text_light"
+                    app:boxStrokeColor="@color/primary"
+                    app:boxCornerRadiusBottomEnd="@dimen/radiusTertiary"
+                    app:boxCornerRadiusBottomStart="@dimen/radiusTertiary"
+                    app:boxCornerRadiusTopEnd="@dimen/radiusTertiary"
+                    app:boxCornerRadiusTopStart="@dimen/radiusTertiary"
+                    app:hintTextColor="@color/primary"
+                    app:boxStrokeWidth="@dimen/strokePrimary">
 
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/municipality_spinner"
+                    <AutoCompleteTextView
+                        android:padding="@dimen/marginPrimary"
+                        android:id="@+id/province"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/textFieldHeight"
+                        android:hint="Province"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textColor="@android:color/secondary_text_light"
+                        android:textColorHint="@android:color/tertiary_text_light"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/textNormal"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/municipalityLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/textFieldHeight"
-                    android:layout_marginTop="@dimen/marginSecondary"
-                    android:background="@drawable/spinner_background"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/municipalityErrorText"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/red_button"
-                    android:visibility="gone"/>
+                    android:layout_marginTop="@dimen/marginSecondary"
+                    android:textColorHint="@android:color/tertiary_text_light"
+                    app:boxStrokeColor="@color/primary"
+                    app:boxCornerRadiusBottomEnd="@dimen/radiusTertiary"
+                    app:boxCornerRadiusBottomStart="@dimen/radiusTertiary"
+                    app:boxCornerRadiusTopEnd="@dimen/radiusTertiary"
+                    app:boxCornerRadiusTopStart="@dimen/radiusTertiary"
+                    app:hintTextColor="@color/primary"
+                    app:boxStrokeWidth="@dimen/strokePrimary">
 
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/barangay_spinner"
+                    <AutoCompleteTextView
+                        android:padding="@dimen/marginPrimary"
+                        android:id="@+id/municipality"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/textFieldHeight"
+                        android:hint="Municipality"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textColor="@android:color/secondary_text_light"
+                        android:textColorHint="@android:color/tertiary_text_light"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/textNormal"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/barangayLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/textFieldHeight"
-                    android:layout_marginTop="@dimen/marginSecondary"
-                    android:background="@drawable/spinner_background"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/barangayErrorText"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/red_button"
-                    android:visibility="gone"/>
+                    android:layout_marginTop="@dimen/marginSecondary"
+                    android:textColorHint="@android:color/tertiary_text_light"
+                    app:boxStrokeColor="@color/primary"
+                    app:boxCornerRadiusBottomEnd="@dimen/radiusTertiary"
+                    app:boxCornerRadiusBottomStart="@dimen/radiusTertiary"
+                    app:boxCornerRadiusTopEnd="@dimen/radiusTertiary"
+                    app:boxCornerRadiusTopStart="@dimen/radiusTertiary"
+                    app:hintTextColor="@color/primary"
+                    app:boxStrokeWidth="@dimen/strokePrimary">
+
+                    <AutoCompleteTextView
+                        android:padding="@dimen/marginPrimary"
+                        android:id="@+id/barangay"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/textFieldHeight"
+                        android:hint="Barangay"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textColor="@android:color/secondary_text_light"
+                        android:textColorHint="@android:color/tertiary_text_light"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/textNormal"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
 
                 <com.google.android.material.textfield.TextInputLayout
