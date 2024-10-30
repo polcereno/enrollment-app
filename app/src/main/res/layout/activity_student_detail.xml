@@ -601,7 +601,7 @@
                         app:boxStrokeWidth="@dimen/strokePrimary"
                         app:hintTextColor="@color/primary">
 
-                        <com.google.android.material.textfield.TextInputEditText
+                        <AutoCompleteTextView
                             android:id="@+id/parent"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -624,7 +624,7 @@
                         android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
-                        android:text="@string/benefactor"
+                        android:text="@string/parent"
                         android:textSize="@dimen/textNormal"
                         android:textStyle="bold" />
 
@@ -641,7 +641,7 @@
                         app:boxStrokeWidth="@dimen/strokePrimary"
                         app:hintTextColor="@color/primary">
 
-                        <com.google.android.material.textfield.TextInputEditText
+                        <AutoCompleteTextView
                             android:id="@+id/benefactor"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

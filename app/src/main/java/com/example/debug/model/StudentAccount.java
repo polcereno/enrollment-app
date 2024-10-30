@@ -16,11 +16,13 @@ public class StudentAccount {
     private String level;
     private String username;
     private String password;
+    private String parent;
+    private String benefactor;
 
     // Constructor
     public StudentAccount(String fname, String mname, String lname, String sex, String email, String phone, String purok,
                           String birthdate, String province, String municipality, String barangay, String lrn, String level,
-                          String username, String password) {
+                          String username, String password, String parent, String benefactor) {
         this.fname = fname;
         this.mname = mname;
         this.lname = lname;
@@ -36,6 +38,8 @@ public class StudentAccount {
         this.level = level;
         this.username = username;
         this.password = password;
+        this.parent = parent;
+        this.benefactor = benefactor;
     }
 
     // Getters
@@ -97,5 +101,13 @@ public class StudentAccount {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getParent() {
+        return parent;
+    }
+
+    public String getBenefactor() {
+        return benefactor;
     }
 }

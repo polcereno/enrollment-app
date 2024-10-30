@@ -1,14 +1,16 @@
 package com.example.debug.ui.accountmanagement;
 
-import static androidx.core.content.ContentProviderCompat.requireContext;
-
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,29 +25,36 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.debug.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.ProgressDialog; // Add this import
-import android.os.AsyncTask; // Add this import
-
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class StudentDetailActivity extends AppCompatActivity {
 
     private TextView studentIDTextView;
-    private TextInputLayout parentLayout, benefactorLayout, firstNameLayout, lastNameLayout, middleNameLayout, sexLayout, birthdateLayout, emailLayout, phoneLayout, provinceLayout, municipalityLayout, barangayLayout, purokLayout, levelLayout, lrnLayout;
-    private TextInputEditText parent, benefactor, firstName, lastName, middleName, sex, birthdate, email, phone, province, municipality, barangay, purok, level, lrn;
+    private TextInputEditText firstNameEditText, lastNameEditText, middleNameEditText, genderEditText, birthdateEditText, emailEditText, phoneEditText, provinceEditText, municipalityEditText, barangayEditText, purokEditText;
+    private TextInputLayout[] inputLayouts;
+    private TextInputEditText[] inputFields;
+    private AutoCompleteTextView parentAutoComplete;
+    private ArrayAdapter<String> parentAdapter;
+    private ArrayList<String> parentNames;
+    private AutoCompleteTextView benefactorAutoComplete;
+    private ArrayAdapter<String> benefactorAdapter;
+    private ArrayList<String> benefactorNames;
     private Button saveButton;
+    private ProgressDialog progressDialog;
     private String studentID;
     private boolean isDataChanged = false;
-    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +62,76 @@ public class StudentDetailActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_student_detail);
 
+        setupToolbar();
+        initializeUIElements(); // Make sure to call this before accessing UI elements
+        setupProgressDialog();
+        setupStudentDetails();
+        fetchParentAccounts();
+        fetchBenefactorAccounts();
+        setTextChangeListeners();
+        setupBirthdatePicker();
+        setupSaveButton();
+    }
+
+    private void initializeUIElements() {
+        // Initialize UI Elements
+        studentIDTextView = findViewById(R.id.studentID);
+        firstNameEditText = findViewById(R.id.firstName); // Initialize EditText here
+        lastNameEditText = findViewById(R.id.lastName);
+        middleNameEditText = findViewById(R.id.middleName);
+        genderEditText = findViewById(R.id.sex);
+        birthdateEditText = findViewById(R.id.birthdate);
+        emailEditText = findViewById(R.id.email);
+        phoneEditText = findViewById(R.id.phone);
+        provinceEditText = findViewById(R.id.province);
+        municipalityEditText = findViewById(R.id.municipality);
+        barangayEditText = findViewById(R.id.barangay);
+        purokEditText = findViewById(R.id.purok);
+
+        inputLayouts = new TextInputLayout[] {
+                findViewById(R.id.firstNameLayout),
+                findViewById(R.id.lastNameLayout),
+                findViewById(R.id.middleNameLayout),
+                findViewById(R.id.sexLayout),
+                findViewById(R.id.birthdateLayout),
+                findViewById(R.id.emailLayout),
+                findViewById(R.id.phoneLayout),
+                findViewById(R.id.provinceLayout),
+                findViewById(R.id.municipalityLayout),
+                findViewById(R.id.barangayLayout),
+                findViewById(R.id.purokLayout),
+                findViewById(R.id.parentLayout),
+                findViewById(R.id.benefactorLayout),
+                findViewById(R.id.levelLayout),
+                findViewById(R.id.lrnLayout)
+        };
+
+        inputFields = new TextInputEditText[] {
+                firstNameEditText,
+                lastNameEditText,
+                middleNameEditText,
+                genderEditText,
+                birthdateEditText,
+                emailEditText,
+                phoneEditText,
+                provinceEditText,
+                municipalityEditText,
+                barangayEditText,
+                purokEditText,
+                findViewById(R.id.level),
+                findViewById(R.id.lrn)
+        };
+
+        saveButton = findViewById(R.id.saveButton);
+        parentAutoComplete = findViewById(R.id.parent);
+        parentNames = new ArrayList<>();
+        benefactorAutoComplete = findViewById(R.id.benefactor);
+        benefactorNames = new ArrayList<>();
+    }
+
+    private void setupToolbar() {
         Toolbar toolbar = findViewById(R.id.studentDetailToolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_arrow_back_24);
 
@@ -64,57 +140,79 @@ public class StudentDetailActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
 
-        studentIDTextView = findViewById(R.id.studentID);
 
-        parentLayout = findViewById(R.id.parentLayout);
-        benefactorLayout = findViewById(R.id.benefactorLayout);
-        firstNameLayout = findViewById(R.id.firstNameLayout);
-        lastNameLayout = findViewById(R.id.lastNameLayout);
-        middleNameLayout = findViewById(R.id.middleNameLayout);
-        sexLayout = findViewById(R.id.sexLayout);
-        birthdateLayout = findViewById(R.id.birthdateLayout);
-        emailLayout = findViewById(R.id.emailLayout);
-        phoneLayout = findViewById(R.id.phoneLayout);
-        provinceLayout = findViewById(R.id.provinceLayout);
-        municipalityLayout = findViewById(R.id.municipalityLayout);
-        barangayLayout = findViewById(R.id.barangayLayout);
-        purokLayout = findViewById(R.id.purokLayout);
-        levelLayout = findViewById(R.id.levelLayout);
-        lrnLayout = findViewById(R.id.lrnLayout);
-
-        parent = findViewById(R.id.parent);
-        benefactor = findViewById(R.id.benefactor);
-        firstName = findViewById(R.id.firstName);
-        lastName = findViewById(R.id.lastName);
-        middleName = findViewById(R.id.middleName);
-        sex = findViewById(R.id.sex);
-        birthdate = findViewById(R.id.birthdate);
-        email = findViewById(R.id.email);
-        phone = findViewById(R.id.phone);
-        province = findViewById(R.id.province);
-        municipality = findViewById(R.id.municipality);
-        barangay = findViewById(R.id.barangay);
-        purok = findViewById(R.id.purok);
-        level = findViewById(R.id.level);
-        lrn = findViewById(R.id.lrn);
-
-        saveButton = findViewById(R.id.saveButton);
-
+    private void setupProgressDialog() {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Saving data...");
         progressDialog.setCancelable(false);
+    }
 
+    private void setupStudentDetails() {
         studentID = getIntent().getStringExtra("studentID");
         studentIDTextView.setText(studentID);
-
         fetchStudentData();
+    }
 
-        setTextChangeListeners();
+    private void fetchParentAccounts() {
+        String url = "http://enrol.lesterintheclouds.com/accounts/fetch_parents.php";
 
-        birthdate.setOnClickListener(v -> showDatePickerDialog());
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                this::handleParentAccountsResponse,
+                this::handleErrorResponse);
 
-        saveButton.setOnClickListener(v -> saveStudentData());
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(jsonObjectRequest);
+    }
+
+    private void fetchBenefactorAccounts() {
+        String url = "http://enrol.lesterintheclouds.com/accounts/fetch_benefactors.php";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                this::handleBenefactorAccountsResponse,
+                this::handleErrorResponse);
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(jsonObjectRequest);
+    }
+
+    private void handleParentAccountsResponse(JSONObject response) {
+        try {
+            if (response.getBoolean("success")) {
+                JSONArray parentsArray = response.getJSONArray("parents");
+                for (int i = 0; i < parentsArray.length(); i++) {
+                    String name = parentsArray.optString(i, "N/A"); // Avoid null values
+                    parentNames.add(name);
+                }
+                parentAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, parentNames);
+                parentAutoComplete.setAdapter(parentAdapter);
+            } else {
+                Toast.makeText(this, "No parents found", Toast.LENGTH_SHORT).show();
+            }
+        } catch (JSONException e) {
+            Log.e("StudentDetailActivity", "JSON Error: " + e.getMessage());
+            Toast.makeText(this, "Error fetching parent accounts", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void handleBenefactorAccountsResponse(JSONObject response) {
+        try {
+            if (response.getBoolean("success")) {
+                JSONArray benefactorArray = response.getJSONArray("benefactor");
+                for (int i = 0; i < benefactorArray.length(); i++) {
+                    String name = benefactorArray.optString(i, "N/A"); // Avoid null values
+                    benefactorNames.add(name);
+                }
+                benefactorAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, benefactorNames);
+                benefactorAutoComplete.setAdapter(benefactorAdapter);
+            } else {
+                Toast.makeText(this, "No parents found", Toast.LENGTH_SHORT).show();
+            }
+        } catch (JSONException e) {
+            Log.e("StudentDetailActivity", "JSON Error: " + e.getMessage());
+            Toast.makeText(this, "Error fetching benefactor accounts", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setTextChangeListeners() {
@@ -132,158 +230,145 @@ public class StudentDetailActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {}
         };
 
-        parent.addTextChangedListener(textWatcher);
-        benefactor.addTextChangedListener(textWatcher);
-        firstName.addTextChangedListener(textWatcher);
-        lastName.addTextChangedListener(textWatcher);
-        middleName.addTextChangedListener(textWatcher);
-        sex.addTextChangedListener(textWatcher);
-        birthdate.addTextChangedListener(textWatcher);
-        email.addTextChangedListener(textWatcher);
-        phone.addTextChangedListener(textWatcher);
-        province.addTextChangedListener(textWatcher);
-        municipality.addTextChangedListener(textWatcher);
-        barangay.addTextChangedListener(textWatcher);
-        purok.addTextChangedListener(textWatcher);
-        level.addTextChangedListener(textWatcher);
-        lrn.addTextChangedListener(textWatcher);
+        for (TextInputEditText field : inputFields) {
+            field.addTextChangedListener(textWatcher);
+        }
+        parentAutoComplete.addTextChangedListener(textWatcher);
+
+        for (TextInputEditText field : inputFields) {
+            field.addTextChangedListener(textWatcher);
+        }
+        benefactorAutoComplete.addTextChangedListener(textWatcher);
+    }
+
+    private void setupBirthdatePicker() {
+        inputFields[5].setOnClickListener(v -> showDatePickerDialog());
     }
 
     private void showDatePickerDialog() {
         final Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this,
-                (view, year1, monthOfYear, dayOfMonth1) -> {
-                    String selectedDate = dayOfMonth1 + "/" + (monthOfYear + 1) + "/" + year1;
-                    birthdate.setText(selectedDate);
+                (view, year, month, dayOfMonth) -> {
+                    String selectedDate = dayOfMonth + "/" + (month + 1) + "/" + year;
+                    inputFields[5].setText(selectedDate);  // Birthdate field
                 },
-                year, month, dayOfMonth);
-
+                calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)
+        );
         datePickerDialog.show();
     }
 
     private void fetchStudentData() {
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
         String url = "http://enrol.lesterintheclouds.com/accounts/get_student.php?studentID=" + studentID;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                response -> {
-                    try {
-                        String parentText = response.optString("parent", "N/A");
-                        String benefactorText = response.optString("benefactor", "N/A");
-                        String firstNameText = response.optString("firstName", "N/A");
-                        String lastNameText = response.optString("lastName", "N/A");
-                        String middleNameText = response.optString("middleName", "N/A");
-                        String sexText = response.optString("sex", "N/A");
-                        String birthdateText = response.optString("birthdate", "N/A");
-                        String emailText = response.optString("email", "N/A");
-                        String phoneText = response.optString("phone", "N/A");
-                        String provinceText = response.optString("province", "N/A");
-                        String municipalityText = response.optString("municipality", "N/A");
-                        String barangayText = response.optString("barangay", "N/A");
-                        String purokText = response.optString("purok", "N/A");
-                        String levelText = response.optString("level", "N/A");
-                        String lrnText = response.optString("lrn", "N/A");
+                this::handleStudentDataResponse,
+                this::handleErrorResponse);
 
-                        parent.setText(parentText);
-                        benefactor.setText(benefactorText);
-                        firstName.setText(firstNameText);
-                        lastName.setText(lastNameText);
-                        middleName.setText(middleNameText);
-                        sex.setText(sexText);
-                        birthdate.setText(birthdateText);
-                        email.setText(emailText);
-                        phone.setText(phoneText);
-                        province.setText(provinceText);
-                        municipality.setText(municipalityText);
-                        barangay.setText(barangayText);
-                        purok.setText(purokText);
-                        level.setText(levelText);
-                        lrn.setText(lrnText);
-
-                        isDataChanged = false;
-                        saveButton.setEnabled(false);
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        Toast.makeText(StudentDetailActivity.this, "Error parsing data: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                },
-                error -> {
-                    error.printStackTrace();
-                    Toast.makeText(StudentDetailActivity.this, "Error fetching data: " + error.getMessage(), Toast.LENGTH_LONG).show();
-                });
-
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonObjectRequest);
+    }
+
+    private void handleStudentDataResponse(JSONObject response) {
+        try {
+            inputFields[0].setText(response.optString("firstName", "N/A"));  // First Name
+            inputFields[1].setText(response.optString("lastName", "N/A"));  // Last Name
+            inputFields[2].setText(response.optString("middleName", "N/A"));  // Middle Name
+            inputFields[3].setText(response.optString("sex", "N/A"));  // Sex
+            inputFields[4].setText(response.optString("birthdate", "N/A"));  // Birthdate
+            inputFields[5].setText(response.optString("email", "N/A"));  // Email
+            inputFields[6].setText(response.optString("phone", "N/A"));  // Phone
+            inputFields[7].setText(response.optString("province", "N/A"));  // Province
+            inputFields[8].setText(response.optString("municipality", "N/A"));  // Municipality
+            inputFields[9].setText(response.optString("barangay", "N/A"));  // Barangay
+            inputFields[10].setText(response.optString("purok", "N/A"));  // Purok
+
+            // Update parent and benefactor fields correctly
+            String parent = response.optString("parent");
+            String benefactor = response.optString("benefactor");
+            parentAutoComplete.setText(parent != null ? parent : "N/A");  // Parent
+            benefactorAutoComplete.setText(benefactor != null ? benefactor : "N/A");  // Benefactor
+
+            inputFields[11].setText(response.optString("level", "N/A"));  // Level
+            inputFields[12].setText(response.optString("lrn", "N/A"));  // LRN
+
+        } catch (Exception e) {
+            Log.e("StudentDetailActivity", "Error parsing student data: " + e.getMessage());
+            Toast.makeText(this, "Error loading student data", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void setupSaveButton() {
+        saveButton.setOnClickListener(v -> {
+            if (isDataChanged) {
+                saveStudentData();
+            }
+        });
     }
 
     private void saveStudentData() {
-        if (!isDataChanged) return;
-
+        // Create your save request here
+        String url = "http://enrol.lesterintheclouds.com/accounts/save_student.php";
         progressDialog.show();
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        String url = "http://enrol.lesterintheclouds.com/accounts/update_student.php";
-
-        JSONObject jsonObject = new JSONObject();
+        JSONObject studentData = new JSONObject();
         try {
-            jsonObject.put("studentID", studentID);
-            jsonObject.put("firstName", firstName.getText().toString());
-            jsonObject.put("middleName", middleName.getText().toString());
-            jsonObject.put("lastName", lastName.getText().toString());
-            jsonObject.put("sex", sex.getText().toString());
-            jsonObject.put("birthdate", birthdate.getText().toString());
-            jsonObject.put("email", email.getText().toString());
-            jsonObject.put("phone", phone.getText().toString());
-            jsonObject.put("province", province.getText().toString());
-            jsonObject.put("municipality", municipality.getText().toString());
-            jsonObject.put("barangay", barangay.getText().toString());
-            jsonObject.put("purok", purok.getText().toString());
-            jsonObject.put("level", level.getText().toString());
-            jsonObject.put("lrn", lrn.getText().toString());
-            jsonObject.put("parent", parent.getText().toString());
-            jsonObject.put("benefactor", benefactor.getText().toString());
+            studentData.put("studentID", studentID);
+            // Add other fields accordingly
+            studentData.put("parent", parentAutoComplete.getText().toString());
+            studentData.put("benefactor", benefactorAutoComplete.getText().toString());
+            // Add other input fields...
+            studentData.put("firstName", firstNameEditText.getText().toString());
+            studentData.put("lastName", lastNameEditText.getText().toString());
+            studentData.put("middleName", middleNameEditText.getText().toString());
+            studentData.put("gender", genderEditText.getText().toString());
+            studentData.put("birthdate", birthdateEditText.getText().toString());
+            studentData.put("email", emailEditText.getText().toString());
+            studentData.put("phone", phoneEditText.getText().toString());
+            studentData.put("province", provinceEditText.getText().toString());
+            studentData.put("municipality", municipalityEditText.getText().toString());
+            studentData.put("barangay", barangayEditText.getText().toString());
+            studentData.put("purok", purokEditText.getText().toString());
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, studentData,
+                    response -> {
+                        progressDialog.dismiss();
+                        Toast.makeText(this, "Data saved successfully", Toast.LENGTH_SHORT).show();
+                        // Optionally navigate to another activity or clear the form
+                    },
+                    error -> {
+                        progressDialog.dismiss();
+                        handleErrorResponse(error);
+                    }
+            );
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(jsonObjectRequest);
 
         } catch (JSONException e) {
-            e.printStackTrace();
+            progressDialog.dismiss();
+            Log.e("StudentDetailActivity", "JSON Error: " + e.getMessage());
+            Toast.makeText(this, "Error preparing data for saving", Toast.LENGTH_SHORT).show();
         }
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
-                response -> {
-                    try {
-                        boolean success = response.getBoolean("success");
-                        if (success) {
-                            Toast.makeText(StudentDetailActivity.this, "Data saved successfully", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(StudentDetailActivity.this, "Error saving data", Toast.LENGTH_SHORT).show();
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Toast.makeText(StudentDetailActivity.this, "Error parsing response: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    } finally {
-                        progressDialog.dismiss();
-                    }
-                },
-                error -> {
-                    error.printStackTrace();
-                    Toast.makeText(StudentDetailActivity.this, "Error saving data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                });
-
-        requestQueue.add(jsonObjectRequest);
-
-        isDataChanged = false;
-        saveButton.setEnabled(false);
     }
+
+    private void handleErrorResponse(VolleyError error) {
+        // Handle error response here
+        if (error.networkResponse != null && error.networkResponse.data != null) {
+            String errorMessage = new String(error.networkResponse.data);
+            Log.e("StudentDetailActivity", "Server Error: " + errorMessage);
+            Toast.makeText(this, "Error: " + errorMessage, Toast.LENGTH_SHORT).show();
+        } else {
+            Log.e("StudentDetailActivity", "Network Error: " + error.getMessage());
+            Toast.makeText(this, "Network error, please try again later.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish();
+            finish(); // Close activity on back button
             return true;
         }
         return super.onOptionsItemSelected(item);
