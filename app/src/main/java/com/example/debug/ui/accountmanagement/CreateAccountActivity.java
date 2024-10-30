@@ -33,7 +33,7 @@ import java.util.Map;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
-    private TextInputEditText username, password;
+    private TextInputEditText name, username, password;
     private Spinner role;
     private TextView roleErrorText;
     private Button create;
@@ -58,6 +58,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             return insets;
         });
 
+        name = findViewById(R.id.name);
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         role = findViewById(R.id.role);
@@ -100,6 +101,12 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     private boolean validateInputs() {
         boolean isValid = true;
+
+        // Validate name
+        if (TextUtils.isEmpty(name.getText())) {
+            name.setError("Username is required");
+            isValid = false;
+        }
 
         // Validate username
         if (TextUtils.isEmpty(username.getText())) {
@@ -149,6 +156,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
+                params.put("name", name.getText().toString().trim());
                 params.put("username", username.getText().toString().trim());
                 params.put("password", password.getText().toString().trim());
                 params.put("role", role.getSelectedItem().toString().trim());

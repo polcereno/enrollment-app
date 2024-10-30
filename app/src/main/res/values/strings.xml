@@ -222,6 +222,9 @@
     <string name="debit">Debit</string>
     <string name="credit">Credit</string>
     <string name="balance">Balance</string>
+    <string name="support">Support</string>
+    <string name="parent">Parent</string>
+    <string name="benefactor">Benefactor</string>
 
 
 </resources>

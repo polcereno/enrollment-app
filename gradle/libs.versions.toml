@@ -1,5 +1,5 @@
 [versions]
-agp = "8.5.0"
+agp = "8.7.1"
 drawerlayout = "1.2.0"
 fragmentKtx = "1.8.1"
 imageSupport = "2.0.0"

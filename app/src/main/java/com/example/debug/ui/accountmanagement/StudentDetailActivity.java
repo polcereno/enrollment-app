@@ -40,8 +40,8 @@ import java.util.Calendar;
 public class StudentDetailActivity extends AppCompatActivity {
 
     private TextView studentIDTextView;
-    private TextInputLayout firstNameLayout, lastNameLayout, middleNameLayout, sexLayout, birthdateLayout, emailLayout, phoneLayout, provinceLayout, municipalityLayout, barangayLayout, purokLayout, levelLayout, lrnLayout;
-    private TextInputEditText firstName, lastName, middleName, sex, birthdate, email, phone, province, municipality, barangay, purok, level, lrn;
+    private TextInputLayout parentLayout, benefactorLayout, firstNameLayout, lastNameLayout, middleNameLayout, sexLayout, birthdateLayout, emailLayout, phoneLayout, provinceLayout, municipalityLayout, barangayLayout, purokLayout, levelLayout, lrnLayout;
+    private TextInputEditText parent, benefactor, firstName, lastName, middleName, sex, birthdate, email, phone, province, municipality, barangay, purok, level, lrn;
     private Button saveButton;
     private String studentID;
     private boolean isDataChanged = false;
@@ -67,6 +67,8 @@ public class StudentDetailActivity extends AppCompatActivity {
 
         studentIDTextView = findViewById(R.id.studentID);
 
+        parentLayout = findViewById(R.id.parentLayout);
+        benefactorLayout = findViewById(R.id.benefactorLayout);
         firstNameLayout = findViewById(R.id.firstNameLayout);
         lastNameLayout = findViewById(R.id.lastNameLayout);
         middleNameLayout = findViewById(R.id.middleNameLayout);
@@ -81,6 +83,8 @@ public class StudentDetailActivity extends AppCompatActivity {
         levelLayout = findViewById(R.id.levelLayout);
         lrnLayout = findViewById(R.id.lrnLayout);
 
+        parent = findViewById(R.id.parent);
+        benefactor = findViewById(R.id.benefactor);
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
         middleName = findViewById(R.id.middleName);
@@ -128,6 +132,8 @@ public class StudentDetailActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {}
         };
 
+        parent.addTextChangedListener(textWatcher);
+        benefactor.addTextChangedListener(textWatcher);
         firstName.addTextChangedListener(textWatcher);
         lastName.addTextChangedListener(textWatcher);
         middleName.addTextChangedListener(textWatcher);
@@ -167,6 +173,8 @@ public class StudentDetailActivity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
+                        String parentText = response.optString("parent", "N/A");
+                        String benefactorText = response.optString("benefactor", "N/A");
                         String firstNameText = response.optString("firstName", "N/A");
                         String lastNameText = response.optString("lastName", "N/A");
                         String middleNameText = response.optString("middleName", "N/A");
@@ -181,6 +189,8 @@ public class StudentDetailActivity extends AppCompatActivity {
                         String levelText = response.optString("level", "N/A");
                         String lrnText = response.optString("lrn", "N/A");
 
+                        parent.setText(parentText);
+                        benefactor.setText(benefactorText);
                         firstName.setText(firstNameText);
                         lastName.setText(lastNameText);
                         middleName.setText(middleNameText);
@@ -235,6 +245,8 @@ public class StudentDetailActivity extends AppCompatActivity {
             jsonObject.put("purok", purok.getText().toString());
             jsonObject.put("level", level.getText().toString());
             jsonObject.put("lrn", lrn.getText().toString());
+            jsonObject.put("parent", parent.getText().toString());
+            jsonObject.put("benefactor", benefactor.getText().toString());
 
         } catch (JSONException e) {
             e.printStackTrace();

@@ -24,7 +24,7 @@ import org.json.JSONObject;
 
 public class StudentProfileActivity extends AppCompatActivity {
 
-    private TextView studentID, firstName, lastName, middleName, sex, birthdate, email, phone, province, municipality, barangay, purokAndStreet, level, lrn;
+    private TextView parent, benefactor, studentID, firstName, lastName, middleName, sex, birthdate, email, phone, province, municipality, barangay, purokAndStreet, level, lrn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,8 @@ public class StudentProfileActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_arrow_back_24);
 
         // Initialize views
+        parent = findViewById(R.id.parent);
+        benefactor = findViewById(R.id.benefactor);
         studentID = findViewById(R.id.studentID); // Initialize studentID TextView
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
@@ -95,6 +97,8 @@ public class StudentProfileActivity extends AppCompatActivity {
                                 JSONObject data = response.getJSONObject("data");
 
                                 // Update the UI with student data
+                                parent.setText(data.optString("parent", "N/A"));
+                                benefactor.setText(data.optString("benefactor", "N/A"));
                                 studentID.setText(data.optString("student_id", "N/A")); // Update studentID
                                 firstName.setText(data.optString("first_name", "N/A"));
                                 middleName.setText(data.optString("middle_name", "N/A"));

@@ -64,6 +64,34 @@
                     android:visibility="gone" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/name_input"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginSecondary"
+                    android:textColorHint="@android:color/tertiary_text_light"
+                    app:boxCornerRadiusBottomEnd="@dimen/radiusTertiary"
+                    app:boxCornerRadiusBottomStart="@dimen/radiusTertiary"
+                    app:boxCornerRadiusTopEnd="@dimen/radiusTertiary"
+                    app:boxCornerRadiusTopStart="@dimen/radiusTertiary"
+                    app:boxStrokeColor="@color/primary"
+                    app:boxStrokeWidth="@dimen/strokePrimary"
+                    app:hintTextColor="@color/primary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/textFieldHeight"
+                        android:hint="@string/name"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:textColor="@android:color/secondary_text_light"
+                        android:textColorHint="@android:color/tertiary_text_light"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/textNormal" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/username_input"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"

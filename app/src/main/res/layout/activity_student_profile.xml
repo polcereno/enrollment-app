@@ -396,6 +396,99 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/marginPrimary"
+                    android:text="@string/support"
+                    android:textSize="@dimen/textLarge"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="@dimen/marginPrimary" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/marginPrimary"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/parent"
+                        android:textSize="@dimen/textNormal"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/parentLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@android:color/tertiary_text_light"
+                        app:boxCornerRadiusBottomEnd="@dimen/radiusTertiary"
+                        app:boxCornerRadiusBottomStart="@dimen/radiusTertiary"
+                        app:boxCornerRadiusTopEnd="@dimen/radiusTertiary"
+                        app:boxCornerRadiusTopStart="@dimen/radiusTertiary"
+                        app:boxStrokeColor="@color/primary"
+                        app:boxStrokeWidth="@dimen/strokePrimary"
+                        app:hintTextColor="@color/primary">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/parent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            android:inputType="text"
+                            android:textColor="@android:color/secondary_text_light"
+                            android:textColorHint="@android:color/tertiary_text_light"
+                            android:textCursorDrawable="@null"
+                            android:textSize="@dimen/textNormal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/marginPrimary"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/benefactor"
+                        android:textSize="@dimen/textNormal"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/benefactorLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@android:color/tertiary_text_light"
+                        app:boxCornerRadiusBottomEnd="@dimen/radiusTertiary"
+                        app:boxCornerRadiusBottomStart="@dimen/radiusTertiary"
+                        app:boxCornerRadiusTopEnd="@dimen/radiusTertiary"
+                        app:boxCornerRadiusTopStart="@dimen/radiusTertiary"
+                        app:boxStrokeColor="@color/primary"
+                        app:boxStrokeWidth="@dimen/strokePrimary"
+                        app:hintTextColor="@color/primary">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/benefactor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            android:inputType="text"
+                            android:textColor="@android:color/secondary_text_light"
+                            android:textColorHint="@android:color/tertiary_text_light"
+                            android:textCursorDrawable="@null"
+                            android:textSize="@dimen/textNormal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/marginPrimary"
                     android:text="@string/enrollment_data"
                     android:textSize="@dimen/textLarge"
                     android:textStyle="bold" />
