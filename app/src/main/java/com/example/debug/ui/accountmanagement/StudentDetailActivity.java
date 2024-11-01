@@ -34,7 +34,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Map;
 
 public class StudentDetailActivity extends AppCompatActivity {
 
@@ -50,7 +49,6 @@ public class StudentDetailActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private ArrayAdapter<String> parentAdapter, benefactorAdapter;
     private ArrayList<String> parentNames = new ArrayList<>(), benefactorNames = new ArrayList<>();
-    private Map<String, String> parentIdMap = new HashMap<>();
     private boolean isDataChanged = false;
     private String studentID;
 
@@ -117,10 +115,13 @@ public class StudentDetailActivity extends AppCompatActivity {
         fetchStudentData();
     }
 
+    private HashMap<String, String> parentIdMap = new HashMap<>();
+    private HashMap<String, String> benefactorIdMap = new HashMap<>();
+
     private void fetchParentAccounts() {
         String url = "http://enrol.lesterintheclouds.com/accounts/fetch_parents.php";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                response -> populateAutoCompleteList(response, "parents", parentNames, parentAutoComplete),
+                response -> populateAutoCompleteList(response, "parents", parentNames, parentAutoComplete, parentIdMap),
                 this::handleErrorResponse);
         Volley.newRequestQueue(this).add(request);
     }
@@ -128,17 +129,27 @@ public class StudentDetailActivity extends AppCompatActivity {
     private void fetchBenefactorAccounts() {
         String url = "http://enrol.lesterintheclouds.com/accounts/fetch_benefactors.php";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                response -> populateAutoCompleteList(response, "benefactor", benefactorNames, benefactorAutoComplete),
+                response -> {
+                    Log.d("BenefactorResponse", response.toString()); // Log the response for debugging
+                    populateAutoCompleteList(response, "benefactors", benefactorNames, benefactorAutoComplete, benefactorIdMap);
+                },
                 this::handleErrorResponse);
         Volley.newRequestQueue(this).add(request);
     }
 
-    private void populateAutoCompleteList(JSONObject response, String arrayKey, ArrayList<String> namesList, AutoCompleteTextView autoCompleteTextView) {
+    private void populateAutoCompleteList(JSONObject response, String arrayKey, ArrayList<String> namesList, AutoCompleteTextView autoCompleteTextView, HashMap<String, String> idMap) {
+        namesList.clear(); // Clear existing data
+        idMap.clear(); // Clear existing ID mappings
+
         try {
             if (response.getBoolean("success")) {
                 JSONArray array = response.getJSONArray(arrayKey);
                 for (int i = 0; i < array.length(); i++) {
-                    namesList.add(array.optString(i, "N/A"));
+                    JSONObject obj = array.getJSONObject(i);
+                    String id = obj.getString("id");
+                    String name = obj.getString("name");
+                    namesList.add(name);
+                    idMap.put(name, id);
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, namesList);
                 autoCompleteTextView.setAdapter(adapter);
@@ -150,6 +161,7 @@ public class StudentDetailActivity extends AppCompatActivity {
             Toast.makeText(this, "Error fetching " + arrayKey + " accounts", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     private void setTextChangeListeners() {
         TextWatcher textWatcher = new TextWatcher() {
@@ -237,8 +249,13 @@ public class StudentDetailActivity extends AppCompatActivity {
             studentData.put("purok", purokEditText.getText().toString().trim());
             studentData.put("level", levelEditText.getText().toString().trim());
             studentData.put("lrn", lrnEditText.getText().toString().trim());
-            studentData.put("parent", parentAutoComplete.getText().toString().trim());
-            studentData.put("benefactor", benefactorAutoComplete.getText().toString().trim());
+
+            // Save the parent and benefactor IDs instead of names
+            String parentId = parentIdMap.get(parentAutoComplete.getText().toString().trim());
+            String benefactorId = benefactorIdMap.get(benefactorAutoComplete.getText().toString().trim());
+            studentData.put("parent", parentId != null ? parentId : ""); // save ID
+            studentData.put("benefactor", benefactorId != null ? benefactorId : ""); // save ID
+
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "Error preparing data for save.", Toast.LENGTH_SHORT).show();
