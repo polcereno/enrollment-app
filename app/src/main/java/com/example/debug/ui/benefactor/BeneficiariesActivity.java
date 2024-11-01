@@ -9,10 +9,31 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.debug.R;
+import com.example.debug.adapter.StudentAccountAdapter;
+import com.example.debug.controller.UserUtil;
+import com.example.debug.model.AccountStudent;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BeneficiariesActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private StudentAccountAdapter adapter;
+    private List<AccountStudent> accountStudentList;
+    private RequestQueue requestQueue;
+    private static final String URL = "http://enrol.lesterintheclouds.com/benefactor/fetch_beneficiary.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +53,19 @@ public class BeneficiariesActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        recyclerView = findViewById(R.id.beneficiaryRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        accountStudentList = new ArrayList<>();
+        adapter = new StudentAccountAdapter(this, accountStudentList);
+        recyclerView.setAdapter(adapter);
+
+        // Initialize Volley RequestQueue
+        requestQueue = Volley.newRequestQueue(this);
+
+        // Fetch student data
+        fetchStudentData();
     }
 
     @Override
@@ -43,5 +77,31 @@ public class BeneficiariesActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void fetchStudentData() {
+        int benefactorId = UserUtil.getCurrentUserId(this);
+        String urlWithParam = URL + "?benefactor=" + benefactorId; // Add parent_id to the URL
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, urlWithParam, null,
+                response -> {
+                    try {
+                        accountStudentList.clear();
+                        for (int i = 0; i < response.length(); i++) {
+                            JSONObject jsonObject = response.getJSONObject(i);
+                            String name = jsonObject.getString("name");
+                            String level = jsonObject.getString("level");
+                            String studentID = jsonObject.getString("studentID");
+
+                            accountStudentList.add(new AccountStudent(0, name, "", "", level, studentID));
+                        }
+                        adapter.notifyDataSetChanged();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                error -> error.printStackTrace());
+
+        requestQueue.add(jsonArrayRequest);
     }
 }
