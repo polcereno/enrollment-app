@@ -219,6 +219,8 @@ public class StudentDetailActivity extends AppCompatActivity {
             purokEditText.setText(response.optString("purok", "N/A"));
             levelEditText.setText(response.optString("level", "N/A"));
             lrnEditText.setText(response.optString("lrn", "N/A"));
+            parentAutoComplete.setText(response.optString("parent", "N/A"));
+            benefactorAutoComplete.setText(response.optString("benefactor", "N/A"));
         } catch (Exception e) {
             Log.e("StudentDetailActivity", "Error parsing student data: " + e.getMessage());
         }
